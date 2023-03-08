@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="style/style_s2g.css">
+
+        <title>PDV - AUTOMATION - S2G</title>
+    </head>
+
+    <body>
+        <main class='wrapper' id="teste">
+            <form id='nameForm'>
+                <div class='form-uname'>
+                    <div>
+                        <label id='lableFirstPartImgOne' for='firstPartImgOne'>Parte 1:</label>
+                        <input id='firstPartImgOne' type='text'></input>
+                    </div>
+
+                    <div>
+                        <label id='lableSecPartImgOne' for='secPartImgOne'>Parte 2:</label>
+                        <input id='secPartImgOne' type='text'></input>
+                    </div>
+
+                    <div>
+                        <label id='lableThirdPartImgOne' for='thirdPartImgThree'>Parte 3:</label>
+                        <input id='thirdPartImgThree' type='text'></input>
+                    </div>
+
+                    <div>
+                        <label id='lableAltImgOne' for='altImgOne'>ALT:</label>
+                        <input id='altImgOne' type='text'></input>
+                    </div>
+
+                    <div>
+                        <label id='lableLinkImgOne' for='linkImgOne'>Link:</label>
+                        <input id='linkImgOne' type='text'></input>
+                    </div>
+                    
+                    <div>
+                        <label id='lableLinkImgOneDesk' for='linkImgOneDesk'>Link IMG DESK:</label>
+                        <input id='linkImgOneDesk' type='text'></input>
+                    </div>
+
+                    <div>
+                        <label id='lableLinkImgOneMobile' for='linkImgOneMobile'>Link IMG MOBILE:</label>
+                        <input id='linkImgOneMobile' type='text'></input>
+                    </div>
+                </div>
+
+                <div class='form-sub'>
+                    <button id='subButton' type='button' onclick="getUserName()">Montar HTML</button>
+                </div>
+            </form>  
+            
+            <div>
+                <button id='copyHtml' type='button' onclick="copy()">copyHtml</button>
+            </div>
+    
+            <textarea name="codigo" id="codigo"></textarea>
+
+            <!--Inicio primeira coluna do grid - IMAGEM 1-->
+            <aside class="pbc-hoover-position-mosaic" id="mosaico-01-fem">
+                <a href="">
+                    <picture>
+                        <source srcset="" media="(max-width:650px)">
+
+                        <img class="photo-fluid-mosaic" src="" alt="">
+                    </picture>                         
+
+                    <!--Inicio hoover-->
+                    <div class="pbc-hoover-on-mosaic pbc-hoover-click">                    
+                        <div class="pbc-hoover-content">
+                            <p class="pbc-hoover-title pbc-austin-medium">Título</p>
+                            <p class="pbc-hoover-subtitle pbc-futura-book"></p>
+                            <p class="pbc-hoover-text-bold pbc-futura-book"></p>
+                            <p class="pbc-hoover-btn pbc-futura-book">Click '2 Shop</p>
+                        </div>				
+                    </div>            
+                    <!--Fim hoover-->
+                </a>
+            </aside>
+            <!--Fim primeira coluna do grid - IMAGEM 1-->
+        </aside>        
+
+        <script src="script/script_s2g.js"></script>
+    </body>
+</html>
