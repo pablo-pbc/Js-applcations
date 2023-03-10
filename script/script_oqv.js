@@ -1,4 +1,5 @@
 
+//Função para copiar o HTML após as inserções dentro dos inputs
 function copy() {
     const nodeList = document.getElementsByClassName("box-banner");
 
@@ -15,3 +16,5 @@ function copy() {
     document.getElementById("codigo").select();
     document.execCommand('copy');
 }
+
+//Função para preencher as informações do BANNER
