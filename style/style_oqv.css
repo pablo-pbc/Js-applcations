@@ -2,6 +2,10 @@
     margin: 0;
 }
 
+.box-banner picture img {
+    width: 100%;
+}
+
 .pbc-pdv-automation-form {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
