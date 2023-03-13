@@ -3,6 +3,10 @@ const saveBackup = () => {
     const link = document.createElement("a");
     const nodeList = document.getElementsByClassName("box-banner");
     const txtArea = document.getElementById("codigo")
+    const date = new Date()
+    const today = date.toLocaleDateString('pt-br')
+    const hours = date.getHours('pt-br')
+    const min = date.getMinutes('pt-br')
 
     txtArea.value = ''
 
@@ -12,13 +16,12 @@ const saveBackup = () => {
         let copyHomeSlideHtml = nodeList[i].outerHTML
         
         document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
-        console.log(i)
     }
     
     const file = new Blob([txtArea.value], { type: 'text/plain' });
 
     link.href = URL.createObjectURL(file);
-    link.download = `backupBanner.txt`;
+    link.download = `backupBanner_${today}_${hours}h-${min}min.txt`;
     link.click();
     URL.revokeObjectURL(link.href);
 
@@ -40,7 +43,6 @@ function copy() {
         let copyHomeSlideHtml = nodeList[i].outerHTML
         
         document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
-        console.log(i)
     }
 
     // Selecting the content inside the textarea
