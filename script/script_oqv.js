@@ -42,3 +42,5 @@ function buildBannerFem(bannerPosition, bannerPositonId) {
         resultBannerMobileFem.srcset = bannerMobileFem
     }  
 }
+
+//usar select para mudanças de posiçao

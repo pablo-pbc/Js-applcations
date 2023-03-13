@@ -17,18 +17,18 @@
     row-gap: 1rem;
 }
 
-#homeSlideFemForm > div:nth-child(5) > button {
+.homeSlideFemForm > div:nth-child(5) > button {
     padding: 0.5rem 0;
     font-size: 1rem
 }
 
-#homeSlideFemForm > div {
+.homeSlideFemForm > div {
     display: flex;
     flex-direction: column;
     padding: 0.5rem 0 0;
 }
 
-#homeSlideFemForm > div > input {
+.homeSlideFemForm > div > input {
     min-height: 1.5rem;
 }
 
