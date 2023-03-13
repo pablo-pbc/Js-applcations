@@ -1,48 +1,71 @@
 * {
     margin: 0;
+    padding: 0;
 }
 
 .box-banner picture img {
     width: 100%;
 }
 
-.pbc-pdv-automation-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 1rem;
-    padding: 1rem;   
-}
-
-.pbc-btn-copy {
+main.pbc-pdv-automation-form {
     display: flex;
     flex-direction: column;
-    text-align: center;
     padding: 1rem;
-    row-gap: 1rem;
 }
 
-.homeSlideFemForm > div:nth-child(5) > button {
-    padding: 0.5rem 0;
-    font-size: 1rem
+form#homeSlideForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
 }
 
-.homeSlideFemForm > div {
+#homeSlideForm > section > div {
     display: flex;
     flex-direction: column;
     padding: 0.5rem 0 0;
 }
 
-.homeSlideFemForm > div > input {
+#homeSlideForm > section > div > input {
     min-height: 1.5rem;
 }
 
-button#copyHtml {
-    padding: 1rem 3rem;
-    font-size: 1rem;
+.pbc-btn-txtarea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    padding: 1rem 0;
+}
+
+.pbc-btn-txtarea > div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.pbc-btn-txtarea > div > button {
+    text-transform: uppercase;
+    min-height: 3rem;
+    width: 100%;
+}
+
+.pbc-btn-txtarea > div > button:hover {
+    font-weight: bold;
+}
+
+#buildHomeSlide, #copyHomeSlideHtml{
+    display: none;
+}
+
+textarea {
+    width: 100%;
+    height: 10vh;
+    margin: 0 auto;
 }
 
 @media (max-width: 600px) {
-    .pbc-pdv-automation-form {
+    form#homeSlideForm {
         grid-template-columns: 1fr 1fr;
     }
 }
