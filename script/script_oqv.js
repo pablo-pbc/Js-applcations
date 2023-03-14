@@ -1,68 +1,53 @@
-//Function to save the backup file
-const saveBackup = () => {
-    const link = document.createElement("a");
-    const nodeList = document.getElementsByClassName("box-banner");
+function loopTxtArea() {
+    const nodeList = document.getElementsByClassName("box-banner")
     const txtArea = document.getElementById("codigo")
-    const date = new Date()
-    const today = date.toLocaleDateString('pt-br')
+
+    txtArea.value = ''    
+
+    for (let i = 0; i < nodeList.length; i++) {         
+        let bannerNumComment = `<!-- 0${i+1} -->`
+        let bannerComment = `<!-- BANNER -->`
+        let copyHomeSlideHtml = nodeList[i].outerHTML
+        
+        document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
+    }
+    return txtArea
+}
+
+//Function to save the backup file
+function saveHomeSlideBackup() {
+    const date = new Date()    
     const hours = date.getHours('pt-br')
     const min = date.getMinutes('pt-br')
+    const today = date.toLocaleDateString('pt-br')
 
-    txtArea.value = ''
+    const link = document.createElement("a")  
+    const file = new Blob([loopTxtArea().value], { type: 'text/plain' })
 
-    for (let i = 0; i < nodeList.length; i++) {         
-        let bannerNumComment = `<!-- 0${i+1} -->`
-        let bannerComment = `<!-- BANNER -->`
-        let copyHomeSlideHtml = nodeList[i].outerHTML
-        
-        document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
-    }
-    
-    const file = new Blob([txtArea.value], { type: 'text/plain' });
+    link.href = URL.createObjectURL(file)
+    link.download = `backupBanner_${today}_${hours}h-${min}.txt`
+    link.click()
+    URL.revokeObjectURL(link.href)
+ }
 
-    link.href = URL.createObjectURL(file);
-    link.download = `backupBanner_${today}_${hours}h-${min}min.txt`;
-    link.click();
-    URL.revokeObjectURL(link.href);
-
-    document.getElementById('homeSlideBackup').display = 'none'
-    document.getElementById('buildHomeSlide').display = 'block'
-    document.getElementById('copyHomeSlideHtml').display = 'block'
- };
-
-//Função para copiar o HTML após as inserções dentro dos inputs
-function copy() {
-    const nodeList = document.getElementsByClassName("box-banner");
-    const txtArea = document.getElementById("codigo")
-
-    txtArea.value = ''
-
-    for (let i = 0; i < nodeList.length; i++) {         
-        let bannerNumComment = `<!-- 0${i+1} -->`
-        let bannerComment = `<!-- BANNER -->`
-        let copyHomeSlideHtml = nodeList[i].outerHTML
-        
-        document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
-    }
-
+//Function to copy the HTML after input's insertions
+function copyHomeSlideHtml() {
     // Selecting the content inside the textarea
-    txtArea.select()
+    loopTxtArea().select()
     // Selecting the content inside the textarea for mobile devices
-    txtArea.setSelectionRange(0, 99999)
+    loopTxtArea().setSelectionRange(0, 99999)
     // Copy the text inside the textarea field
-    navigator.clipboard.writeText(txtArea.value)     
+    navigator.clipboard.writeText(loopTxtArea().value)     
 }
 
 //Function to add the Banner's informations
-function buildBannerFem() {
+function buildHomeSlide() {
     const bannerPositionArray = ['One', 'Two', 'Three', 'Four', 'Five', 'Six']
     const bannerPositonIdArray = ['1', '2', '3', '4', '5', '6']
     let flag = 0
     let i = 0
 
-    //for (let i = 0; i < bannerPositionArray.length; i++) 
-    while (i < bannerPositionArray.length && flag != 1) {
-        
+    while (i < bannerPositionArray.length && flag < 1) {        
         let bannerPosition = bannerPositionArray[i]
         let bannerPositonId = bannerPositonIdArray[i]
 
@@ -85,9 +70,7 @@ function buildBannerFem() {
             resultBannerDeskFem.src = bannerDeskFem
             resultBannerDeskFem.alt = altBannerFem
             resultBannerMobileFem.srcset = bannerMobileFem
-        }
-        
+        }        
         i++
     }      
 }
-//usar select para mudanças de posiçao

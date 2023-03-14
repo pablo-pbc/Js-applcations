@@ -27,7 +27,7 @@ form#homeSlideForm {
 }
 
 #homeSlideForm > section > div > input {
-    min-height: 1.5rem;
+    min-height: 2rem;
 }
 
 .pbc-btn-txtarea {
@@ -52,10 +52,6 @@ form#homeSlideForm {
 
 .pbc-btn-txtarea > div > button:hover {
     font-weight: bold;
-}
-
-#buildHomeSlide, #copyHomeSlideHtml{
-   
 }
 
 textarea {
