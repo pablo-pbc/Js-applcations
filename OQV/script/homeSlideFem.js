@@ -51,10 +51,10 @@ function buildHomeSlide() {
         let bannerPositonId = bannerPositonIdArray[i]
 
         //Importing the input's values
-        let linkBannerFem = document.getElementById(`linkBannerFem${bannerPositonId}`).value
-        let bannerDeskFem = document.getElementById(`bannerDeskFem${bannerPositonId}`).value
-        let bannerMobileFem = document.getElementById(`bannerMobileFem${bannerPositonId}`).value
-        let altBannerFem = document.getElementById(`altBannerFem${bannerPositonId}`).value
+        let linkBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(2) > input[type=text]`).value
+        let bannerDeskFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(3) > input[type=text]`).value
+        let bannerMobileFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(4) > input[type=text]`).value
+        let altBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(5) > input[type=text]`).value
 
         //Choosing HTML element
         let resultLinkBannerFem = document.querySelector(`#pbc-banner-fem-${bannerPositonId} > a`)
@@ -84,42 +84,72 @@ window.onload = function buildHomeSlideForms() {
         let attributesBannerDeskFem = document.querySelector(`#pbc-banner-fem-${i+1} > a > picture > img`)
         let attributesBannerMobileFem = document.querySelector(`#pbc-banner-fem-${i+1} > a > picture > source`)
         let inputHtmlSection = `
-            <section>
-            <h2>Banner 0${i+1}</h2>
+            <section class='pbcForm' draggable="true">
+            <h2>Banner 0${i+1}</h2>        
             <div>
-                <label for="bannerPositions${i+1}">Aproveitar posição:</label>
-                <select name="bannerPositions${i+1}" id="bannerPositions${i+1}">
-                    <option value=""></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                </select>
+                <label>Link:</label>
+                <input type='text' value="${attributesLinkBannerFem.href}" required></input>
             </div>
         
             <div>
-                <label for='linkBannerFem${i+1}'>Link:</label>
-                <input id='linkBannerFem${i+1}' type='text' value="${attributesLinkBannerFem.href}" required></input>
+                <label>Imagem Desk:</label>
+                <input type='text' value="${attributesBannerDeskFem.src}" required></input>
             </div>
         
             <div>
-                <label for='bannerDeskFem${i+1}'>Imagem Desk:</label>
-                <input id='bannerDeskFem${i+1}' type='text' value="${attributesBannerDeskFem.src}" required></input>
+                <label>Imagem Mobile:</label>
+                <input type='text' value="${attributesBannerMobileFem.srcset}" required></input>
             </div>
         
             <div>
-                <label for='bannerMobileFem${i+1}'>Imagem Mobile:</label>
-                <input id='bannerMobileFem${i+1}' type='text' value="${attributesBannerMobileFem.srcset}" required></input>
-            </div>
-        
-            <div>
-                <label for='altBannerFem${i+1}'>Alt:</label>
-                <input id='altBannerFem${i+1}' type='text' value="${attributesBannerDeskFem.alt}" required></input>
+                <label>Alt:</label>
+                <input type='text' value="${attributesBannerDeskFem.alt}" required></input>
             </div>
             </section>
         `
         appendFormReference.innerHTML += `${inputHtmlSection}\n`
     }
+
+    draggFormElement()
+}
+
+function draggFormElement() {
+    const elements = document.querySelectorAll('.pbcForm');
+    let draggingElement;
+
+    elements.forEach(element => {
+        element.addEventListener('dragstart', e => {
+            draggingElement = e.target;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', null);
+            element.classList.add('dragging');
+        });
+        
+        element.addEventListener('dragend', e => {
+            draggingElement = null;
+            element.classList.remove('dragging');
+        });
+        
+        element.addEventListener('dragover', e => {
+            e.preventDefault();
+        });
+        
+        element.addEventListener('drop', e => {
+            e.preventDefault();
+            
+            if (draggingElement === element) {
+            return;
+            }
+            
+            const container = element.parentNode;
+            const draggingIndex = Array.from(elements).indexOf(draggingElement);
+            const targetIndex = Array.from(elements).indexOf(element);
+            
+            if (draggingIndex < targetIndex) {
+            container.insertBefore(draggingElement, element.nextSibling);
+            } else {
+            container.insertBefore(draggingElement, element);
+            }
+        });
+    });
 }
