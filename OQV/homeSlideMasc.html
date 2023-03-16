@@ -1,109 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style/homeSlideMasc.css">
-	
+    <link rel="stylesheet" href="style/homeSlideMasc.css" />
+
     <title>PDV - AUTOMATION - OQV</title>
-</head>
+  </head>
 
-<body>
-	<main class="pbc-pdv-automation-form">
-		<form id="homeSlideForm"></form>
+  <body>
+    <main class="pbc-pdv-automation-form">
+      <form id="homeSlideForm"></form>
 
-		<section class="pbc-btn-txtarea">
-			<!-- Inicio botão salvar backup -->
-			<div>
-				<button id='homeSlideBackup' type='button' onclick="saveHomeSlideBackup()">Salvar BACKUP</button>
-			</div>
-			<!-- Fim botão salvar backup -->
+      <section class="pbc-btn-txtarea">
+        <!-- Inicio botão salvar backup -->
+        <div>
+          <button
+            id="homeSlideBackup"
+            type="button"
+            onclick="saveHomeSlideBackup()"
+          >
+            Salvar BACKUP
+          </button>
+        </div>
+        <!-- Fim botão salvar backup -->
 
-			<!-- Inicio botão submit form -->
-			<div>
-				<button id='buildHomeSlide' onclick="buildHomeSlide()">Montar HTML</button>
-			</div>
-			<!-- Fim botão submit form -->			
+        <!-- Inicio botão submit form -->
+        <div>
+          <button id="buildHomeSlide" onclick="buildHomeSlide()">
+            Montar HTML
+          </button>
+        </div>
+        <!-- Fim botão submit form -->
 
-			<!-- Inicio botão copiar HTML -->
-			<div>
-				<button id='copyHomeSlideHtml' type='button' onclick="copyHomeSlideHtml()">Copiar código</button>
-			</div>
-			<!-- Inicio botão copiar HTML -->
-			
-			<div>
-				<textarea name="codigo" id="codigo"></textarea>
-			</div>			
-		</section>	
-	</main> 
+        <!-- Inicio botão copiar HTML -->
+        <div>
+          <button
+            id="copyHomeSlideHtml"
+            type="button"
+            onclick="copyHomeSlideHtml()"
+          >
+            Copiar código
+          </button>
+        </div>
+        <!-- Inicio botão copiar HTML -->
 
-<!-- 01 -->
-<!-- BANNER --> 
-<div class="box-banner" id="pbc-banner-masc-1">
-	<a href="https://www.oqvestir.com.br/catalog/category/view/id/135253">
-		<picture>
-			<source srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_mobile_masc.jpg"  alt="" media="(max-width: 770px)">
+        <div>
+          <textarea
+            name="codigo"
+            id="codigo"
+            style="opacity: 0; position: absolute"
+          ></textarea>
+        </div>
+      </section>
+    </main>
 
-			<img src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_desk_masc.jpg" alt="Semana do consumidor">
-		</picture>
-	</a>
-</div>
-<!-- BANNER -->
+    <div class="pdv-automation">
+      <!-- 01 -->
+      <!-- BANNER -->
+      <div class="box-banner">
+        <a href="https://www.oqvestir.com.br/catalog/category/view/id/135253">
+          <picture>
+            <source
+              srcset="
+                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_mobile_masc.jpg
+              "
+              alt=""
+              media="(max-width: 770px)"
+            />
 
-<!-- 02 -->
-<!-- BANNER --> 
-<div class="box-banner" id="pbc-banner-masc-2">
-	<a href="https://www.oqvestir.com.br/catalog/category/view/id/134972">
-		<picture>
-			<source srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_mobile_masc.jpg"  alt="" media="(max-width: 770px)">
+            <img
+              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_desk_masc.jpg"
+              alt="Semana do consumidor"
+            />
+          </picture>
+        </a>
+      </div>
+      <!-- BANNER -->
 
-			<img src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_desk_masc.jpg" alt="Osklen">
-		</picture>
-	</a>
-</div>
-<!-- BANNER -->
+      <!-- 02 -->
+      <!-- BANNER -->
+      <div class="box-banner">
+        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134972">
+          <picture>
+            <source
+              srcset="
+                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_mobile_masc.jpg
+              "
+              alt=""
+              media="(max-width: 770px)"
+            />
 
-<!-- 03 -->
-<!-- BANNER --> 
-<div class="box-banner" id="pbc-banner-masc-3">
-	<a href="https://www.oqvestir.com.br/catalog/category/view/id/136235">
-		<picture>
-			<source srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_mobile_masc.jpg" alt="" media="(max-width: 770px)">
+            <img
+              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_desk_masc.jpg"
+              alt="Osklen"
+            />
+          </picture>
+        </a>
+      </div>
+      <!-- BANNER -->
 
-			<img src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_desk_masc.jpg" alt="Jab">
-		</picture>
-	</a> 
-</div>
-<!-- BANNER -->
+      <!-- 03 -->
+      <!-- BANNER -->
+      <div class="box-banner">
+        <a href="https://www.oqvestir.com.br/catalog/category/view/id/136235">
+          <picture>
+            <source
+              srcset="
+                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_mobile_masc.jpg
+              "
+              alt=""
+              media="(max-width: 770px)"
+            />
 
-<!-- 04 -->
-<!-- BANNER --> 
-<div class="box-banner" id="pbc-banner-masc-4">
-	<a href="https://www.oqvestir.com.br/catalog/category/view/id/134971">
-		<picture>
-			<source srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_mobile_masc.jpg" alt="" media="(max-width: 770px)">
+            <img
+              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_desk_masc.jpg"
+              alt="Jab"
+            />
+          </picture>
+        </a>
+      </div>
+      <!-- BANNER -->
 
-			<img src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_desk_masc.jpg" alt="Nike">
-		</picture>
-	</a> 
-</div>
-<!-- BANNER -->
+      <!-- 04 -->
+      <!-- BANNER -->
+      <div class="box-banner">
+        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134971">
+          <picture>
+            <source
+              srcset="
+                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_mobile_masc.jpg
+              "
+              alt=""
+              media="(max-width: 770px)"
+            />
 
-<!-- 05 -->
-<!-- BANNER --> 
-<div class="box-banner" id="pbc-banner-masc-5">
-	<a href="https://www.oqvestir.com.br/catalog/category/view/id/134999">
-		<picture>
-			<source srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_mobile_masc.jpg" alt="" media="(max-width: 770px)">
+            <img
+              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_desk_masc.jpg"
+              alt="Nike"
+            />
+          </picture>
+        </a>
+      </div>
+      <!-- BANNER -->
 
-			<img src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_desk_masc.jpg" alt="Colcci">
-		</picture>
-	</a> 
-</div>
-<!-- BANNER -->
+      <!-- 05 -->
+      <!-- BANNER -->
+      <div class="box-banner">
+        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134999">
+          <picture>
+            <source
+              srcset="
+                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_mobile_masc.jpg
+              "
+              alt=""
+              media="(max-width: 770px)"
+            />
 
-<script src="script/homeSlideMasc.js"></script>
-</body>
+            <img
+              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_desk_masc.jpg"
+              alt="Colcci"
+            />
+          </picture>
+        </a>
+      </div>
+      <!-- BANNER -->
+    </div>
+
+    <script src="script/homeSlideMasc.js"></script>
+  </body>
 </html>
