@@ -182,3 +182,22 @@ function teste1() {
     draggableStatus.draggable = true  
   }
 }
+
+// focus input
+setTimeout(() => {
+  const nodeList = document.querySelectorAll("#homeSlideForm input");
+  for (var i = 0; i < nodeList.length; i++) {
+    nodeList[i].addEventListener("focusout", (event) => {
+      const button = document.querySelectorAll(".pbcForm");
+      for (var i = 0; i < button.length; i++) {
+        button[i].setAttribute("draggable", "true");
+      }
+    });
+    nodeList[i].addEventListener("focus", (event) => {
+      const button = document.querySelectorAll(".pbcForm");
+      for (var i = 0; i < button.length; i++) {
+        button[i].setAttribute("draggable", "false");
+      }
+    });
+  }
+}, 1000);
