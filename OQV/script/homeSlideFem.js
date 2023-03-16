@@ -90,22 +90,22 @@ window.onload = function buildHomeSlideForms() {
         <h2>Banner 0${i+1}</h2>        
         <div>
             <label>Link:</label>
-            <input type='text' value="${attributesLinkBannerFem.href}" required></input>
+            <input type='text' value="${attributesLinkBannerFem.href}" required onFocus="teste()" onfocusout="teste1()"></input>
         </div>
     
         <div>
             <label>Imagem Desk:</label>
-            <input type='text' value="${attributesBannerDeskFem.src}" required></input>
+            <input type='text' value="${attributesBannerDeskFem.src}" required onFocus="teste()" onfocusout="teste1()"></input>
         </div>
     
         <div>
             <label>Imagem Mobile:</label>
-            <input type='text' value="${attributesBannerMobileFem.srcset}" required></input>
+            <input type='text' value="${attributesBannerMobileFem.srcset}" required onFocus="teste()" onfocusout="teste1()"></input>
         </div>
     
         <div>
             <label>Alt:</label>
-            <input type='text' value="${attributesBannerDeskFem.alt}" required></input>
+            <input type='text' value="${attributesBannerDeskFem.alt}" required onFocus="teste()" onfocusout="teste1()"></input>
         </div>
         </section>
     `
@@ -163,4 +163,22 @@ function draggFormElement() {
       })
     })
   })
+}
+
+function teste() {
+  const draggableElement = document.getElementById("homeSlideForm")
+
+  for (let i = 0; i < 6; i++) {
+    const draggableStatus = draggableElement.querySelector(`#homeSlideForm > section:nth-child(${i+1})`)
+    draggableStatus.draggable = false  
+  }
+}
+
+function teste1() {
+  const draggableElement = document.getElementById("homeSlideForm")
+
+  for (let i = 0; i < 6; i++) {
+    const draggableStatus = draggableElement.querySelector(`#homeSlideForm > section:nth-child(${i+1})`)
+    draggableStatus.draggable = true  
+  }
 }
