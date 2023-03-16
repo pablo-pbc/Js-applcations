@@ -27,18 +27,18 @@
   </head>
   <body>
     <div id="container">
-      <div class="element" id="element1" draggable="true">1</div>
-      <div class="element" id="element2" draggable="true">2</div>
-      <div class="element" id="element3" draggable="true">3</div>
-      <div class="element" id="element4" draggable="true">4</div>
-      <div class="element" id="element5" draggable="true">5</div>
-      <div class="element" id="element6" draggable="true">6</div>
+      <div class="element" id="element1" draggable="true" data-index="0">1</div>
+      <div class="element" id="element2" draggable="true" data-index="1">2</div>
+      <div class="element" id="element3" draggable="true" data-index="2">3</div>
+      <div class="element" id="element4" draggable="true" data-index="3">4</div>
+      <div class="element" id="element5" draggable="true" data-index="4">5</div>
+      <div class="element" id="element6" draggable="true" data-index="5">6</div>
     </div>
     
     <script>
       const elements = document.querySelectorAll('.element');
       let draggingElement;
-
+    
       elements.forEach(element => {
         element.addEventListener('dragstart', e => {
           draggingElement = e.target;
@@ -64,16 +64,23 @@
           }
           
           const container = element.parentNode;
-          const draggingIndex = Array.from(elements).indexOf(draggingElement);
-          const targetIndex = Array.from(elements).indexOf(element);
+          const draggingIndex = parseInt(draggingElement.dataset.index);
+          const targetIndex = parseInt(element.dataset.index);
           
           if (draggingIndex < targetIndex) {
             container.insertBefore(draggingElement, element.nextSibling);
           } else {
             container.insertBefore(draggingElement, element);
           }
+          
+          // Update the data-index attributes of all elements to reflect their new positions
+          const updatedElements = document.querySelectorAll('.element');
+          updatedElements.forEach((el, index) => {
+            el.dataset.index = index;
+          });
         });
       });
     </script>
+    
   </body>
 </html>
