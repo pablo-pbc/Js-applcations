@@ -64,11 +64,13 @@ form#homeSlideForm .dragging {
     font-weight: bold;
 }
 
-textarea {
+textarea{
     width: 100%;
-    height: 10vh;
-    margin: 0 auto;
+    height: 0vh;
+    margin: 0 auto;   
+    opacity: 0;
 }
+
 
 @media (max-width: 900px) {
     form#homeSlideForm {

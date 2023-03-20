@@ -24,11 +24,16 @@ function saveHomeSlideBackup() {
 
   const link = document.createElement("a")  
   const file = new Blob([loopTxtArea().value], { type: 'text/plain' })
+  
 
   link.href = URL.createObjectURL(file)
-  link.download = `backupBanner_${today}_${hours}h-${min}.txt`
+  link.download = `backupBanner_${today}_${hours}h-${min}min.txt`
   link.click()
   URL.revokeObjectURL(link.href)
+
+  document.getElementById("buildHomeSlide").disabled = false;
+  
+  
 }
 
 //Function to copy the HTML after input's insertions
@@ -71,7 +76,8 @@ function buildHomeSlide() {
         resultBannerMobileFem.srcset = bannerMobileFem
     }        
     i++
-  }      
+  } 
+  document.getElementById("copyHomeSlideHtml").disabled = false;   
 }
 
 //Function to create form following banner's quantity
