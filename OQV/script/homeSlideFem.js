@@ -45,12 +45,12 @@ function copyHomeSlideHtml() {
 
 //Function to add the Banner's informations
 function buildHomeSlide() {
-  const bannerPositonIdArray = ['1', '2', '3', '4', '5', '6'];
+  const nodeList = document.getElementsByClassName("box-banner");
   const prefix = "https://dybvctjo56z4b.cloudfront.net";
   let flag = 0;
   let i = 0;  
 
-  while (i < bannerPositonIdArray.length && flag < 1) {
+  while (i < nodeList.length && flag < 1) {
     let bannerPositonId = bannerPositonIdArray[i];
 
     //Importing the input's values
@@ -59,23 +59,23 @@ function buildHomeSlide() {
     let bannerMobileFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(4) > input[type=text]`).value;
     let altBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(5) > input[type=text]`).value;
 
-    const urlDesk = bannerDeskFem;
-    const pathDesk = new URL(urlDesk).pathname.substring(1);
-    const finalLinkDesk = prefix + "/" + pathDesk;
-
-    const urlMobile = bannerMobileFem;
-    const pathMobile = new URL(urlMobile).pathname.substring(1);
-    const finalLinkMobile = prefix + "/" + pathMobile;
-
     //Choosing HTML element
     let resultLinkBannerFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a`);
     let resultBannerDeskFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a > picture > img`);
     let resultBannerMobileFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a > picture > source`);
 
-    if (linkBannerFem.length < 3 && bannerDeskFem.length < 3 && bannerMobileFem.length < 3 && altBannerFem.length < 3) {
+    if (linkBannerFem.length < 3 || bannerDeskFem.length < 3 || bannerMobileFem.length < 3 || altBannerFem.length < 3) {
         flag = 1;
         alert('Favor preencher todos os campos corretamente');         
     } else {
+        let urlDesk = bannerDeskFem;
+        let pathDesk = new URL(urlDesk).pathname.substring(1);
+        let finalLinkDesk = prefix + "/" + pathDesk;
+    
+        let urlMobile = bannerMobileFem;
+        let pathMobile = new URL(urlMobile).pathname.substring(1);
+        let finalLinkMobile = prefix + "/" + pathMobile;
+
         resultLinkBannerFem.href = linkBannerFem;
         resultBannerDeskFem.src = finalLinkDesk;
         resultBannerDeskFem.alt = altBannerFem;

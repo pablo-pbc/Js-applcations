@@ -1,0 +1,396 @@
+body
+  > div.wrapper
+  > div
+  > div
+  > div.main-container.col3-layout
+  > div
+  > div.col-right.sidebar
+  > div {
+  display: none;
+}
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+
+.col-right.sidebar {
+    display: none;
+}
+
+.pdv-pagebuilder-index-index footer {
+    display: none!important;
+}
+
+.pdv-wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.pdv-wrapper .button {
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: 0 5px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 80px;
+  cursor: pointer;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+}
+
+.pdv-wrapper .button .icon {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  border-radius: 80px;
+  box-sizing: border-box;
+  line-height: 80px;
+  transition: all 0.3s ease-out;
+}
+.pdv-wrapper .button:nth-child(1):hover .icon {
+  background: #4267b2;
+}
+.pdv-wrapper .button:nth-child(2):hover .icon {
+  background: #1da1f2;
+}
+.pdv-wrapper .button:nth-child(3):hover .icon {
+  background: #e1306c;
+}
+.pdv-wrapper .button:nth-child(4):hover .icon {
+  background: #333;
+}
+.pdv-wrapper .button:nth-child(5):hover .icon {
+  background: #ff0000;
+}
+.pdv-wrapper .button .icon i {
+  font-size: 35px;
+  line-height: 80px;
+  transition: all 0.3s ease-out;
+}
+.pdv-wrapper .button:hover .icon i {
+  color: #fff;
+}
+.pdv-wrapper .button span {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 80px;
+  margin-left: 10px;
+  transition: all 0.3s ease-out;
+}
+.pdv-wrapper .button:nth-child(1) span {
+  color: #4267b2;
+}
+.pdv-wrapper .button:nth-child(2) span {
+  color: #1da1f2;
+}
+.pdv-wrapper .button:nth-child(3) span {
+  color: #e1306c;
+}
+.pdv-wrapper .button:nth-child(4) span {
+  color: #333;
+}
+.pdv-wrapper .button:nth-child(5) span {
+  color: #ff0000;
+}
+
+/*HOOVER*/
+
+.box-banner picture img {
+  width: 100%;
+}
+
+main.pbc-pdv-automation-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+form#HooverForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+#HooverForm > section > div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0 0;
+}
+
+/* #HooverForm > section > div > input {
+  min-height: 2rem;
+} */
+
+.pbc-btn-txtarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+  padding: 1rem 0;
+}
+
+.pbc-btn-txtarea > div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.pbc-btn-txtarea > div > button {
+  text-transform: uppercase;
+  min-height: 3rem;
+  width: 100%;
+}
+
+.pbc-btn-txtarea > div > button:hover {
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  height: 0vh;
+  margin: 0 auto;
+  visibility: hidden;
+}
+
+@media (min-width: 601px) {
+  .icon-mobile-change {
+    display: none;
+  }
+
+  .pdv-wrapper .button:hover {
+    width: 200px;
+  }
+  /* .pdv-automation {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .pdv-automation > a {
+    display: flex;
+    flex-direction: column;
+  } */
+}
+
+@media (max-width: 600px) {
+  form#HooverForm {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pdv-wrapper .button {
+    height: 200px;
+    width: 80%;
+    box-shadow: 2px 13px 11px rgb(0 0 0 / 25%);
+    text-align: center;
+  }
+
+  .pdv-wrapper .button span {
+    margin-left: 0;
+  }
+
+  .grid-mob-position {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
+  .grid-mob-position h2 {
+    height: 60px;
+    align-items: center;
+    display: flex;
+  }
+
+  .grid-mob-position h2:active {
+    background-color: blue;
+  }
+
+  .grid-mob-position .ar_form {
+    padding: 0;
+    width: 46%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .grid-mob-position > section > div {
+    display: none !important;
+  }
+  .box-hoover a {
+    pointer-events: none;
+  }
+
+  .icon-mobile-change {
+    width: 50px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+  }
+  .item.selected {
+    display: flex;
+    margin-bottom: 20px;
+    overflow: auto;
+    margin-left: 15px;
+  }
+
+  .item.selected > div > div {
+    overflow: auto;
+    width: 100% !important;
+    margin-bottom: 400px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .item.selected::-webkit-scrollbar,
+  .item.selected > div > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid-mob-position section.pbcForm.ar_form.selected {
+    background-color: rgb(10 29 137 / 32%);
+  }
+
+  #HooverForm {
+    display: -webkit-inline-box !important;
+    overflow: auto;
+    padding: 2px;
+  }
+
+  .grid-mob-position#HooverForm {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  #HooverForm::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pdv-automation > div > a {
+    width: 150px!important;
+  }
+
+  .pdv-automation > div > a > img {
+    width: 150px!important;
+  }
+}
+
+/**/
+
+.ar_form {
+  max-width: 300px;
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 2px 1px 5px -1px #111;
+}
+
+.ar_form * {
+  transition: 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.ar_form input {
+  width: 95%;
+  margin: 0.6em 0;
+  padding: 10px 10px;
+  border: 0;
+  font-weight: 700;
+  background-color: transparent;
+  outline: none;
+  border-color: #217554;
+  border-radius: 20px;
+}
+
+#HooverForm > section > div:nth-child(5) {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    align-self: center;
+}
+
+.ar_form input[type="text"],
+.ar_form input[type="password"] {
+  border: 2px solid gray;
+}
+/* #03273D; */
+.ar_form input[type="text"]:focus,
+.ar_form input[type="password"]:focus {
+  border-color: #217554;
+  width: 100%;
+}
+
+.ar_form input[type="submit"] {
+  background-color: #217554;
+  color: white;
+  width: 70%;
+}
+
+.ar_form a {
+  color: #bbb;
+  margin-top: 2em;
+  text-align: center;
+  display: block;
+}
+
+.ar_form a:hover {
+  color: #35bd87;
+}
+
+.item {
+  display: none;
+}
+
+.item.selected {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.item .pdv-automation > div {
+  margin: 0 auto;
+  justify-content: center;
+  gap: 1rem;
+
+  float: inherit;
+  display: flex;
+  width: 100% !important;
+}
+
+.box-hoover img {
+  width: 150px;
+}
+
+.box-hoover a {
+  display: grid;
+}
+
+#select-option {
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+body {
+  background-color: #f6f6f6;
+  transition: background-color 0.3s;
+}
+
+body[light-mode="dark"] * {
+  background-color: #141516;
+  color: #ced4e2;
+}
+
+body[light-mode="dark"] .light-mode-button span:nth-child(1) {
+  background-color: #ced4e2;
+  color: #141516;
+}
+
+body[light-mode="dark"] .light-mode-button span:nth-child(2) {
+  left: 65px;
+  background-color: #141516;
+}
+
+body[light-mode="dark"] a {
+  color: #141516;
+}
+
+/*HOOVER*/
+
