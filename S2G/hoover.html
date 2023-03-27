@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style/hoover.css">
+
+    <title>PDV - HOOVER FEM - S2G</title>
+  </head>
+
+<body>
+    <main class="pbc-pdv-automation-form">
+        <img src="/skin/frontend/rwd/oqv/images/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
+        <form id="HooverForm"></form>
+
+        <section class="pbc-btn-txtarea">
+            <!-- Inicio botão salvar backup -->
+            <div>
+                <button
+                    id="buttonBackup"
+                    type="button"
+                    onclick="saveBackup()">
+                    Salvar BACKUP
+                </button>
+            </div>
+            <!-- Fim botão salvar backup -->
+
+            <!-- Inicio botão submit form -->
+            <div>
+                <button id="buildButton" onclick="buildHtml()" disabled>
+                    Montar HTML
+                </button>
+            </div>
+            <!-- Fim botão submit form -->
+
+            <!-- Inicio botão copiar HTML -->
+            <div>
+                <button
+                    id="copyHtmlButton"
+                    type="button"
+                    onclick="copyHtml()"
+                    disabled>
+                    Copiar código
+                </button>
+            </div>
+            <!-- Inicio botão copiar HTML -->
+
+            <div>
+                <textarea
+                    name="codigo"
+                    id="codigo">
+                </textarea>
+            </div>
+        </section>
+    </main>
+
+    <select id="select-option">
+        <option value="1" selected>Whast News - Feminino</option>
+        <option value="2">Marcas - Feminino</option>
+        <option value="3">Roupas - Feminino</option>
+        <option value="4">Sapatos - Feminino</option>
+        <option value="5">Acessórios - Feminino</option>
+        <option value="6">Casa - Feminino</option>
+        <option value="7">Liquida - Feminino</option>        
+        <option value="8">Beleza - Feminino</option>
+        <option value="9">Whats News - Masculino</option>
+        <option value="10">Marcas - Masculino</option>
+        <option value="11">Roupas - Masculino</option>
+        <option value="12">Calçados - Masculino</option>
+        <option value="13">Acessórios - Masculino</option>
+        <option value="14">Liquida - Masculino</option>
+        <option value="15">Casa - Masculino</option>
+    </select>
+      
+<div class="item selected" data-option="1">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_85772_whats_news_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/131448">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/200323/hoover_whatsnew-fem-01.jpg" alt="Inverno 2023" border="0"> 
+                Inverno 2023
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/56784"> 
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/230223/hoover_whatsnew-fem-02.jpg" alt="Shop by Look"  border="0">
+                Shop by Look
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="2">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_2532_marcas_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/104784">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_marca-fem-01.jpg" alt="NXT LVL" border="0">
+                NXT LVL
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/134782">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_marca-fem-02.jpg" alt="ANSELMI" border="0">
+                ANSELMI
+            </A>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/7775">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_marca-fem-03.jpg" alt="Vix" border="0">
+                Vix
+            </a> 
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="3">
+    <div class="pdv-automation">        
+        <div class="box-hoover">
+            <!-- hoover_menu_150_roupas_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133349">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_roupas-fem-01.jpg" alt="Valisere"   border="0">
+                Valisere
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="4">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_126373_sapatos_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/93240">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_calcados-fem-01.jpg" alt="VICENZA" border="0">
+                VICENZA
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/135062">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_calcados-fem-02.jpg" alt="On Running" border="0">
+                On Running
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/138434">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/100323/hoover_calcados-fem-03.jpg" alt="CARIUMA" border="0">
+                CARIUMA
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133577">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_calcados-fem-04.jpg" alt="MANOLITA" border="0">
+                MANOLITA
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="5">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_152_acessorios_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/134726">
+                <img alt="Fe Yamin" src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_acessorios-fem-01.jpg" />
+                OLIVER PEOPLE
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/137328">
+                <img alt="Lool" src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_acessorios-fem-02.jpg" />
+                PALONE
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/138446">
+                <img alt="Estilé" src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_acessorios-fem-03.jpg" />
+                IZIPIZI
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/33374">
+                <img alt="Nohma Brand" src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_acessorios-fem-04.jpg" />
+                Isla
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="6">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_126385_casa_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/134793">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_casa-fem-01.jpg" alt="PACCO" border="0">
+                PACCO
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/135424">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_casa-fem-02.jpg" alt="GREGHI DESIGN"  border="0">
+                GREGHI DESIGN
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="7">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_2965_liquida_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/2965/?marca=633">
+                <img alt="Animale até 70% off" src="https://dpmhyxrn33nxe.cloudfront.net/menu/270722/hoover_liquida-fem-01.jpg"/>
+                Animale até 70% off
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="8">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_137791_beleza_fem -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/137935">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/130323/hoover_beleza-fem-01.jpg" alt="Sephora Collection" border="0">
+                Sephora Collection
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="9">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_133590_whats_news_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/135217">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/080223/hoover_whatsnew-masc-01.jpg" alt="Sneaker Shop" border="0">
+                Sneaker Shop
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/56785">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/020323/hoover_whatsnew-masc-02.jpg" alt="Shop by Look" border ="0">
+                Shop by Look
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133590">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/200323/hoover_whatsnew-masc-03.jpg" alt="Austral" border ="0">
+                Inverno 2023
+            </a>
+            
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/137772">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/140622/hoover_whatsnew-masc-04.jpg" alt="Jaquetas Puffer" border="0">
+                Jaquetas Puffer
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="10">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_133589_marcas_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/36086">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_marca-masc-01.jpg" alt="FOXTON" border="0">
+                FOXTON
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133198">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_marca-masc-02.jpg" alt="Jab" border="0">
+                Jab
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/8216">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_marca-masc-03.jpg" alt="RICARDO ALMEIDA" border="0">
+                RICARDO ALMEIDA
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133431">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_marca-masc-04.jpg" alt="VØN DER VÖLKE" border="0">
+                VØN DER VÖLKE
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="11">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_178_roupas_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/126365">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_roupas-masc-01.jpg" alt="PINEAPPLE" border="0">
+                PINEAPPLE
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/5112">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_roupas-masc-02.jpg" alt="JOHN JOHN" border="0">
+                JOHN JOHN
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/10544">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_roupas-masc-03.jpg" alt="LEVI’S" border="0">
+                LEVI’S
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="12">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_108260_calcados_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/29608">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_calcados-masc-01.jpg" alt="CONVERSE " border="0">
+                CONVERSE
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/9729">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_calcados-masc-02.jpg" alt="REDLEY" border="0">
+                REDLEY
+            </a> 
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/138106">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_calcados-masc-003.jpg" alt="TRECOLLI" border="0">
+                TRECOLLI
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/134767">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_calcados-masc-04.jpg" alt="LE CORK" border="0">
+                LE CORK
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="13">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_189_acessorios_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/138447">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_acessorios-masc-01.jpg" alt="IZIPIZI" border="0">
+                IZIPIZI
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133579">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/060123/hoover_acessorios-masc-02.jpg" alt="FJÄLLRÄVEN" border="0">
+                FJÄLLRÄVEN
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133615">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/060123/hoover_acessorios-masc-03.jpg" alt="RAY BAN" border="0">
+                RAY BAN
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/133338">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/030323/hoover_acessorios-masc-04.jpg" alt="NEW ERA" border="0">
+                NEW ERA
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="14">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_9154_liquida_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/70452">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/280722/hoover_liquida-masc-01.jpg" alt="'2essential até 70% off " width="224" height="250" border="0">
+                '2essential
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/7505">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/280722/hoover_liquida-masc-02.jpg" alt="Ellus até 60% off" width="224" height="250" border="0">
+                Ellus
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="item" data-option="15">
+    <div class="pdv-automation">
+        <div class="box-hoover">
+            <!-- hoover_menu_134827_casa_masc -->
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/134793">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/051222/hoover_casa-masc-01.jpg" alt="Pacco" border="0">
+                Pacco
+            </a>
+
+            <a href="https://www.shop2gether.com.br/catalog/category/view/id/138241">
+                <img src="https://dpmhyxrn33nxe.cloudfront.net/menu/090323/hoover_casa-masc-01.jpg" alt="STRAUSS" border="0">
+                STRAUSS
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="script/script.js"></script>
+<script src="script/hoover.js"></script>
+</html>
