@@ -36,7 +36,20 @@ function buildHomeSlide() {
     };        
     i++;
   } 
-  btnCopyhtml.disabled = false;   
+  
+  btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653'
+    btnCopyhtml.style.border = '1px solid #264653'
+
+    btnCopyhtml.addEventListener("mouseover", function() {
+        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+        btnCopyhtml.style.cursor = "initial";
+    });
+
+    btnCopyhtml.addEventListener("mouseout", function() {
+        btnCopyhtml.style.backgroundColor = "#fff";        
+        btnCopyhtml.style.cursor = "initial";
+    });
 };
 
 //Function to create form following banner's quantity

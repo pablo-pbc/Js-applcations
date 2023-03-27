@@ -12,48 +12,45 @@
 
   <body>
     <main class="pbc-pdv-automation-form">
+      <img src="/skin/frontend/rwd/oqv/images/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
       <form id="homeSlideForm"></form>
 
       <section class="pbc-btn-txtarea">
         <!-- Inicio botão salvar backup -->
         <div>
-          <button
-            id="homeSlideBackup"
-            type="button"
-            onclick="saveBackup()"
-          >
+          <button 
+            id='homeSlideBackup' 
+            type='button' 
+            onclick="saveBackup()">
             Salvar BACKUP
           </button>
         </div>
         <!-- Fim botão salvar backup -->
-
+  
         <!-- Inicio botão submit form -->
         <div>
-          <button id="buildButton" onclick="buildHomeSlide()">
-            Montar HTML
-          </button>
+          <button 
+          id='buildButton' 
+          onclick="buildHomeSlide()" 
+          disabled>
+          Montar HTML</button>
         </div>
-        <!-- Fim botão submit form -->
-
+        <!-- Fim botão submit form -->			
+  
         <!-- Inicio botão copiar HTML -->
         <div>
-          <button
-            id="copyHtmlButton"
-            type="button"
-            onclick="copyHtml()"
-          >
-            Copiar código
-          </button>
+          <button 
+          id='copyHtmlButton' 
+          type='button' 
+          onclick="copyHtml()"
+          disabled>
+          Copiar código</button>
         </div>
         <!-- Inicio botão copiar HTML -->
-
+        
         <div>
-          <textarea
-            name="codigo"
-            id="codigo"
-            style="opacity: 0; position: absolute"
-          ></textarea>
-        </div>
+          <textarea name="codigo" id="codigo"></textarea>
+        </div>			
       </section>
     </main>
 

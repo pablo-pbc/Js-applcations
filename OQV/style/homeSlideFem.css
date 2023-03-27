@@ -70,23 +70,40 @@ form#homeSlideForm .dragging {
     align-items: center;
     row-gap: 1rem;
     padding: 1rem 0;
-}
-
-.pbc-btn-txtarea > div {
+  }
+  
+  .pbc-btn-txtarea > div {
     display: flex;
     justify-content: center;
-    width: 100%;
-}
-
-.pbc-btn-txtarea > div > button {
+    width: 50%;
+  }
+  
+  .pbc-btn-txtarea > div > button {
     text-transform: uppercase;
     min-height: 3rem;
     width: 100%;
-}
-
-.pbc-btn-txtarea > div > button:hover {
-    font-weight: bold;
-}
+    outline: none;
+    border: 1px solid #264653;
+    background: none;
+    border-radius: 25px;
+    color: #264653;
+    transition: 0.5s all;
+    cursor: pointer;
+  }
+  
+  #buildButton, #copyHtmlButton {
+    border: 1px solid red;
+    color: red;
+    cursor: not-allowed;
+  }
+  
+  #buildButton:hover, #copyHtmlButton:hover {
+    background-color: rgb(255, 222, 222);
+  }
+  
+  .pbc-btn-txtarea > div > button:hover {
+    background-color: #c7f9cc;
+  }
 
 textarea{
     width: 100%;

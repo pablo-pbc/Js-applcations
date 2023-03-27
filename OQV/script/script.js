@@ -61,6 +61,18 @@ function saveBackup() {
     URL.revokeObjectURL(link.href);
 
     btnBuildHtml.disabled = false;
+    btnBuildHtml.style.color = '#264653'
+    btnBuildHtml.style.border = '1px solid #264653'
+
+    btnBuildHtml.addEventListener("mouseover", function() {
+        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+        btnBuildHtml.style.cursor = "initial";
+    });
+
+    btnBuildHtml.addEventListener("mouseout", function() {
+        btnBuildHtml.style.backgroundColor = "#fff";        
+        btnBuildHtml.style.cursor = "initial";
+    });
 };
 
 //Function to copy the HTML after input's insertions
