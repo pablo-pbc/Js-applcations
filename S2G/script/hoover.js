@@ -1,49 +1,49 @@
-//Function to feed the textarea element
-function loopTxtArea() {
-    const nodeList = document.querySelectorAll(".item.selected .pdv-automation > div a");
-    const txtArea = document.getElementById("codigo");
-    let drop = 'dropDown'
-  
-    txtArea.value = "";
-  
+//Function to create form following pdv's quantity
+window.onload = function buildHooverForms() {
+    const nodeList = document.querySelectorAll(".item.selected .box-hoover a");
+    const appendFormReference = document.querySelector("#HooverForm");
+
     for (let i = 0; i < nodeList.length; i++) {
-      let beginElementComment = `<!-- Inicio ${drop} 0${i + 1} -->`;
-      let endElementComment = `<!-- Final ${drop} 0${i + 1} -->`;
-      let copyHtml = nodeList[i].outerHTML;
-  
-      document.getElementById("codigo").value += `${beginElementComment}\n${copyHtml}\n${endElementComment}\n\n`;
+        let attributeslinkHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
+        let attributesimgHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1}) > img`);
+
+        let inputHtmlSection = `
+                <section class='pbcForm ar_form' draggable="true" data-index="${i}">
+                <h2>Hoover 0${i + 1}</h2>        
+                <div>
+                    <label>Link:</label>
+                    <input type='text' value="${attributeslinkHoover.href}" required></input>
+                </div>
+            
+                <div>
+                    <label>Imagem Desk:</label>
+                    <input type='text' value="${attributesimgHoover.src}" required></input>
+                </div>
+            
+                <div>
+                    <label>Alt:</label>
+                    <input type='text' value="${attributesimgHoover.alt}" required></input>
+                </div>
+
+                <div>
+                    <label>Marque aqui, caso queira remover essa imagem!</label>
+                    <input type="checkbox">                  
+                </div>
+                </section>
+            `;
+        appendFormReference.innerHTML += `${inputHtmlSection}\n`;
+    }   
+
+    var x = window.matchMedia("(max-width: 700px)");
+
+    if (x.matches) {
+        // If media query matches
+        swapFormElementPositions();
+    } else {
+        draggFormElement();
     }
-    return txtArea;
-}
-  
-//Function to save the backup file
-function saveBackup() {
-    const date = new Date();
-    const hours = date.getHours("pt-br");
-    const min = date.getMinutes("pt-br");
-    const today = date.toLocaleDateString("pt-br");
+};
 
-    const link = document.createElement("a");
-    const file = new Blob([loopTxtArea().value], { type: "text/plain" });
-
-    link.href = URL.createObjectURL(file);
-    link.download = `backup_${today}_${hours}h-${min}.txt`;
-    link.click();
-    URL.revokeObjectURL(link.href);
-
-    document.getElementById("buildButton").disabled = false;
-}
-
-//Function to copy the HTML after input's insertions
-function copyHtml() {
-    // Selecting the content inside the textarea
-    loopTxtArea().select();
-    // Selecting the content inside the textarea for mobile devices
-    loopTxtArea().setSelectionRange(0, 99999);
-    // Copy the text inside the textarea field
-    navigator.clipboard.writeText(loopTxtArea().value);  
-}
-  
 //Function to add the Banner's informations
 function buildHtml() {
     const nodeList = document.querySelectorAll(".item.selected .pdv-automation > div a");
@@ -85,59 +85,11 @@ function buildHtml() {
             resultlinkHoover.href = linkHoover;
             resultlinkHoover.innerHTML =`<img src=${finalUrl} alt=${altHoover} border="0" />${altHoover}` ;
         }
-        console.log('ta no while')
         i++;        
     }
-    console.log('saiu do while')
-    document.getElementById("copyHtmlButton").disabled = false;
+    btnCopyhtml.disabled = false;
 }
-  
-//Function to create form following pdv's quantity
-window.onload = function buildHooverForms() {
-    const homeSlideList = document.querySelectorAll(".item.selected .box-hoover a");
-    const appendFormReference = document.querySelector("#HooverForm");
 
-    for (let i = 0; i < homeSlideList.length; i++) {
-        let attributeslinkHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
-        let attributesimgHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1}) > img`);
-
-        let inputHtmlSection = `
-                <section class='pbcForm ar_form' draggable="true" data-index="${i}">
-                <h2>Hoover 0${i + 1}</h2>        
-                <div>
-                    <label>Link:</label>
-                    <input type='text' value="${attributeslinkHoover.href}" required></input>
-                </div>
-            
-                <div>
-                    <label>Imagem Desk:</label>
-                    <input type='text' value="${attributesimgHoover.src}" required></input>
-                </div>
-            
-                <div>
-                    <label>Alt:</label>
-                    <input type='text' value="${attributesimgHoover.alt}" required></input>
-                </div>
-
-                <div>
-                    <label>Marque aqui, caso queira remover essa imagem!</label>
-                    <input type="checkbox">                  
-                </div>
-                </section>
-            `;
-        appendFormReference.innerHTML += `${inputHtmlSection}\n`;
-    }   
-
-    var x = window.matchMedia("(max-width: 700px)");
-
-    if (x.matches) {
-        // If media query matches
-        swapFormElementPositions();
-    } else {
-        draggFormElement();
-    }
-};
-  
 function swapFormElementPositions() {
     const elements = document.querySelectorAll(".pbcForm");
     const elements2 = document.getElementById("HooverForm");
@@ -168,54 +120,7 @@ function swapFormElementPositions() {
         });
     });
 }
-  
-function draggFormElement() {
-    const elements = document.querySelectorAll(".pbcForm");
-    let draggingElement;
 
-    elements.forEach((element) => {
-        element.addEventListener("dragstart", (e) => {
-            draggingElement = e.target;
-            e.dataTransfer.effectAllowed = "move";
-            e.dataTransfer.setData("text/plain", null);
-            element.classList.add("dragging");
-        });
-
-        element.addEventListener("dragend", (e) => {
-            draggingElement = null;
-            element.classList.remove("dragging");
-        });
-
-        element.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        });
-
-        element.addEventListener("drop", (e) => {
-            e.preventDefault();
-
-            if (draggingElement === element) {
-                return;
-            }
-
-            const container = element.parentNode;
-            const draggingIndex = parseInt(draggingElement.dataset.index);
-            const targetIndex = parseInt(element.dataset.index);
-
-            if (draggingIndex < targetIndex) {
-                container.insertBefore(draggingElement, element.nextSibling);
-            } else {
-                container.insertBefore(draggingElement, element);
-            }
-
-            // Update the data-index attributes of all elements to reflect their new positions
-            const updatedElements = document.querySelectorAll(".pbcForm");
-            updatedElements.forEach((el, index) => {
-                el.dataset.index = index;
-            });
-        });
-    });
-}
-  
 // focus input
 setTimeout(() => {
     const nodeList = document.querySelectorAll("#HooverForm input");
@@ -235,36 +140,6 @@ setTimeout(() => {
         });
     }
 }, 2000);
-  
-// function select
-setTimeout(() => {
-    var selectOption = document.getElementById("select-option");
-    if (selectOption) {
-        selectOption.addEventListener("change", function () {
-            var selectedOption = this.value;
-            var items = document.querySelectorAll(".item");
-            var selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');
-
-            const element = document.querySelectorAll("#HooverForm section");
-
-            items.forEach(function (item) {
-                item.classList.remove("selected");
-            });            
-
-            selectedItems.forEach(function (item) {
-                item.classList.add("selected");
-            });            
-
-            for (i = 0; i < element.length; i++) {
-                element[i].remove();
-            }
-
-            setTimeout(() => {
-                window.onload();
-            }, 1000);
-        });
-    }
-}, 1000);
 
 /* Mobile */  
 function toggleClass(elementId, className) {
