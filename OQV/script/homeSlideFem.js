@@ -43,14 +43,13 @@ function buildHomeSlide() {
 window.onload = function buildHomeSlideForms() {
   const formBackground = document.getElementsByClassName("pbcForm");
   const appendFormReference = document.querySelector('#homeSlideForm');
-  const hexBgForm = ['#d9ed92', '#b5e48c', '#99d98c', '#76c893', '#52b69a', '#588157'];
 
   for (let i = 0; i < nodeList.length; i++) {
     let attributesLinkBannerFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a`);
     let attributesBannerDeskFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > img`);
     let attributesBannerMobileFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > source`);
     let inputHtmlSection = `
-        <section class='pbcForm' draggable="true" data-index="${i}">
+        <section class='pbcForm ar_form' draggable="true" data-index="${i}">
         <h2>Banner 0${i+1}</h2>        
         <div>
             <label>Link:</label>
@@ -76,10 +75,45 @@ window.onload = function buildHomeSlideForms() {
     appendFormReference.innerHTML += `${inputHtmlSection}\n`;       
   } 
 
-  for (let k = 0; k < formBackground.length; k++) {
-    formBackground[k].style.backgroundColor = hexBgForm[k];       
-  };
-  draggFormElement();
+  var x = window.matchMedia("(max-width: 700px)");
+
+  if (x.matches) {
+      // If media query matches
+      swapFormElementPositions();
+  } else {
+      draggFormElement();
+  }
+}
+
+function swapFormElementPositions() {
+  const elements = document.querySelectorAll(".pbcForm");
+  const elements2 = document.getElementById("homeSlideForm");
+  let firstElement = null;
+
+  elements.forEach((element) => {
+      element.addEventListener("click", () => {
+          if (firstElement === null) {
+              firstElement = element;
+              element.classList.add("selected");
+          } else {
+
+              const container = element.parentNode;
+              const firstIndex = parseInt(firstElement.dataset.index);
+              const secondIndex = parseInt(element.dataset.index);
+
+              if (firstIndex !== secondIndex && elements2.classList == "grid-mob-position") {
+                  const temp = document.createElement("div");
+                  container.insertBefore(temp, element);
+                  container.insertBefore(element, firstElement);
+                  container.insertBefore(firstElement, temp);
+                  temp.remove();
+              }
+
+              firstElement.classList.remove("selected");
+              firstElement = null;
+          }
+      });
+  });
 }
 
 // focus input
@@ -100,3 +134,13 @@ setTimeout(() => {
     });
   }
 }, 1000);
+
+/* Mobile */  
+function toggleClass(elementId, className) {
+  const element = document.getElementById("homeSlideForm");
+  if (element.classList.contains(className)) {
+      element.classList.remove(className);
+  } else {
+      element.classList.add(className);
+  }
+}
