@@ -7,10 +7,10 @@ function buildHomeSlide() {
   while (i < nodeList.length && flag < 1) {
 
     //Importing the input's values
-    let linkBannerMasc = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(2) > input[type=text]`).value;
-    let bannerDeskMasc = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(3) > input[type=text]`).value;
-    let bannerMobileMasc = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
-    let altBannerMasc = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=text]`).value;
+    let linkBannerMasc = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(2) > input[type=text]`).value;
+    let bannerDeskMasc = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(3) > input[type=text]`).value;
+    let bannerMobileMasc = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
+    let altBannerMasc = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=text]`).value;
 
     //Choosing HTML element
     let resultLinkBannerMasc = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a`);
@@ -52,9 +52,8 @@ function buildHomeSlide() {
 };
 
 //Function to create form following banner's quantity
-window.onload = function buildHomeSlideForms() {
-  const formBackground = document.getElementsByClassName("pbcForm");
-  const appendFormReference = document.querySelector('#homeSlideForm');
+window.onload = function buildpdvForms() {
+  const appendFormReference = document.querySelector('#pdvForm');
 
   for (let i = 0; i < nodeList.length; i++) {
     let attributesLinkBannerMasc = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a`);
@@ -99,7 +98,7 @@ window.onload = function buildHomeSlideForms() {
 
 function swapFormElementPositions() {
   const elements = document.querySelectorAll(".pbcForm");
-  const elements2 = document.getElementById("homeSlideForm");
+  const elements2 = document.getElementById("pdvForm");
   let firstElement = null;
 
   elements.forEach((element) => {
@@ -130,7 +129,7 @@ function swapFormElementPositions() {
 
 // focus input
 setTimeout(() => {
-  const nodeList = document.querySelectorAll("#homeSlideForm input");
+  const nodeList = document.querySelectorAll("#pdvForm input");
   for (var i = 0; i < nodeList.length; i++) {
     nodeList[i].addEventListener("focusout", (event) => {
       const button = document.querySelectorAll(".pbcForm");
@@ -149,7 +148,7 @@ setTimeout(() => {
 
 /* Mobile */  
 function toggleClass(elementId, className) {
-  const element = document.getElementById("homeSlideForm");
+  const element = document.getElementById("pdvForm");
   if (element.classList.contains(className)) {
       element.classList.remove(className);
   } else {

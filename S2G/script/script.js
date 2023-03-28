@@ -8,7 +8,7 @@ let nodeList = null;
 
 switch (pdvName) {
     case 'hoover':
-        querySelector = '.item.selected .box-hoover a';
+        querySelector = 'div.item.selected > div > div > a';       
         nodeList = document.querySelectorAll(`${querySelector}`);
         pdvComment = 'Hoover';
         break;
@@ -61,6 +61,17 @@ function saveBackup() {
     URL.revokeObjectURL(link.href);
 
     btnBuildHtml.disabled = false;
+    btnBuildHtml.style.color = '#264653'
+    btnBuildHtml.style.border = '1px solid #264653'
+
+    btnBuildHtml.addEventListener("mouseover", function() {
+        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+        btnBuildHtml.style.cursor = "pointer";
+    });
+
+    btnBuildHtml.addEventListener("mouseout", function() {
+        btnBuildHtml.style.backgroundColor = "#fff";
+    });
 };
 
 //Function to copy the HTML after input's insertions
@@ -129,7 +140,7 @@ setTimeout(() => {
             let items = document.querySelectorAll(".item");
             let selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');            
 
-            const element = document.querySelectorAll("#HooverForm section");
+            const element = document.querySelectorAll("#pdvForm section");
 
             items.forEach(function (item) {
                 item.classList.remove("selected");

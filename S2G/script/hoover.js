@@ -1,6 +1,7 @@
 //Function to create form following pdv's quantity
-window.onload = function buildHooverForms() {
-    const appendFormReference = document.querySelector("#HooverForm");
+window.onload = function buildForm() {    
+    const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+    const appendFormReference = document.querySelector("#pdvForm");    
 
     for (let i = 0; i < nodeList.length; i++) {
         let attributeslinkHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
@@ -24,7 +25,7 @@ window.onload = function buildHooverForms() {
                     <input type='text' value="${attributesimgHoover.alt}" required></input>
                 </div>
 
-                <div>
+                <div class="input_checkbox">
                     <label>Marque aqui, caso queira remover essa imagem!</label>
                     <input type="checkbox">                  
                 </div>
@@ -45,21 +46,20 @@ window.onload = function buildHooverForms() {
 
 //Function to add the Banner's informations
 function buildHtml() {
-    const nodeList = document.querySelectorAll(".item.selected .pdv-automation > div a");
+    const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
     const prefix = "https://dpmhyxrn33nxe.cloudfront.net";
     let flag = 0;
     let i = 0;   
 
     while (i < nodeList.length && flag < 1) {
-        let HooverPosition = i + 1;
         //Importing the input's values
-        let linkHoover = document.querySelector(`#HooverForm > section:nth-child(${HooverPosition}) > div:nth-child(2) > input[type=text]`).value;
-        let imgHoover = document.querySelector(`#HooverForm > section:nth-child(${HooverPosition}) > div:nth-child(3) > input[type=text]`).value;
-        let altHoover = document.querySelector(`#HooverForm > section:nth-child(${HooverPosition}) > div:nth-child(4) > input[type=text]`).value;  
-        let checkBox =  document.querySelector(`#HooverForm > section:nth-child(${HooverPosition}) > div:nth-child(5) > input[type=checkbox]`).checked;
+        let linkHoover = document.querySelector(`#pdvForm > section:nth-child(${i + 1}) > div:nth-child(2) > input[type=text]`).value;
+        let imgHoover = document.querySelector(`#pdvForm > section:nth-child(${i + 1}) > div:nth-child(3) > input[type=text]`).value;
+        let altHoover = document.querySelector(`#pdvForm > section:nth-child(${i + 1}) > div:nth-child(4) > input[type=text]`).value;  
+        let checkBox =  document.querySelector(`#pdvForm > section:nth-child(${i + 1}) > div:nth-child(5) > input[type=checkbox]`).checked;
         
         //Choosing HTML element
-        let resultlinkHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${HooverPosition})`);
+        let resultlinkHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
 
         if (linkHoover.length < 3 || imgHoover.length < 3 || altHoover.length < 3) {
             flag = 1;
@@ -86,12 +86,24 @@ function buildHtml() {
         }
         i++;        
     }
+    
     btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653'
+    btnCopyhtml.style.border = '1px solid #264653'
+
+    btnCopyhtml.addEventListener("mouseover", function() {
+        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+        btnCopyhtml.style.cursor = "pointer";
+    });
+
+    btnCopyhtml.addEventListener("mouseout", function() {
+        btnCopyhtml.style.backgroundColor = "#fff";
+    });
 }
 
 function swapFormElementPositions() {
     const elements = document.querySelectorAll(".pbcForm");
-    const elements2 = document.getElementById("HooverForm");
+    const elements2 = document.getElementById("pdvForm");
     let firstElement = null;
 
     elements.forEach((element) => {
@@ -122,7 +134,7 @@ function swapFormElementPositions() {
 
 // focus input
 setTimeout(() => {
-    const nodeList = document.querySelectorAll("#HooverForm input");
+    const nodeList = document.querySelectorAll("#pdvForm input");
     for (var i = 0; i < nodeList.length; i++) {
         nodeList[i].addEventListener("focusout", (event) => {
             const button = document.querySelectorAll(".pbcForm");
@@ -142,7 +154,7 @@ setTimeout(() => {
 
 /* Mobile */  
 function toggleClass(elementId, className) {
-    const element = document.getElementById("HooverForm");
+    const element = document.getElementById("pdvForm");
     if (element.classList.contains(className)) {
         element.classList.remove(className);
     } else {

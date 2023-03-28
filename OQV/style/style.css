@@ -19,18 +19,18 @@ main.pbc-pdv-automation-form {
     padding: 1rem;
 }
 
-form#homeSlideForm {
+form#pdvForm {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     width: 100%;
 }
 
-form#homeSlideForm .dragging {
+form#pdvForm .dragging {
     opacity: 0.5;
 }
 
-#homeSlideForm > section.pbcForm {
+#pdvForm > section.pbcForm {
     padding: 1rem;
     border: 2px solid #A9BFB8;
     border-radius: 10px;
@@ -38,18 +38,18 @@ form#homeSlideForm .dragging {
     transition: 0.5s all;
 }
 
-#homeSlideForm > section.pbcForm:hover {
+#pdvForm > section.pbcForm:hover {
     box-shadow: 2px 1px 5px -1px #264653;
     border: 2px solid #264653;
 }
 
-#homeSlideForm > section > div {
+#pdvForm > section > div {
     display: flex;
     flex-direction: column;
     padding: 0.5rem 0 0;
 }
 
-#homeSlideForm > section > div > input {
+#pdvForm > section > div > input[type=text] {
     width: 95%;
     padding: 0.5rem;
     margin: 0.5rem auto;
@@ -59,9 +59,20 @@ form#homeSlideForm .dragging {
     transition: 0.5s all;
 }
 
-#homeSlideForm > section > div > input:focus {
+#pdvForm > section > div > input[type=checkbox] {
+    width: 30%;
+    margin: 0 auto;
+}
+
+#pdvForm > section > div > input[type=text]:focus {
     width: 100%;
     border: 2px solid #264653;
+}
+
+#pdvForm > section > div.input_checkbox {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    text-align: center;
 }
 
 .pbc-btn-txtarea {
@@ -70,15 +81,15 @@ form#homeSlideForm .dragging {
     align-items: center;
     row-gap: 1rem;
     padding: 1rem 0;
-  }
+}
   
-  .pbc-btn-txtarea > div {
+.pbc-btn-txtarea > div {
     display: flex;
     justify-content: center;
     width: 50%;
-  }
+}
   
-  .pbc-btn-txtarea > div > button {
+.pbc-btn-txtarea > div > button {
     text-transform: uppercase;
     min-height: 3rem;
     width: 100%;
@@ -89,21 +100,59 @@ form#homeSlideForm .dragging {
     color: #264653;
     transition: 0.5s all;
     cursor: pointer;
-  }
+}
   
-  #buildButton, #copyHtmlButton {
+#buildButton, #copyHtmlButton {
     border: 1px solid red;
     color: red;
     cursor: not-allowed;
-  }
+}
   
-  #buildButton:hover, #copyHtmlButton:hover {
+#buildButton:hover, #copyHtmlButton:hover {
     background-color: rgb(255, 222, 222);
-  }
+}
   
-  .pbc-btn-txtarea > div > button:hover {
+.pbc-btn-txtarea > div > button:hover {
     background-color: #c7f9cc;
-  }
+}
+
+.box-dropdown a {
+    display: grid;
+}
+
+.box-dropdown a img {
+    max-width: 100%;
+}
+
+.item {
+    display: none;
+}
+
+.item.selected {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.item .pdv-automation > div {
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.item .pdv-automation > div > img { 
+    max-width: 100%;
+}
+
+select#select-option {
+    width: 50%;
+    height: 5vh;
+    padding: 0 0.5rem;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #A9BFB8;
+}
 
 textarea{
     width: 100%;
@@ -116,22 +165,22 @@ textarea{
 
 
 @media (max-width: 900px) {
-    form#homeSlideForm {
+    form#pdvForm {
         display: -webkit-inline-box;
         overflow: auto;
     }
 
-    #homeSlideForm > section.pbcForm {
+    #pdvForm > section.pbcForm {
         padding: 0.5rem;
         width: 85%;
     }    
 
-    #homeSlideForm.grid-mob-position {
+    #pdvForm.grid-mob-position {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
     }
 
-    #homeSlideForm.grid-mob-position > section.pbcForm {
+    #pdvForm.grid-mob-position > section.pbcForm {
         width: 100%;
     }
 
@@ -148,10 +197,34 @@ textarea{
         display: none !important;
     }
 
+    .pbc-btn-txtarea > div {
+        width: 90%;
+    }
+
     .icon-mobile-change {
         display: block;
         width: 50px;
         margin: 0 auto;
         margin-bottom: 25px;
+    }
+
+    .item.selected {
+        display: flex;
+        margin-bottom: 20px;
+        overflow: auto;
+        margin-left: 15px;
+    }
+
+    .item.selected > div > div {
+        overflow: auto;
+        width: 100% !important;
+        margin-bottom: 100px;
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+
+    .item.selected::-webkit-scrollbar,
+    .item.selected > div > div::-webkit-scrollbar {
+        display: none;
     }
 }

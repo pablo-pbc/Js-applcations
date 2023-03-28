@@ -8,7 +8,7 @@ let nodeList = null;
 
 switch (pdvName) {
     case 'dropdown':
-        querySelector = '.item.selected .pdv-automation > div a';
+        querySelector = 'div.item.selected > div > div > a';
         nodeList = document.querySelectorAll(`${querySelector}`);
         pdvComment = 'Dropdown';
         break;
@@ -60,18 +60,7 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
-    btnBuildHtml.disabled = false;
-    btnBuildHtml.style.color = '#264653'
-    btnBuildHtml.style.border = '1px solid #264653'
-
-    btnBuildHtml.addEventListener("mouseover", function() {
-        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
-        btnBuildHtml.style.cursor = "pointer";
-    });
-
-    btnBuildHtml.addEventListener("mouseout", function() {
-        btnBuildHtml.style.backgroundColor = "#fff";
-    });
+    buildBtnDisabledFalse();
 };
 
 //Function to copy the HTML after input's insertions
@@ -140,7 +129,7 @@ setTimeout(() => {
             let items = document.querySelectorAll(".item");
             let selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');            
 
-            const element = document.querySelectorAll("#HooverForm section");
+            const element = document.querySelectorAll("#pdvForm > section");
 
             items.forEach(function (item) {
                 item.classList.remove("selected");
@@ -154,12 +143,40 @@ setTimeout(() => {
                 element[i].remove();
             };
 
-            btnBuildHtml.disabled = true;
-            btnCopyhtml.disabled = true;
-
             setTimeout(() => {
                 window.onload();
-            }, 1000);
+            }, 1000);            
         });
     };
 }, 1000);
+
+function copyBtnDisabledFalse() {
+    btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653'
+    btnCopyhtml.style.border = '1px solid #264653'
+
+    btnCopyhtml.addEventListener("mouseover", function() {
+        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+        btnCopyhtml.style.cursor = "pointer";
+    });
+
+    btnCopyhtml.addEventListener("mouseout", function() {
+        btnCopyhtml.style.backgroundColor = "#fff";
+    }); 
+};
+
+
+function buildBtnDisabledFalse() {
+    btnBuildHtml.disabled = false;
+    btnBuildHtml.style.color = '#264653'
+    btnBuildHtml.style.border = '1px solid #264653'
+
+    btnBuildHtml.addEventListener("mouseover", function() {
+        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+        btnBuildHtml.style.cursor = "pointer";
+    });
+
+    btnBuildHtml.addEventListener("mouseout", function() {
+        btnBuildHtml.style.backgroundColor = "#fff";
+    });
+}
