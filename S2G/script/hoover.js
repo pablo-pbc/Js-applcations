@@ -68,7 +68,7 @@ function buildHtml() {
             // Quando o primeiro checkbox é marcado, desmarca o segundo checkbox
             resultlinkHoover.style.display = 'none'
         } else {
-            resultlinkHoover.style.display = 'block'        
+            resultlinkHoover.removeAttribute('style')
 
             let originUrl = new URL(imgHoover).origin;
             let pathNameUrl = new URL(imgHoover).pathname.substring(1)
@@ -99,6 +99,8 @@ function buildHtml() {
     btnCopyhtml.addEventListener("mouseout", function() {
         btnCopyhtml.style.backgroundColor = "#fff";
     });
+
+    alert('Código HTML montado com sucesso!')
 }
 
 function swapFormElementPositions() {

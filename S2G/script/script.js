@@ -8,7 +8,7 @@ let nodeList = null;
 
 switch (pdvName) {
     case 'hoover':
-        querySelector = 'div.item.selected > div > div > a';       
+        querySelector = 'div.item.selected > div.pdv-automation > div.box-hoover > a';       
         nodeList = document.querySelectorAll(`${querySelector}`);
         pdvComment = 'Hoover';
         break;
@@ -31,6 +31,7 @@ switch (pdvName) {
 
 //Function to feed the textarea element
 function loopTxtArea() { 
+    const  nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div.box-hoover > a`);
     const txtArea = document.getElementById("codigo");
      
     txtArea.value = "";
@@ -56,7 +57,7 @@ function saveBackup() {
     const file = new Blob([loopTxtArea().value], { type: "text/plain" });
 
     link.href = URL.createObjectURL(file);
-    link.download = `backup_${today}_${hours}h-${min}.txt`;
+    link.download = `backup${pdvComment}_${today}_${hours}h-${min}.txt`;
     link.click();
     URL.revokeObjectURL(link.href);
 
@@ -72,6 +73,8 @@ function saveBackup() {
     btnBuildHtml.addEventListener("mouseout", function() {
         btnBuildHtml.style.backgroundColor = "#fff";
     });
+
+    alert('Backup salvo com sucesso!')
 };
 
 //Function to copy the HTML after input's insertions
@@ -82,6 +85,7 @@ function copyHtml() {
     loopTxtArea().setSelectionRange(0, 99999);
     // Copy the text inside the textarea field
     navigator.clipboard.writeText(loopTxtArea().value);  
+    alert('Código HTML salvo para área de transferência. Só dar um CRTL+V agora!')
 };
   
 function draggFormElement() {
@@ -153,9 +157,6 @@ setTimeout(() => {
             for (i = 0; i < element.length; i++) {
                 element[i].remove();
             };
-
-            btnBuildHtml.disabled = true;
-            btnCopyhtml.disabled = true;
 
             setTimeout(() => {
                 window.onload();

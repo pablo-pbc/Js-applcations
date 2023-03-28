@@ -40,8 +40,9 @@ function buildHtml() {
       resultDropDown.innerHTML =`<img src=${finalUrl} alt=${altDropDown} border="0" />${altDropDown}` ;
     }
   };
-
   copyBtnDisabledFalse();
+
+  alert('Código HTML montado com sucesso!');
 };
 
 //Function to create form following pdv quantity

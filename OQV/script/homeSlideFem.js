@@ -1,5 +1,6 @@
 //Function to add the Banner's informations
 function buildHomeSlide() {
+  const nodeList = document.querySelectorAll(`.box-banner`);
   const prefix = "https://dybvctjo56z4b.cloudfront.net";
   let flag = 0;
   let i = 0;  
@@ -49,10 +50,12 @@ function buildHomeSlide() {
   btnCopyhtml.addEventListener("mouseout", function() {
       btnCopyhtml.style.backgroundColor = "#fff";
   });
+  alert('Código HTML montado com sucesso!');
 };
 
 //Function to create form following banner's quantity
 window.onload = function buildpdvForms() {
+  const nodeList = document.querySelectorAll(`.box-banner`);
   const appendFormReference = document.querySelector('#pdvForm');
 
   for (let i = 0; i < nodeList.length; i++) {

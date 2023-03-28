@@ -2,35 +2,35 @@ let btnBuildHtml = document.getElementById("buildButton");
 let btnCopyhtml = document.getElementById("copyHtmlButton");
 let currentUlrPathname = new URL(window.location.href).pathname.substring(5);
 let pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
-let querySelector = "";
 let pdvComment = "";
-let nodeList = null;
-
-switch (pdvName) {
-    case 'dropdown':
-        querySelector = 'div.item.selected > div > div > a';
-        nodeList = document.querySelectorAll(`${querySelector}`);
-        pdvComment = 'Dropdown';
-        break;
-
-    case 'homeSlideFem':
-        querySelector = '.box-banner'
-        nodeList = document.querySelectorAll(`${querySelector}`)
-        pdvComment = 'BANNER FEM'
-        break;
-
-    case 'homeSlideMasc':
-        querySelector = '.box-banner'
-        nodeList = document.querySelectorAll(`${querySelector}`)
-        pdvComment = 'BANNER MASC'
-        break;
-
-    default:
-        break;
-};
 
 //Function to feed the textarea element
-function loopTxtArea() { 
+function loopTxtArea() {    
+    let querySelector = "";    
+    let nodeList = null;
+
+    switch (pdvName) {
+        case 'dropdown':
+            querySelector = 'div.item.selected > div > div > a';
+            nodeList = document.querySelectorAll(`${querySelector}`);
+            pdvComment = 'Dropdown';
+            break;
+    
+        case 'homeSlideFem':
+            querySelector = '.box-banner';
+            nodeList = document.querySelectorAll(`${querySelector}`);
+            pdvComment = 'BannerFem';
+            break;
+    
+        case 'homeSlideMasc':
+            querySelector = '.box-banner';
+            nodeList = document.querySelectorAll(`${querySelector}`);
+            pdvComment = 'BannerMasc';
+            break;
+    
+        default:
+            break;
+    };
     const txtArea = document.getElementById("codigo");
      
     txtArea.value = "";
@@ -56,11 +56,12 @@ function saveBackup() {
     const file = new Blob([loopTxtArea().value], { type: "text/plain" });
 
     link.href = URL.createObjectURL(file);
-    link.download = `backup_${today}_${hours}h-${min}.txt`;
+    link.download = `backup${pdvComment}_${today}_${hours}h-${min}.txt`;
     link.click();
     URL.revokeObjectURL(link.href);
 
     buildBtnDisabledFalse();
+    alert('Backup salvo com sucesso!')
 };
 
 //Function to copy the HTML after input's insertions
@@ -71,6 +72,7 @@ function copyHtml() {
     loopTxtArea().setSelectionRange(0, 99999);
     // Copy the text inside the textarea field
     navigator.clipboard.writeText(loopTxtArea().value);  
+    alert('Código HTML copiado com sucesso!')
 };
   
 function draggFormElement() {
