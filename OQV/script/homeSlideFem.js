@@ -1,81 +1,34 @@
-//Function to feed the textarea element
-function loopTxtArea() {
-  const nodeList = document.getElementsByClassName("box-banner");
-  const txtArea = document.getElementById("codigo");
-
-  txtArea.value = ''    
-
-  for (let i = 0; i < nodeList.length; i++) {         
-      let bannerNumComment = `<!-- 0${i+1} -->`;
-      let bannerComment = `<!-- BANNER -->`;
-      let copyHomeSlideHtml = nodeList[i].outerHTML;
-      
-      document.getElementById("codigo").value += `${bannerNumComment}\n${bannerComment}\n${copyHomeSlideHtml}\n${bannerComment}\n\n`;
-  };
-  return txtArea;
-};
-
-//Function to save the backup file
-function saveHomeSlideBackup() {
-  const date = new Date();    
-  const hours = date.getHours('pt-br');
-  const min = date.getMinutes('pt-br');
-  const today = date.toLocaleDateString('pt-br');
-
-  const link = document.createElement("a");
-  const file = new Blob([loopTxtArea().value], { type: 'text/plain' });  
-
-  link.href = URL.createObjectURL(file);
-  link.download = `backupBanner_${today}_${hours}h-${min}min.txt`;
-  link.click();
-  URL.revokeObjectURL(link.href);
-
-  document.getElementById("buildHomeSlide").disabled = false;
-};
-
-//Function to copy the HTML after input's insertions
-function copyHomeSlideHtml() {
-  // Selecting the content inside the textarea
-  loopTxtArea().select();
-  // Selecting the content inside the textarea for mobile devices
-  loopTxtArea().setSelectionRange(0, 99999);
-  // Copy the text inside the textarea field
-  navigator.clipboard.writeText(loopTxtArea().value);    
-};
-
 //Function to add the Banner's informations
 function buildHomeSlide() {
-  const bannerPositonIdArray = ['1', '2', '3', '4', '5', '6'];
   const prefix = "https://dybvctjo56z4b.cloudfront.net";
   let flag = 0;
   let i = 0;  
 
-  while (i < bannerPositonIdArray.length && flag < 1) {
-    let bannerPositonId = bannerPositonIdArray[i];
+  while (i < nodeList.length && flag < 1) {
 
     //Importing the input's values
-    let linkBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(2) > input[type=text]`).value;
-    let bannerDeskFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(3) > input[type=text]`).value;
-    let bannerMobileFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(4) > input[type=text]`).value;
-    let altBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${bannerPositonId}) > div:nth-child(5) > input[type=text]`).value;
-
-    const urlDesk = bannerDeskFem;
-    const pathDesk = new URL(urlDesk).pathname.substring(1);
-    const finalLinkDesk = prefix + "/" + pathDesk;
-
-    const urlMobile = bannerMobileFem;
-    const pathMobile = new URL(urlMobile).pathname.substring(1);
-    const finalLinkMobile = prefix + "/" + pathMobile;
+    let linkBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(2) > input[type=text]`).value;
+    let bannerDeskFem = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(3) > input[type=text]`).value;
+    let bannerMobileFem = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
+    let altBannerFem = document.querySelector(`#homeSlideForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=text]`).value;
 
     //Choosing HTML element
-    let resultLinkBannerFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a`);
-    let resultBannerDeskFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a > picture > img`);
-    let resultBannerMobileFem = document.querySelector(`.pdv-automation div:nth-child(${bannerPositonId}) > a > picture > source`);
+    let resultLinkBannerFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a`);
+    let resultBannerDeskFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > img`);
+    let resultBannerMobileFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > source`);
 
-    if (linkBannerFem.length < 3 && bannerDeskFem.length < 3 && bannerMobileFem.length < 3 && altBannerFem.length < 3) {
+    if (linkBannerFem.length < 3 || bannerDeskFem.length < 3 || bannerMobileFem.length < 3 || altBannerFem.length < 3) {
         flag = 1;
         alert('Favor preencher todos os campos corretamente');         
     } else {
+        let urlDesk = bannerDeskFem;
+        let pathDesk = new URL(urlDesk).pathname.substring(1);
+        let finalLinkDesk = prefix + "/" + pathDesk;
+    
+        let urlMobile = bannerMobileFem;
+        let pathMobile = new URL(urlMobile).pathname.substring(1);
+        let finalLinkMobile = prefix + "/" + pathMobile;
+
         resultLinkBannerFem.href = linkBannerFem;
         resultBannerDeskFem.src = finalLinkDesk;
         resultBannerDeskFem.alt = altBannerFem;
@@ -83,22 +36,33 @@ function buildHomeSlide() {
     };        
     i++;
   } 
-  document.getElementById("copyHomeSlideHtml").disabled = false;   
+  
+  btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653'
+    btnCopyhtml.style.border = '1px solid #264653'
+
+    btnCopyhtml.addEventListener("mouseover", function() {
+        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+        btnCopyhtml.style.cursor = "initial";
+    });
+
+    btnCopyhtml.addEventListener("mouseout", function() {
+        btnCopyhtml.style.backgroundColor = "#fff";        
+        btnCopyhtml.style.cursor = "initial";
+    });
 };
 
 //Function to create form following banner's quantity
 window.onload = function buildHomeSlideForms() {
-  const homeSlideList = document.getElementsByClassName("box-banner");
   const formBackground = document.getElementsByClassName("pbcForm");
   const appendFormReference = document.querySelector('#homeSlideForm');
-  const hexBgForm = ['#d9ed92', '#b5e48c', '#99d98c', '#76c893', '#52b69a', '#588157'];
 
-  for (let i = 0; i < homeSlideList.length; i++) {
+  for (let i = 0; i < nodeList.length; i++) {
     let attributesLinkBannerFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a`);
     let attributesBannerDeskFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > img`);
     let attributesBannerMobileFem = document.querySelector(`.pdv-automation div:nth-child(${i+1}) > a > picture > source`);
     let inputHtmlSection = `
-        <section class='pbcForm' draggable="true" data-index="${i}">
+        <section class='pbcForm ar_form' draggable="true" data-index="${i}">
         <h2>Banner 0${i+1}</h2>        
         <div>
             <label>Link:</label>
@@ -124,56 +88,44 @@ window.onload = function buildHomeSlideForms() {
     appendFormReference.innerHTML += `${inputHtmlSection}\n`;       
   } 
 
-  for (let k = 0; k < formBackground.length; k++) {
-    formBackground[k].style.backgroundColor = hexBgForm[k];       
-  };
-  draggFormElement();
+  var x = window.matchMedia("(max-width: 700px)");
+
+  if (x.matches) {
+      // If media query matches
+      swapFormElementPositions();
+  } else {
+      draggFormElement();
+  }
 }
 
-function draggFormElement() {
-  const elements = document.querySelectorAll('.pbcForm');
-  let draggingElement;
+function swapFormElementPositions() {
+  const elements = document.querySelectorAll(".pbcForm");
+  const elements2 = document.getElementById("homeSlideForm");
+  let firstElement = null;
 
-  elements.forEach(element => {
-    element.addEventListener('dragstart', e => {
-      draggingElement = e.target;
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', null);
-      element.classList.add('dragging');
-    });
-    
-    element.addEventListener('dragend', e => {
-      draggingElement = null;
-      element.classList.remove('dragging');
-    });
-    
-    element.addEventListener('dragover', e => {
-      e.preventDefault();
-    });
-    
-    element.addEventListener('drop', e => {
-      e.preventDefault();
-      
-      if (draggingElement === element) {
-        return
-      };
-      
-      const container = element.parentNode;
-      const draggingIndex = parseInt(draggingElement.dataset.index);
-      const targetIndex = parseInt(element.dataset.index);
-      
-      if (draggingIndex < targetIndex) {
-        container.insertBefore(draggingElement, element.nextSibling);
-      } else {
-        container.insertBefore(draggingElement, element);
-      }
-      
-      // Update the data-index attributes of all elements to reflect their new positions
-      const updatedElements = document.querySelectorAll('.pbcForm');
-        updatedElements.forEach((el, index) => {
-        el.dataset.index = index;
+  elements.forEach((element) => {
+      element.addEventListener("click", () => {
+          if (firstElement === null) {
+              firstElement = element;
+              element.classList.add("selected");
+          } else {
+
+              const container = element.parentNode;
+              const firstIndex = parseInt(firstElement.dataset.index);
+              const secondIndex = parseInt(element.dataset.index);
+
+              if (firstIndex !== secondIndex && elements2.classList == "grid-mob-position") {
+                  const temp = document.createElement("div");
+                  container.insertBefore(temp, element);
+                  container.insertBefore(element, firstElement);
+                  container.insertBefore(firstElement, temp);
+                  temp.remove();
+              }
+
+              firstElement.classList.remove("selected");
+              firstElement = null;
+          }
       });
-    });
   });
 }
 
@@ -195,3 +147,13 @@ setTimeout(() => {
     });
   }
 }, 1000);
+
+/* Mobile */  
+function toggleClass(elementId, className) {
+  const element = document.getElementById("homeSlideForm");
+  if (element.classList.contains(className)) {
+      element.classList.remove(className);
+  } else {
+      element.classList.add(className);
+  }
+}
