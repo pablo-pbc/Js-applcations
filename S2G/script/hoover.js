@@ -1,6 +1,5 @@
 //Function to create form following pdv's quantity
 window.onload = function buildHooverForms() {
-    const nodeList = document.querySelectorAll(".item.selected .box-hoover a");
     const appendFormReference = document.querySelector("#HooverForm");
 
     for (let i = 0; i < nodeList.length; i++) {

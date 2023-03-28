@@ -8,9 +8,9 @@ let nodeList = null;
 
 switch (pdvName) {
     case 'dropdown':
-        querySelector = '.item.selected .box-hoover a';
+        querySelector = '.item.selected .pdv-automation > div a';
         nodeList = document.querySelectorAll(`${querySelector}`);
-        pdvComment = 'Hoover';
+        pdvComment = 'Dropdown';
         break;
 
     case 'homeSlideFem':
@@ -66,12 +66,11 @@ function saveBackup() {
 
     btnBuildHtml.addEventListener("mouseover", function() {
         btnBuildHtml.style.backgroundColor = "#c7f9cc";        
-        btnBuildHtml.style.cursor = "initial";
+        btnBuildHtml.style.cursor = "pointer";
     });
 
     btnBuildHtml.addEventListener("mouseout", function() {
-        btnBuildHtml.style.backgroundColor = "#fff";        
-        btnBuildHtml.style.cursor = "initial";
+        btnBuildHtml.style.backgroundColor = "#fff";
     });
 };
 

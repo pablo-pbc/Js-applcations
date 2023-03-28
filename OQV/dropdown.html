@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style/dropdown.css" />
+        <title>PDV - DROPDOWN - OQV</title>
+    </head>
+
+<body>
+    <main class="pbc-pdv-automation-form">
+        <img src="media/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
+        <form id="dropDownForm"></form>
+
+        <section class="pbc-btn-txtarea">
+            <!-- Inicio botão salvar backup -->
+            <div>
+                <button
+                    id="backupButton"
+                    type="button"
+                    onclick="saveBackup()">
+                    Salvar BACKUP
+                </button>
+            </div>
+            <!-- Fim botão salvar backup -->
+
+            <!-- Inicio botão submit form -->
+            <div>
+                <button 
+                    id="buildButton" 
+                    onclick="buildHtml()" 
+                    disabled>
+                    Montar HTML
+                </button>
+            </div>
+            <!-- Fim botão submit form -->
+
+            <!-- Inicio botão copiar HTML -->
+            <div>
+                <button
+                    id="copyHtmlButton"
+                    type="button"
+                    onclick="copyHtml()" 
+                    disabled>
+                    Copiar código
+                </button>
+            </div>
+            <!-- Inicio botão copiar HTML -->
+
+            <div>
+                <textarea
+                    name="codigo"
+                    id="codigo">
+                </textarea>
+            </div>
+
+            <select id="select-option">
+                <option value="1" selected>Sale</option>
+                <option value="2">Novidades</option>
+                <option value="3">Feminino</option>
+                <option value="4">Marcas</option>
+                <option value="5">Masculino</option>
+                <option value="6">Roupas</option>
+                <option value="7">Sapatos</option>
+                <option value="8">Acessórios</option>
+                <option value="9">Plus size</option>
+            </select>
+        </section>        
+    </main>
+
+    
+
+    <div class="item selected" data-option="1">
+        <div class="pdv-automation">
+            <div id="dropdown_59271" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/59271/?dir=asc&amp;marca=1554&amp;order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/020123/DROPDOWN_SALE_01.jpg" alt="Farm" border="0">
+                    Farm
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/59271/?cat=134430&amp;dir=asc&amp;marca=1332&amp;order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/020123/DROPDOWN_SALE_02.jpg" alt="Osklen" border="0">
+                    Osklen
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/59271/?dir=asc&amp;marca=663&amp;order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/020123/DROPDOWN_SALE_03.jpg" alt="Schutz" border="0">
+                    Schutz
+                </a>
+            </div>
+
+            <style>
+                #dropdown_59271 {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    width: 58%;
+                    height: auto;
+                }
+                /*
+                #custommenu #popup59271 .block1 #dropdown_59271 a {
+                    width: calc(100% / 4 - 10px);
+                }
+                
+                #custommenu #popup59271 .block1 #dropdown_59271 {
+                        width: calc(100% - 260px);
+                }
+                */
+            </style> 
+            
+            <style>                
+                /*	DESINVERTE SALE E MARCAS*/                    
+                div.block2.menu-image-qty2 {display: flex;}                    
+                .block1 #dropdown_133074 {display: flex;}
+
+                #popup133075 .block1 .column,
+                #popup133074 .block1 .column,
+                #popup133075 .block1 .column,
+                #popup133076 .block1 .column,
+                #popup133078 .block1 .column,
+                #popup133079 .block1 .column,
+                #popup133080 .block1 .column {width:  160px;}
+                #popup133077 .block1 .column {width: 120px;}
+                    
+                #popup133074 .block1 #dropdown_133074 {width:  calc(100% - 320px);}
+                #popup133076 .block1 #dropdown_133076 {width:  calc(100% - 320px);}
+                #popup133077 .block1 #dropdown_133077 {width:  calc(100% - 120px);}
+                #popup133078 .block1 #dropdown_13307,
+                #popup133078 .block1 #dropdown_133078,
+                #popup133079 .block1 #dropdown_133079,
+                #popup133080 .block1 #dropdown_133080 {width:  calc(100% - 160px);} 
+                #popup133075 .block1 #dropdown_133075 {width: calc(100% - 160px); display: flex;}
+
+                #popup59271 .block1 #dropdown_59271 a {width: calc(100% / 2 - 10px);}                
+                #popup133073 .block1 #dropdown_133073 a {width: calc(100% / 2 - 5px);}  
+                #popup133074 .block1 #dropdown_133074 a {width: calc(100% / 4 - 10px);}
+                #popup133077 .block1 #dropdown_133077 a,
+                #popup133078 .block1 #dropdown_133078 a,
+                #popup133079 .block1 #dropdown_133079 a,
+                #popup133080 .block1 #dropdown_133080 a {width: calc(100% / 5 - 10px);}
+                #popup133075 .block1 #dropdown_133075 a, 
+                #popup133077 .block1 #dropdown_133077 a  {width: calc(100% / 5); padding-left: 0; display: block;}                                 
+                
+                #popup133075 .block1 #dropdown_133075 a img {display: block;} 
+                
+                #popup59271 .block1  #dropdown_59271 a,
+                #popup133074 .block1 #dropdown_133074 a,
+                #popup133075 .block1 #dropdown_133075 a,
+                #popup133076 .block1 #dropdown_133076 a,
+                #popup133077 .block1 #dropdown_133077 a,
+                #popup133078 .block1 #dropdown_133078 a,
+                #popup133079 .block1 #dropdown_133079 a,
+                #popup133080 .block1 #dropdown_133080 a,
+                #popup133073 .block1 #dropdown_133073 a { margin-left: 10px !important;} 
+
+                #popup59271 .block1 #dropdown_59271 a:frist-child,
+                #popup133075 .block1 #dropdown_133075 a:first-child,
+                #popup133076 .block1 #dropdown_133076 a:first-child,
+                #popup133080 .block1 #dropdown_133080 a:first-child,
+                #popup133073 .block1 #dropdown_133073 a:first-child {margin-left: 0 !important;}                                
+            </style>
+        </div>
+    </div>
+
+    <div class="item" data-option="2">
+        <div class="pdv-automation">
+            <div id="dropdown_133073" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134178">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_NOVIDADES_01.jpg" alt="Animale Jeans" border="0">
+                    Animale Jeans
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134972">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_NOVIDADES_02.jpg" alt="Osklen" border="0">
+                    Osklen
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/133762">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_NOVIDADES_03.jpg" alt="Santa Lolla" border="0">
+                    Santa Lolla
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134999">	
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_NOVIDADES_04.jpg" alt="Colcci" border="0">
+                    Colcci
+                </a> 
+
+                <style>
+                    #dropdown_133073 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 70%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="3">
+        <div class="pdv-automation">
+            <div id="dropdown_133093" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134344">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_FEMININO_01.jpg" alt="My Favorite Things" border="0">
+                    My Favorite Things
+                </a>
+
+                <style>
+                    #dropdown_133093 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 20%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="4">
+        <div class="pdv-automation">
+            <div id="dropdown_133074" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134387">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_MARCAS_01.jpg" alt="Dzarm" border="0">
+                    Dzarm
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135261">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_MARCAS_02.jpg" alt="Hering" border="0">
+                    Hering
+                </a>
+
+                <style>
+                    #dropdown__133074 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 40%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="5">
+        <div class="pdv-automation">
+            <div id="dropdown_134422" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/136235">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_MASCULINO_01.jpg" alt="Jab" border="0">
+                    Jab
+                </a>
+
+                <style>
+                    #dropdown_134422 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 20%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="6">
+        <div class="pdv-automation">
+            <div id="dropdown_133076" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135389">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ROUPAS_01.jpg" alt="Bonjour by Hope" border="0">
+                    Bonjour by Hope
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/133682">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ROUPAS_02.jpg" alt="Cantão" border="0">
+                    Cantão
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/136189">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ROUPAS_03.jpg" alt="Hugo" border="0">
+                    Hugo
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134961">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ROUPAS_04.jpg" alt="Blueman" border="0">
+                    Blueman
+                </a>
+
+                <style>
+                    #dropdown_133076 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 74%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="7">
+        <div class="pdv-automation">
+            <div id="dropdown_133077" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135377">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_SAPATOS_01.jpg" alt="Reserva Go" border="0">
+                    Reserva Go
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134181">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_SAPATOS_02.jpg" alt="Linus" border="0">
+                    Linus
+                </a>
+
+                <style>
+                    #dropdown_133077 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 40%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="8">
+        <div class="pdv-automation">
+            <div id="dropdown_133078" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/133665">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ACESSORIOS_01.jpg" alt="Luiza Barcelos" border="0">
+                    Luiza Barcelos
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/134970">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050123/DROPDOWN_ACESSORIOS_02.jpg" alt="New Era" border="0">
+                    New Era
+                </a>
+
+                <style>
+                    #dropdown_133078 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 40%;
+                        height: auto; 
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="9">
+        <div class="pdv-automation">
+            <div id="dropdown_134727" class="box-dropdown">
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135615?order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050922/DROPDOWN_PLUSSIZE_01.jpg" alt="MKTBeach " border="0">
+                    MKTBeach
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135941?order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050922/DROPDOWN_PLUSSIZE_02.jpg" alt="LAB86" border="0">
+                    LAB86
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/133617?order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050922/DROPDOWN_PLUSSIZE_03.jpg" alt="Calma São Paulo" border="0">
+                    Calma São Paulo
+                </a>
+
+                <a href=" https://test2.oqvestir.com.br/catalog/category/view/id/135573?order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050922/DROPDOWN_PLUSSIZE_04.jpg" alt="Keka Tenório + Ju Ferraz" border="0">
+                    Keka Tenório + Ju Ferraz
+                </a>
+
+                <a href="https://test2.oqvestir.com.br/catalog/category/view/id/135247?order=position">
+                    <img src="https://dybvctjo56z4b.cloudfront.net/pdv/dropdown/050922/DROPDOWN_PLUSSIZE_05.jpg" alt="Hering " border="0">
+                    Hering 
+                </a> 
+
+                <style>
+                    #dropdown_134727 {
+                        display: flex;
+                        flex-wrap: nowrap;
+                        flex-direction: row;
+                        width: 82%;
+                        height: auto;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+    <script src="script/script.js"></script>
+    <script src="script/dropdown.js"></script>
+</body>
+</html>
