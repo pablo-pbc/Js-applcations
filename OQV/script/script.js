@@ -186,7 +186,7 @@ function addNewElement() {
     console.log(nodeList)
 
     if (element.length < 6) {
-        container.appendChild(clonedElement);
+        container.insertBefore(clonedElement, lastValue);
         for (i = 0; i < element.length; i++) {
             element[i].remove();
         };
