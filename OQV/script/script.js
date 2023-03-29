@@ -1,6 +1,8 @@
 const btnBuildHtml = document.getElementById("buildButton");
 const btnCopyhtml = document.getElementById("copyHtmlButton");
 const backupBtn = document.getElementById('backupButton');
+const addBtn = document.querySelector('header.pbc-icons > div')
+const addBtnSvg = document.getElementById('plus')
 const currentUlrPathname = new URL(window.location.href).pathname.substring(5);
 const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
 let pdvComment = '';
@@ -174,6 +176,31 @@ setTimeout(() => {
     };
 }, 1000);
 
+function addNewElement() {
+    const container = document.querySelector('div.item.selected > div > div.box-dropdown');
+    const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+    const lastValue = nodeList[nodeList.length - 1];
+    const clonedElement = lastValue.cloneNode(true);
+    const element = document.querySelectorAll("#pdvForm > section");
+
+    console.log(nodeList)
+
+    if (element.length < 6) {
+        container.appendChild(clonedElement);
+        for (i = 0; i < element.length; i++) {
+            element[i].remove();
+        };
+    
+        setTimeout(() => {
+            window.onload();
+        }, 1000);
+    } else {
+        addBtn.disabled = true
+        addBtn.innerText = 'Máximo de imagens'
+        addBtn.style.cursor = 'not-allowed'
+    }
+}
+
 function overOnBtnCopy() {
     btnCopyhtml.style.backgroundColor = "#c7f9cc";        
     btnCopyhtml.style.cursor = "pointer";
@@ -209,3 +236,17 @@ function buildBtnDisabledFalse() {
     btnBuildHtml.addEventListener("mouseover", overOnBtnBuild);
     btnBuildHtml.addEventListener("mouseout", overOffBtnBuild); 
 };
+
+addBtn.addEventListener('mouseover', function () {
+   addBtn.style.border = '2px solid #008000';
+   addBtn.style.color = '#008000';
+   addBtn.style.cursor = 'pointer';
+   addBtnSvg.setAttribute("fill", "#008000");
+});
+
+addBtn.addEventListener('mouseout', function () {
+    addBtn.style.border = '2px solid #A9BFB8';
+    addBtn.style.color = '#A9BFB8';
+    addBtn.style.cursor = 'pointer';
+    addBtnSvg.setAttribute("fill", "#A9BFB8");
+ });

@@ -9,9 +9,30 @@
     </head>
 
 <body>
+    <header class="pbc-icons">
+        <div onclick="addNewElement()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill='#A9BFB8' class="plus-form-icon" data-name="1" viewBox="0 0 128 128" id="plus">
+                <path d="M64 0a64 64 0 1 0 64 64A64.07 64.07 0 0 0 64 0Zm0 124a60 60 0 1 1 60-60 60.07 60.07 0 0 1-60 60Z"></path>
+                <path d="M95 62H66V33a2 2 0 0 0-4 0v29H33a2 2 0 0 0 0 4h29v29a2 2 0 0 0 4 0V66h29a2 2 0 0 0 0-4Z"></path>
+            </svg>
+            <span>Adicionar imagem</span>
+        </div>
+
+        <div onclick="toggleClass('meu-elemento', 'grid-mob-position')">
+            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+            <svg viewBox="0 0 48 48" fill="none" class="icon-mobile-change" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" fill="white" fill-opacity="0.01"/>
+                <path d="M18 31H38V5" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30 21H10V43" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M44 11L38 5L32 11" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 37L10 43L4 37" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Trocar posições</span>
+        </div>            
+    </header>  
+    
     <main class="pbc-pdv-automation-form">
-        <img src="media/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
-        <form id="pdvForm"></form>
+        <form id="pdvForm"></form>        
 
         <section class="pbc-btn-txtarea">
             <!-- Inicio botão salvar backup -->

@@ -56,6 +56,8 @@ window.onload = function buildHtmlForm() {
       let attributeslinkDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
       let attributesimgDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1}) > img`);
 
+      console.log(nodeList)
+
       let inputHtmlSection = `
               <section class='pbcForm ar_form' draggable="true" data-index="${i}">
               <h2>Dropdown 0${i+1}</h2>        
@@ -81,7 +83,7 @@ window.onload = function buildHtmlForm() {
               </section>
           `;
       appendFormReference.innerHTML += `${inputHtmlSection}\n`;
-  }; 
+  };
 
   var x = window.matchMedia("(max-width: 700px)");  
   if (x.matches) {
