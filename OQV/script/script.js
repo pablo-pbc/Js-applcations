@@ -1,11 +1,13 @@
-let btnBuildHtml = document.getElementById("buildButton");
-let btnCopyhtml = document.getElementById("copyHtmlButton");
-let currentUlrPathname = new URL(window.location.href).pathname.substring(5);
-let pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
-let pdvComment = "";
+const btnBuildHtml = document.getElementById("buildButton");
+const btnCopyhtml = document.getElementById("copyHtmlButton");
+const backupBtn = document.getElementById('backupButton');
+const currentUlrPathname = new URL(window.location.href).pathname.substring(5);
+const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
+let pdvComment = '';
 
 //Function to feed the textarea element
-function loopTxtArea() {    
+function loopTxtArea() {  
+    const txtArea = document.getElementById("codigo");  
     let querySelector = "";    
     let nodeList = null;
 
@@ -30,8 +32,7 @@ function loopTxtArea() {
     
         default:
             break;
-    };
-    const txtArea = document.getElementById("codigo");
+    };    
      
     txtArea.value = "";
   
@@ -46,7 +47,7 @@ function loopTxtArea() {
 };
   
 //Function to save the backup file
-function saveBackup() {
+function saveBackup() {    
     const date = new Date();
     const hours = date.getHours("pt-br");
     const min = date.getMinutes("pt-br");
@@ -60,8 +61,11 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
+    backupBtn.innerText = 'Backup Salvo!';
+    backupBtn.style.color = '#38b000';
+    backupBtn.style.border = "2px solid #38b000";
+
     buildBtnDisabledFalse();
-    alert('Backup salvo com sucesso!')
 };
 
 //Function to copy the HTML after input's insertions
@@ -72,7 +76,10 @@ function copyHtml() {
     loopTxtArea().setSelectionRange(0, 99999);
     // Copy the text inside the textarea field
     navigator.clipboard.writeText(loopTxtArea().value);  
-    alert('Código HTML copiado com sucesso!')
+    
+    btnCopyhtml.innerText = 'HTML copiado!';
+    btnCopyhtml.style.color = '#38b000';
+    btnCopyhtml.style.border = "2px solid #38b000";
 };
   
 function draggFormElement() {
@@ -145,6 +152,21 @@ setTimeout(() => {
                 element[i].remove();
             };
 
+            backupBtn.removeAttribute('style');
+            backupBtn.innerText = 'Salvar Backup';
+
+            btnCopyhtml.removeAttribute('style');
+            btnCopyhtml.innerText = 'Copiar código';
+            btnCopyhtml.disabled = true;
+            btnCopyhtml.removeEventListener('mouseover', overOnBtnCopy);
+            btnCopyhtml.removeEventListener('mouseout', overOffBtnCopy);
+
+            btnBuildHtml.removeAttribute('style')
+            btnBuildHtml.innerText = 'Montar código';
+            btnBuildHtml.disabled = true;
+            btnBuildHtml.removeEventListener('mouseover', overOnBtnBuild);
+            btnBuildHtml.removeEventListener('mouseout', overOffBtnBuild);
+
             setTimeout(() => {
                 window.onload();
             }, 1000);            
@@ -152,33 +174,38 @@ setTimeout(() => {
     };
 }, 1000);
 
-function copyBtnDisabledFalse() {
-    btnCopyhtml.disabled = false;
-    btnCopyhtml.style.color = '#264653'
-    btnCopyhtml.style.border = '1px solid #264653'
-
-    btnCopyhtml.addEventListener("mouseover", function() {
-        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
-        btnCopyhtml.style.cursor = "pointer";
-    });
-
-    btnCopyhtml.addEventListener("mouseout", function() {
-        btnCopyhtml.style.backgroundColor = "#fff";
-    }); 
+function overOnBtnCopy() {
+    btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+    btnCopyhtml.style.cursor = "pointer";
 };
 
+function overOffBtnCopy() {
+    btnCopyhtml.style.backgroundColor = "#fff";
+};
+
+function overOnBtnBuild() {
+    btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+    btnBuildHtml.style.cursor = "pointer";
+};
+
+function overOffBtnBuild() {
+    btnBuildHtml.style.backgroundColor = "#fff";
+};
+
+function copyBtnDisabledFalse() {
+    btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.addEventListener("mouseover", overOnBtnCopy);
+    btnCopyhtml.addEventListener("mouseout", overOffBtnCopy); 
+};
 
 function buildBtnDisabledFalse() {
     btnBuildHtml.disabled = false;
-    btnBuildHtml.style.color = '#264653'
-    btnBuildHtml.style.border = '1px solid #264653'
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
 
-    btnBuildHtml.addEventListener("mouseover", function() {
-        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
-        btnBuildHtml.style.cursor = "pointer";
-    });
-
-    btnBuildHtml.addEventListener("mouseout", function() {
-        btnBuildHtml.style.backgroundColor = "#fff";
-    });
-}
+    btnBuildHtml.addEventListener("mouseover", overOnBtnBuild);
+    btnBuildHtml.addEventListener("mouseout", overOffBtnBuild); 
+};

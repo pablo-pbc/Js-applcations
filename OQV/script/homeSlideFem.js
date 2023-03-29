@@ -37,20 +37,11 @@ function buildHomeSlide() {
     };        
     i++;
   } 
+  copyBtnDisabledFalse();
   
-  btnCopyhtml.disabled = false;
-  btnCopyhtml.style.color = '#264653'
-  btnCopyhtml.style.border = '1px solid #264653'
-
-  btnCopyhtml.addEventListener("mouseover", function() {
-      btnCopyhtml.style.backgroundColor = "#c7f9cc";        
-      btnCopyhtml.style.cursor = "pointer";
-  });
-
-  btnCopyhtml.addEventListener("mouseout", function() {
-      btnCopyhtml.style.backgroundColor = "#fff";
-  });
-  alert('Código HTML montado com sucesso!');
+  btnBuildHtml.innerText = 'Código montado com sucesso!';
+  btnBuildHtml.style.color = '#38b000';
+  btnBuildHtml.style.border = "2px solid #38b000";
 };
 
 //Function to create form following banner's quantity

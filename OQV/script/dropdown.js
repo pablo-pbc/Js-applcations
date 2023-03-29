@@ -42,7 +42,9 @@ function buildHtml() {
   };
   copyBtnDisabledFalse();
 
-  alert('Código HTML montado com sucesso!');
+  btnBuildHtml.innerText = 'Código montado com sucesso!';
+  btnBuildHtml.style.color = '#38b000';
+  btnBuildHtml.style.border = "2px solid #38b000";
 };
 
 //Function to create form following pdv quantity
