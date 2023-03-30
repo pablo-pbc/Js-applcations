@@ -137,7 +137,7 @@ function draggFormElement() {
 
             if (draggingElement === element) {
                 return;
-            };
+            };            
 
             const container = element.parentNode;
             const draggingIndex = parseInt(draggingElement.dataset.index);
@@ -157,6 +157,8 @@ function draggFormElement() {
 
             buildHtml();
         });
+
+        count = 0
     });
 };
   

@@ -19,7 +19,7 @@
             <!-- Inicio botão salvar backup -->
             <div>
                 <button
-                    id="buttonBackup"
+                    id="backupButton"
                     type="button"
                     onclick="saveBackup()">
                     Salvar BACKUP
@@ -29,7 +29,10 @@
 
             <!-- Inicio botão submit form -->
             <div>
-                <button id="buildButton" onclick="buildHtml()" disabled>
+                <button 
+                    id="buildButton" 
+                    onclick="buildHtml()" 
+                    disabled>
                     Montar HTML
                 </button>
             </div>
@@ -40,7 +43,7 @@
                 <button
                     id="copyHtmlButton"
                     type="button"
-                    onclick="copyHtml()"
+                    onclick="copyHtml()" 
                     disabled>
                     Copiar código
                 </button>
@@ -52,7 +55,7 @@
                     name="codigo"
                     id="codigo">
                 </textarea>
-            </div>
+            </div> 
 
             <select id="select-option">
                 <option value="1" selected>Whast News - Feminino</option>
@@ -72,7 +75,37 @@
                 <option value="15">Casa - Masculino</option>
             </select>
         </section>
-    </main>   
+    </main> 
+    
+    <div class="pbc-icons">
+        <div onclick="addNewElement()" onmouseover="btnAddMouseOver()" onmouseout="btnAddMouseOut()" class="pbc-div-add">
+            <svg xmlns="http://www.w3.org/2000/svg" fill='#264653' class="plus-form-icon" data-name="1" viewBox="0 0 128 128" id="plus">
+                <path d="M64 0a64 64 0 1 0 64 64A64.07 64.07 0 0 0 64 0Zm0 124a60 60 0 1 1 60-60 60.07 60.07 0 0 1-60 60Z"></path>
+                <path d="M95 62H66V33a2 2 0 0 0-4 0v29H33a2 2 0 0 0 0 4h29v29a2 2 0 0 0 4 0V66h29a2 2 0 0 0 0-4Z"></path>
+            </svg>
+            <span>Adicionar imagem</span>
+        </div>
+
+        <div onclick="removeNewElement()" onmouseover="btnRemoveMouseOver()" onmouseout="btnRemoveMouseOut()" class="pbc-div-remove">
+            <svg xmlns="http://www.w3.org/2000/svg" fill='red' class="minus-form-icon" data-name="1" viewBox="0 0 128 128" id="minus">
+                <path d="M64 128a64 64 0 1 1 64-64 64.07 64.07 0 0 1-64 64ZM64 4a60 60 0 1 0 60 60A60.07 60.07 0 0 0 64 4Z"></path>
+                <path d="M95 66H33a2 2 0 0 1 0-4h62a2 2 0 0 1 0 4Z"></path>
+            </svg>
+            <span>Remover imagem</span>
+        </div>
+
+        <div onclick="toggleClass('meu-elemento', 'grid-mob-position')">
+            <?xml version="1.0" encoding="utf-8"?>
+            <svg viewBox="0 0 48 48" fill="none" class="icon-mobile-change" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" fill="white" fill-opacity="0.01"/>
+                <path d="M18 31H38V5" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M30 21H10V43" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M44 11L38 5L32 11" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 37L10 43L4 37" stroke="#A9BFB8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Trocar posições</span>
+        </div>            
+    </div>
       
 <div class="item selected" data-option="1">
     <div class="pdv-automation">
