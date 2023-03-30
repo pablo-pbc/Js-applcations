@@ -1,11 +1,22 @@
 const btnBuildHtml = document.getElementById("buildButton");
 const btnCopyhtml = document.getElementById("copyHtmlButton");
 const backupBtn = document.getElementById('backupButton');
-const addBtn = document.querySelector('header.pbc-icons > div')
+
+const addBtn = document.querySelector('.pbc-div-add')
+const addBtnSpan = document.querySelector('div.pbc-div-add > span')
 const addBtnSvg = document.getElementById('plus')
+
+const removeBtn = document.querySelector('.pbc-div-remove')
+const removeBtnSpan = document.querySelector('div.pbc-div-remove > span')
+const removeBtnSvg = document.getElementById('minus')
+
 const currentUlrPathname = new URL(window.location.href).pathname.substring(5);
 const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
+
 let pdvComment = '';
+let saveBtnCliked = false;
+let inputChanged = false
+let dragStart = false
 
 //Function to feed the textarea element
 function loopTxtArea() {  
@@ -67,8 +78,30 @@ function saveBackup() {
     backupBtn.style.color = '#38b000';
     backupBtn.style.border = "2px solid #38b000";
 
+    saveBtnCliked = true
+
     buildBtnDisabledFalse();
 };
+
+setTimeout(() => {
+    const inputChanging = document.querySelectorAll('#pdvForm > section > div > input')   
+
+    for (let i = 0; i < inputChanging.length; i++) {
+        inputChanging[i].addEventListener("input", function () {
+
+            if (!inputChanged && !dragStart) {
+                saveBackup();
+                inputChanged = true
+            }
+
+            btnBuildHtml.innerText = 'Montar HTML'
+            btnBuildHtml.style.border = '1px solid #264653'   
+            btnBuildHtml.style.color = '#264653' 
+        })    
+    }
+}, 1000);
+
+
 
 //Function to copy the HTML after input's insertions
 function copyHtml() {
@@ -86,10 +119,16 @@ function copyHtml() {
   
 function draggFormElement() {
     const elements = document.querySelectorAll(".pbcForm");
+    let count = 0
     let draggingElement;
 
     elements.forEach((element) => {
         element.addEventListener("dragstart", (e) => {
+            if (count != 1 && !inputChanged) {
+                saveBackup();    
+            }            
+            count = 1
+            dragStart = true
             draggingElement = e.target;
             e.dataTransfer.effectAllowed = "move";
             e.dataTransfer.setData("text/plain", null);
@@ -127,6 +166,8 @@ function draggFormElement() {
             updatedElements.forEach((el, index) => {
                 el.dataset.index = index;
             });
+
+            buildHtml();
         });
     });
 };
@@ -154,20 +195,24 @@ setTimeout(() => {
                 element[i].remove();
             };
 
+            addBtn.removeAttribute("style")
+            addBtnSvg.style.fill = '#A9BFB8'
+            addBtnSpan.innerText = "Adicionar Imagens"
+
             backupBtn.removeAttribute('style');
             backupBtn.innerText = 'Salvar Backup';
 
             btnCopyhtml.removeAttribute('style');
             btnCopyhtml.innerText = 'Copiar código';
             btnCopyhtml.disabled = true;
-            btnCopyhtml.removeEventListener('mouseover', overOnBtnCopy);
-            btnCopyhtml.removeEventListener('mouseout', overOffBtnCopy);
+            btnCopyhtml.removeEventListener('mouseover', function(){});
+            btnCopyhtml.removeEventListener('mouseout', function(){});
 
             btnBuildHtml.removeAttribute('style')
             btnBuildHtml.innerText = 'Montar código';
             btnBuildHtml.disabled = true;
-            btnBuildHtml.removeEventListener('mouseover', overOnBtnBuild);
-            btnBuildHtml.removeEventListener('mouseout', overOffBtnBuild);
+            btnBuildHtml.removeEventListener('mouseover', function(){});
+            btnBuildHtml.removeEventListener('mouseout', function(){});
 
             setTimeout(() => {
                 window.onload();
@@ -177,16 +222,15 @@ setTimeout(() => {
 }, 1000);
 
 function addNewElement() {
-    const container = document.querySelector('div.item.selected > div > div.box-dropdown');
-    const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
-    const lastValue = nodeList[nodeList.length - 1];
-    const clonedElement = lastValue.cloneNode(true);
     const element = document.querySelectorAll("#pdvForm > section");
-
-    console.log(nodeList)
+    const container = document.querySelector('div.item.selected > div > div.box-dropdown');    
 
     if (element.length < 6) {
-        container.insertBefore(clonedElement, lastValue);
+        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+        const nodeListLastValue = nodeList[nodeList.length - 1];
+        const clonedElement = nodeListLastValue.cloneNode(true);
+
+        container.insertBefore(clonedElement, nodeListLastValue);
         for (i = 0; i < element.length; i++) {
             element[i].remove();
         };
@@ -195,37 +239,57 @@ function addNewElement() {
             window.onload();
         }, 1000);
     } else {
-        addBtn.disabled = true
-        addBtn.innerText = 'Máximo de imagens'
-        addBtn.style.cursor = 'not-allowed'
+        addBtn.disabled = true;
+        addBtn.style.border = '2px solid red';
+        addBtn.style.color = 'red';
+        addBtn.style.cursor = 'not-allowed';
+        addBtnSvg.style.fill = 'red';
+        addBtnSpan.innerText = 'Máximo de imagens';
+        addBtn.removeEventListener('onmouseover', addBtnMouseOver);
+        addBtn.removeEventListener('onmouseout', addBtnMouseOut);
     }
 }
 
-function overOnBtnCopy() {
-    btnCopyhtml.style.backgroundColor = "#c7f9cc";        
-    btnCopyhtml.style.cursor = "pointer";
-};
+function removeNewElement() {
+    const element = document.querySelectorAll("#pdvForm > section");
+    const container = document.querySelector('div.item.selected > div > div.box-dropdown');
 
-function overOffBtnCopy() {
-    btnCopyhtml.style.backgroundColor = "#fff";
-};
+    if (element.length > 1) {
+        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+        const nodeListLastValue = nodeList[nodeList.length - 1];
+        nodeListLastValue.remove();        
 
-function overOnBtnBuild() {
-    btnBuildHtml.style.backgroundColor = "#c7f9cc";        
-    btnBuildHtml.style.cursor = "pointer";
-};
-
-function overOffBtnBuild() {
-    btnBuildHtml.style.backgroundColor = "#fff";
-};
+        for (i = 0; i < element.length; i++) {
+            element[i].remove();
+        };
+    
+        setTimeout(() => {
+            window.onload();
+        }, 1000);
+    } else {
+        removeBtn.disabled = true;
+        removeBtn.style.border = '2px solid #e85d04';
+        removeBtn.style.color = '#e85d04';
+        removeBtn.style.cursor = 'not-allowed';
+        removeBtnSvg.style.fill = '#e85d04';
+        removeBtnSpan.innerText = 'Mínimo de imagens';
+        removeBtn.removeEventListener('onmouseover', removeBtnMouseOver);
+        removeBtn.removeEventListener('onmouseout', removeBtnMouseOut);
+    }
+}
 
 function copyBtnDisabledFalse() {
     btnCopyhtml.disabled = false;
     btnCopyhtml.style.color = '#264653';
     btnCopyhtml.style.border = '1px solid #264653';
 
-    btnCopyhtml.addEventListener("mouseover", overOnBtnCopy);
-    btnCopyhtml.addEventListener("mouseout", overOffBtnCopy); 
+    btnCopyhtml.addEventListener("mouseover", function () {
+        btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+        btnCopyhtml.style.cursor = "pointer";
+    });
+    btnCopyhtml.addEventListener("mouseout", function () {
+        btnCopyhtml.style.backgroundColor = "#fff";
+    }); 
 };
 
 function buildBtnDisabledFalse() {
@@ -233,20 +297,39 @@ function buildBtnDisabledFalse() {
     btnBuildHtml.style.color = '#264653';
     btnBuildHtml.style.border = '1px solid #264653';
 
-    btnBuildHtml.addEventListener("mouseover", overOnBtnBuild);
-    btnBuildHtml.addEventListener("mouseout", overOffBtnBuild); 
+    btnBuildHtml.addEventListener("mouseover", function () {
+        btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+        btnBuildHtml.style.cursor = "pointer";
+    });
+    btnBuildHtml.addEventListener("mouseout", function () {
+        btnBuildHtml.style.backgroundColor = "#fff";
+    }); 
 };
 
-addBtn.addEventListener('mouseover', function () {
+function addBtnMouseOver() {
    addBtn.style.border = '2px solid #008000';
    addBtn.style.color = '#008000';
    addBtn.style.cursor = 'pointer';
-   addBtnSvg.setAttribute("fill", "#008000");
-});
+   addBtnSvg.style.fill = "#008000";
+};
 
-addBtn.addEventListener('mouseout', function () {
-    addBtn.style.border = '2px solid #A9BFB8';
-    addBtn.style.color = '#A9BFB8';
+function addBtnMouseOut() {
+    addBtn.style.border = '2px solid #264653';
+    addBtn.style.color = '#264653';
     addBtn.style.cursor = 'pointer';
-    addBtnSvg.setAttribute("fill", "#A9BFB8");
- });
+    addBtnSvg.style.fill = "#264653";
+ };
+
+ function removeBtnMouseOver() {
+    removeBtn.style.border = '2px solid #e85d04';
+    removeBtn.style.color = '#e85d04';
+    removeBtn.style.cursor = 'pointer';
+    removeBtnSvg.style.fill = "#e85d04";
+ };
+ 
+function removeBtnMouseOut() {
+    removeBtn.style.border = '2px solid red';
+    removeBtn.style.color = 'red';
+    removeBtn.style.cursor = 'pointer';
+    removeBtnSvg.style.fill = "red";
+};

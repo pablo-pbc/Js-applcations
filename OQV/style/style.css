@@ -16,7 +16,7 @@ main.pbc-pdv-automation-form {
     flex-direction: column;
     margin: 0 auto;
     max-width: 75rem;
-    padding: 0 1rem 1rem;
+    padding: 1rem;
 }
 
 form#pdvForm {
@@ -145,6 +145,13 @@ form#pdvForm .dragging {
     max-width: 100%;
 }
 
+.pdv-automation {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+}
+
 select#select-option {
     width: 50%;
     height: 5vh;
@@ -167,24 +174,39 @@ textarea{
     display: flex;
     justify-content: center;
     padding: 1rem;
+    gap: 1rem;
 }
 
 .pbc-icons div {
     display: flex;
-    border: 2px solid #A9BFB8;
     border-radius: 50px;
     padding: 0 1rem 0;
     align-items: center;
     gap: 1rem;
-    color: #A9BFB8;
     transition: 0.5s all;
 }
 
-.pbc-icons div:nth-child(2) {
+.pbc-div-add {
+    border: 2px solid #264653;
+    color: #264653;
+}
+
+.pbc-div-remove {
+    border: 2px solid red;
+    color: red;
+}
+
+.pbc-icons div:nth-child(3) {
     display: none;
 }
 
 .plus-form-icon {
+    width: 30px;
+    margin: 0.4rem 0;
+    transition: 0.5s all;
+}
+
+.minus-form-icon {
     width: 30px;
     margin: 0.4rem 0;
     transition: 0.5s all;

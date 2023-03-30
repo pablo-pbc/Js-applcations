@@ -40,11 +40,14 @@ function buildHtml() {
       resultDropDown.innerHTML =`<img src=${finalUrl} alt=${altDropDown} border="0" />${altDropDown}` ;
     }
   };
-  copyBtnDisabledFalse();
+  
+  if (saveBtnCliked) {  
+    copyBtnDisabledFalse();
 
-  btnBuildHtml.innerText = 'Código montado com sucesso!';
-  btnBuildHtml.style.color = '#38b000';
-  btnBuildHtml.style.border = "2px solid #38b000";
+    btnBuildHtml.innerText = 'Código montado com sucesso!';
+    btnBuildHtml.style.color = '#38b000';
+    btnBuildHtml.style.border = "2px solid #38b000";
+  }
 };
 
 //Function to create form following pdv quantity
@@ -55,8 +58,6 @@ window.onload = function buildHtmlForm() {
   for (let i = 0; i < nodeList.length; i++) {
       let attributeslinkDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
       let attributesimgDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1}) > img`);
-
-      console.log(nodeList)
 
       let inputHtmlSection = `
               <section class='pbcForm ar_form' draggable="true" data-index="${i}">

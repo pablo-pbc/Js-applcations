@@ -1,5 +1,5 @@
 //Function to add the Banner's informations
-function buildHomeSlide() {
+function buildHtml() {
   const nodeList = document.querySelectorAll(`.box-banner`);
   const prefix = "https://dybvctjo56z4b.cloudfront.net";
   let flag = 0;
