@@ -1,29 +1,33 @@
+//Query selector for all buttons
 const btnBuildHtml = document.getElementById("buildButton");
 const btnCopyhtml = document.getElementById("copyHtmlButton");
-const backupBtn = document.getElementById('backupButton');
+const btnBackup = document.getElementById('backupButton');
 
-const addBtn = document.querySelector('.pbc-div-add')
-const addBtnSpan = document.querySelector('div.pbc-div-add > span')
-const addBtnSvg = document.getElementById('plus')
+const btnAdd = document.querySelector('.pbc-div-add')
+const btnAddSpan = document.querySelector('div.pbc-div-add > span')
+const btnAddSvg = document.getElementById('plus')
 
-const removeBtn = document.querySelector('.pbc-div-remove')
-const removeBtnSpan = document.querySelector('div.pbc-div-remove > span')
-const removeBtnSvg = document.getElementById('minus')
+const btnRemove = document.querySelector('.pbc-div-remove')
+const btnRemoveSpan = document.querySelector('div.pbc-div-remove > span')
+const btnRemoveSvg = document.getElementById('minus')
 
+//Query for current URL and its manipulation
 const currentUlrPathname = new URL(window.location.href).pathname.substring(5);
 const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
 
+//Varible used for flag/alert and dynamic txt
 let pdvComment = '';
 let saveBtnCliked = false;
 let inputChanged = false
 let dragStart = false
 
-//Function to feed the textarea element
+//Global function to feed the textarea element
 function loopTxtArea() {  
     const txtArea = document.getElementById("codigo");  
     let querySelector = "";    
     let nodeList = null;
 
+    //Switch case that determine the query initial query selector considering the PDV name (name from URL)
     switch (pdvName) {
         case 'dropdown':
             querySelector = 'div.item.selected > div > div > a';
@@ -59,8 +63,9 @@ function loopTxtArea() {
     return txtArea;
 };
   
-//Function to save the backup file
-function saveBackup() {    
+//Global function to save the backup file
+function saveBackup() {   
+    //Formanting the current date 
     const date = new Date();
     const hours = date.getHours("pt-br");
     const min = date.getMinutes("pt-br");
@@ -74,36 +79,17 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
-    backupBtn.innerText = 'Backup Salvo!';
-    backupBtn.style.color = '#38b000';
-    backupBtn.style.border = "2px solid #38b000";
+    btnBackup.innerText = 'Backup Salvo!';
+    btnBackup.style.color = '#38b000';
+    btnBackup.style.border = "2px solid #38b000";
 
+    //Flag alert
     saveBtnCliked = true
 
     buildBtnDisabledFalse();
 };
 
-setTimeout(() => {
-    const inputChanging = document.querySelectorAll('#pdvForm > section > div > input')   
-
-    for (let i = 0; i < inputChanging.length; i++) {
-        inputChanging[i].addEventListener("input", function () {
-
-            if (!inputChanged && !dragStart) {
-                saveBackup();
-                inputChanged = true
-            }
-
-            btnBuildHtml.innerText = 'Montar HTML'
-            btnBuildHtml.style.border = '1px solid #264653'   
-            btnBuildHtml.style.color = '#264653' 
-        })    
-    }
-}, 1000);
-
-
-
-//Function to copy the HTML after input's insertions
+//Global function to copy the HTML after input's insertions
 function copyHtml() {
     // Selecting the content inside the textarea
     loopTxtArea().select();
@@ -117,7 +103,9 @@ function copyHtml() {
     btnCopyhtml.style.border = "2px solid #38b000";
 };
   
+//Global function to drag and drop the current Form
 function draggFormElement() {
+    //Selecting all forms
     const elements = document.querySelectorAll(".pbcForm");
     let count = 0
     let draggingElement;
@@ -172,7 +160,7 @@ function draggFormElement() {
     });
 };
   
-// function select
+// Global function for the SELECT option change
 setTimeout(() => {
     let selectOption = document.getElementById("select-option");
     if (selectOption) {
@@ -195,12 +183,12 @@ setTimeout(() => {
                 element[i].remove();
             };
 
-            addBtn.removeAttribute("style")
-            addBtnSvg.style.fill = '#A9BFB8'
-            addBtnSpan.innerText = "Adicionar Imagens"
+            btnAdd.removeAttribute("style")
+            btnAddSvg.style.fill = '#A9BFB8'
+            btnAddSpan.innerText = "Adicionar Imagens"
 
-            backupBtn.removeAttribute('style');
-            backupBtn.innerText = 'Salvar Backup';
+            btnBackup.removeAttribute('style');
+            btnBackup.innerText = 'Salvar Backup';
 
             btnCopyhtml.removeAttribute('style');
             btnCopyhtml.innerText = 'Copiar código';
@@ -221,6 +209,7 @@ setTimeout(() => {
     };
 }, 1000);
 
+//Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
     const container = document.querySelector('div.item.selected > div > div.box-dropdown');    
@@ -239,17 +228,18 @@ function addNewElement() {
             window.onload();
         }, 1000);
     } else {
-        addBtn.disabled = true;
-        addBtn.style.border = '2px solid red';
-        addBtn.style.color = 'red';
-        addBtn.style.cursor = 'not-allowed';
-        addBtnSvg.style.fill = 'red';
-        addBtnSpan.innerText = 'Máximo de imagens';
-        addBtn.removeEventListener('onmouseover', addBtnMouseOver);
-        addBtn.removeEventListener('onmouseout', addBtnMouseOut);
+        btnAdd.disabled = true;
+        btnAdd.style.border = '2px solid red';
+        btnAdd.style.color = 'red';
+        btnAdd.style.cursor = 'not-allowed';
+        btnAddSvg.style.fill = 'red';
+        btnAddSpan.innerText = 'Máximo de imagens';
+        btnAdd.removeEventListener('onmouseover', btnAddMouseOver);
+        btnAdd.removeEventListener('onmouseout', btnAddMouseOut);
     }
 }
 
+//Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
     const container = document.querySelector('div.item.selected > div > div.box-dropdown');
@@ -267,17 +257,18 @@ function removeNewElement() {
             window.onload();
         }, 1000);
     } else {
-        removeBtn.disabled = true;
-        removeBtn.style.border = '2px solid #e85d04';
-        removeBtn.style.color = '#e85d04';
-        removeBtn.style.cursor = 'not-allowed';
-        removeBtnSvg.style.fill = '#e85d04';
-        removeBtnSpan.innerText = 'Mínimo de imagens';
-        removeBtn.removeEventListener('onmouseover', removeBtnMouseOver);
-        removeBtn.removeEventListener('onmouseout', removeBtnMouseOut);
+        btnRemove.disabled = true;
+        btnRemove.style.border = '2px solid #e85d04';
+        btnRemove.style.color = '#e85d04';
+        btnRemove.style.cursor = 'not-allowed';
+        btnRemoveSvg.style.fill = '#e85d04';
+        btnRemoveSpan.innerText = 'Mínimo de imagens';
+        btnRemove.removeEventListener('onmouseover', btnRemoveMouseOver);
+        btnRemove.removeEventListener('onmouseout', btnRemoveMouseOut);
     }
 }
 
+//Global function to disable the attribute "disable" for COPY BUTTON
 function copyBtnDisabledFalse() {
     btnCopyhtml.disabled = false;
     btnCopyhtml.style.color = '#264653';
@@ -292,6 +283,7 @@ function copyBtnDisabledFalse() {
     }); 
 };
 
+//Global function to disable the attribute "disable" for BUILD BUTTON
 function buildBtnDisabledFalse() {
     btnBuildHtml.disabled = false;
     btnBuildHtml.style.color = '#264653';
@@ -306,30 +298,32 @@ function buildBtnDisabledFalse() {
     }); 
 };
 
-function addBtnMouseOver() {
-   addBtn.style.border = '2px solid #008000';
-   addBtn.style.color = '#008000';
-   addBtn.style.cursor = 'pointer';
-   addBtnSvg.style.fill = "#008000";
+//Global functions to mouseOver and mouseOut for ADD IMG BUTTON and REMOVE IMG BUTTON
+function btnAddMouseOver() {
+   btnAdd.style.border = '2px solid #008000';
+   btnAdd.style.color = '#008000';
+   btnAdd.style.cursor = 'pointer';
+   btnAddSvg.style.fill = "#008000";
 };
 
-function addBtnMouseOut() {
-    addBtn.style.border = '2px solid #264653';
-    addBtn.style.color = '#264653';
-    addBtn.style.cursor = 'pointer';
-    addBtnSvg.style.fill = "#264653";
+function btnAddMouseOut() {
+    btnAdd.style.border = '2px solid #264653';
+    btnAdd.style.color = '#264653';
+    btnAdd.style.cursor = 'pointer';
+    btnAddSvg.style.fill = "#264653";
  };
 
- function removeBtnMouseOver() {
-    removeBtn.style.border = '2px solid #e85d04';
-    removeBtn.style.color = '#e85d04';
-    removeBtn.style.cursor = 'pointer';
-    removeBtnSvg.style.fill = "#e85d04";
+ function btnRemoveMouseOver() {
+    btnRemove.style.border = '2px solid #e85d04';
+    btnRemove.style.color = '#e85d04';
+    btnRemove.style.cursor = 'pointer';
+    btnRemoveSvg.style.fill = "#e85d04";
  };
  
-function removeBtnMouseOut() {
-    removeBtn.style.border = '2px solid red';
-    removeBtn.style.color = 'red';
-    removeBtn.style.cursor = 'pointer';
-    removeBtnSvg.style.fill = "red";
+function btnRemoveMouseOut() {
+    btnRemove.style.border = '2px solid red';
+    btnRemove.style.color = 'red';
+    btnRemove.style.cursor = 'pointer';
+    btnRemoveSvg.style.fill = "red";
 };
+
