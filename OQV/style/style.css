@@ -177,7 +177,7 @@ textarea{
     gap: 1rem;
 }
 
-.pbc-icons div {
+.pbc-icons div, .pbc-icon-homeSlide {
     display: flex;
     border-radius: 50px;
     padding: 0 1rem 0;
@@ -186,7 +186,7 @@ textarea{
     transition: 0.5s all;
 }
 
-.pbc-div-add {
+.pbc-div-add, .pbc-icon-homeSlide {
     border: 2px solid #264653;
     color: #264653;
 }
@@ -197,6 +197,10 @@ textarea{
 }
 
 .pbc-icons div:nth-child(3) {
+    display: none;
+}
+
+.pbc-icons div.pbc-icon-homeSlide {
     display: none;
 }
 
@@ -256,14 +260,24 @@ textarea{
         margin: 0.4rem 0;
     }   
     
-    .pbc-icons div:nth-child(2) {
+    .pbc-icons div:nth-child(3) {
         display: flex;
-        border: 2px solid #A9BFB8;
+        border: 2px solid #264653;
         border-radius: 50px;
         padding: 0 1rem 0;
         align-items: center;
         gap: 1rem;
-        color: #A9BFB8;
+        color: #264653;
+    }
+
+    .pbc-icons div.pbc-icon-homeSlide {
+        display: flex;
+        border: 2px solid #264653;
+        border-radius: 50px;
+        padding: 0 1rem 0;
+        align-items: center;
+        gap: 1rem;
+        color: #264653;
     }
     
     .pbc-icons {
