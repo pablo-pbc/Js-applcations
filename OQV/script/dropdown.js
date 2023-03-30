@@ -6,23 +6,27 @@ function buildHtml() {
   let flag = 0;
 
   for (i = 0; i < nodeList.length && flag < 1; i++) {
-    
     //Importing the input's values
     let linkDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(2) > input[type=text]`).value;
     let imgDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(3) > input[type=text]`).value;
     let altDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
     let checkBox =  document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=checkbox]`).checked;
 
+    let formSection = document.querySelector(`#pdvForm > section:nth-child(${i+1})`);
+
     //Choosing HTML element
     let resultDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i+1})`);
 
+    //Checking the input's length
     if (linkDropDown.length < 3 || imgDropDown.length < 3 || altDropDown.length < 3) {
       flag = 1;
       alert("Favor preencher todos os campos corretamente");
-    } else if (checkBox) {
-      // Quando o primeiro checkbox é marcado, desmarca o segundo checkbox
+    } else if (checkBox) { //checking if the checkbox is checked
+
       resultDropDown.style.display = 'none'
+
     } else {
+
       resultDropDown.removeAttribute("style");
 
       let originUrl = new URL(imgDropDown).origin;
@@ -31,16 +35,16 @@ function buildHtml() {
       let finalUrl = null
 
       if (originUrl == prefix) {
-          finalUrl = prefix + "/" + pathNameUrl
+        finalUrl = prefix + "/" + pathNameUrl
       } else {
-          finalUrl = prefix + "/" + pathNameUrlS3
+        finalUrl = prefix + "/" + pathNameUrlS3
       }                     
 
       resultDropDown.href = linkDropDown;
       resultDropDown.innerHTML =`<img src=${finalUrl} alt=${altDropDown} border="0" />${altDropDown}` ;
     }
   };
-  
+
   if (saveBtnCliked) {  
     copyBtnDisabledFalse();
 
@@ -54,7 +58,7 @@ function buildHtml() {
 window.onload = function buildHtmlForm() {
   const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
   const appendFormReference = document.getElementById("pdvForm");
-
+ 
   for (let i = 0; i < nodeList.length; i++) {
       let attributeslinkDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1})`);
       let attributesimgDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i + 1}) > img`);
@@ -87,14 +91,17 @@ window.onload = function buildHtmlForm() {
   };
 
   var x = window.matchMedia("(max-width: 700px)");  
+
   if (x.matches) {
     // If media query matches
     swapFormElementPositions();
   } else {
     draggFormElement();
   };
+  inputFocusOnOff();
 };
 
+//Function for change the element position when mobile
 function swapFormElementPositions() {
   const elements = document.querySelectorAll(".pbcForm");
   const elements2 = document.getElementById("pdvForm");
@@ -129,24 +136,46 @@ function swapFormElementPositions() {
   });
 }  
 
-// focus input
-setTimeout(() => {
+//Function to change BUILD BUTTON style after some input modification
+function inputChanging() {
+  const inputChanging = document.querySelectorAll('#pdvForm > section > div > input');
+
+  for (let i = 0; i < inputChanging.length; i++) {
+      inputChanging[i].addEventListener("input", function () {
+
+          if (!inputChanged && !dragStart) {
+              saveBackup();
+              inputChanged = true;
+          };
+
+          btnBuildHtml.innerText = 'Montar HTML';
+          btnBuildHtml.style.border = '1px solid #264653';
+          btnBuildHtml.style.color = '#264653';
+      });    
+  };    
+};
+
+//Function to disable the draggable attribute
+function inputFocusOnOff() {
   const nodeList = document.querySelectorAll("#pdvForm input");
   for (var i = 0; i < nodeList.length; i++) {
     nodeList[i].addEventListener("focusout", (event) => {
       const button = document.querySelectorAll(".pbcForm");
       for (var i = 0; i < button.length; i++) {
         button[i].setAttribute("draggable", "true");
-      }
+        inputChanging();
+      }      
     });
+
     nodeList[i].addEventListener("focus", (event) => {
       const button = document.querySelectorAll(".pbcForm");
       for (var i = 0; i < button.length; i++) {
         button[i].setAttribute("draggable", "false");
+        inputChanging();
       }
     });
   }
-}, 2000);  
+}
 
 /* Mobile */  
 function toggleClass(elementId, className) {
