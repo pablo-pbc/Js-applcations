@@ -1,37 +1,38 @@
-let btnBuildHtml = document.getElementById("buildButton");
-let btnCopyhtml = document.getElementById("copyHtmlButton");
-let currentUlrPathname = new URL(window.location.href).pathname.substring(5);
-let pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
-let querySelector = "";
-let pdvComment = "";
-let nodeList = null;
-
-switch (pdvName) {
-    case 'hoover':
-        querySelector = '.item.selected .box-hoover a';
-        nodeList = document.querySelectorAll(`${querySelector}`);
-        pdvComment = 'Hoover';
-        break;
-
-    case 'mosaicoFem':
-        querySelector = 'box-banner'
-        nodeList = document.querySelectorAll(`${querySelector}`)
-        pdvComment = 'MOSAICO FEM'
-        break;
-
-    case 'mosaicoMasc':
-        querySelector = 'box-banner'
-        nodeList = document.querySelectorAll(`${querySelector}`)
-        pdvComment = 'MOSAICO MASC'
-        break;
-
-    default:
-        break;
-};
+const btnBuildHtml = document.getElementById("buildButton");
+const btnCopyhtml = document.getElementById("copyHtmlButton");
+const backupBtn = document.getElementById('buttonBackup');
+const currentUlrPathname = new URL(window.location.href).pathname.substring(5);
+const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('.'));
+let pdvComment = '';
 
 //Function to feed the textarea element
-function loopTxtArea() { 
+function loopTxtArea() {     
     const txtArea = document.getElementById("codigo");
+    let querySelector = "";
+    let nodeList = null;
+
+    switch (pdvName) {
+        case 'hoover':
+            querySelector = 'div.item.selected > div.pdv-automation > div.box-hoover > a';       
+            nodeList = document.querySelectorAll(`${querySelector}`);
+            pdvComment = 'Hoover';
+            break;
+
+        case 'mosaicoFem':
+            querySelector = 'box-banner'
+            nodeList = document.querySelectorAll(`${querySelector}`)
+            pdvComment = 'MOSAICO FEM'
+            break;
+
+        case 'mosaicoMasc':
+            querySelector = 'box-banner'
+            nodeList = document.querySelectorAll(`${querySelector}`)
+            pdvComment = 'MOSAICO MASC'
+            break;
+
+        default:
+            break;
+    };
      
     txtArea.value = "";
   
@@ -56,11 +57,15 @@ function saveBackup() {
     const file = new Blob([loopTxtArea().value], { type: "text/plain" });
 
     link.href = URL.createObjectURL(file);
-    link.download = `backup_${today}_${hours}h-${min}.txt`;
+    link.download = `backup${pdvComment}_${today}_${hours}h-${min}.txt`;
     link.click();
     URL.revokeObjectURL(link.href);
 
-    btnBuildHtml.disabled = false;
+    backupBtn.innerText = 'Backup Salvo!';
+    backupBtn.style.color = '#38b000';
+    backupBtn.style.border = "2px solid #38b000";
+
+    buildBtnDisabledFalse();
 };
 
 //Function to copy the HTML after input's insertions
@@ -71,6 +76,10 @@ function copyHtml() {
     loopTxtArea().setSelectionRange(0, 99999);
     // Copy the text inside the textarea field
     navigator.clipboard.writeText(loopTxtArea().value);  
+
+    btnCopyhtml.innerText = 'HTML copiado!';
+    btnCopyhtml.style.color = '#38b000';
+    btnCopyhtml.style.border = "2px solid #38b000";
 };
   
 function draggFormElement() {
@@ -129,7 +138,7 @@ setTimeout(() => {
             let items = document.querySelectorAll(".item");
             let selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');            
 
-            const element = document.querySelectorAll("#HooverForm section");
+            const element = document.querySelectorAll("#pdvForm section");
 
             items.forEach(function (item) {
                 item.classList.remove("selected");
@@ -143,8 +152,20 @@ setTimeout(() => {
                 element[i].remove();
             };
 
-            btnBuildHtml.disabled = true;
+            backupBtn.removeAttribute('style');
+            backupBtn.innerText = 'Salvar Backup';
+
+            btnCopyhtml.removeAttribute('style');
+            btnCopyhtml.innerText = 'Copiar código';
             btnCopyhtml.disabled = true;
+            btnCopyhtml.removeEventListener('mouseover', overOnBtnCopy);
+            btnCopyhtml.removeEventListener('mouseout', overOffBtnCopy);
+
+            btnBuildHtml.removeAttribute('style')
+            btnBuildHtml.innerText = 'Montar código';
+            btnBuildHtml.disabled = true;
+            btnBuildHtml.removeEventListener('mouseover', overOnBtnBuild);
+            btnBuildHtml.removeEventListener('mouseout', overOffBtnBuild);
 
             setTimeout(() => {
                 window.onload();
@@ -152,3 +173,39 @@ setTimeout(() => {
         });
     };
 }, 1000);
+
+function overOnBtnCopy() {
+    btnCopyhtml.style.backgroundColor = "#c7f9cc";        
+    btnCopyhtml.style.cursor = "pointer";
+};
+
+function overOffBtnCopy() {
+    btnCopyhtml.style.backgroundColor = "#fff";
+};
+
+function overOnBtnBuild() {
+    btnBuildHtml.style.backgroundColor = "#c7f9cc";        
+    btnBuildHtml.style.cursor = "pointer";
+};
+
+function overOffBtnBuild() {
+    btnBuildHtml.style.backgroundColor = "#fff";
+};
+
+function copyBtnDisabledFalse() {
+    btnCopyhtml.disabled = false;
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.addEventListener("mouseover", overOnBtnCopy);
+    btnCopyhtml.addEventListener("mouseout", overOffBtnCopy); 
+};
+
+function buildBtnDisabledFalse() {
+    btnBuildHtml.disabled = false;
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
+
+    btnBuildHtml.addEventListener("mouseover", overOnBtnBuild);
+    btnBuildHtml.addEventListener("mouseout", overOffBtnBuild); 
+};
