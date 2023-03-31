@@ -12,9 +12,21 @@
 
   <body>
     <main class="pbc-pdv-automation-form">
-      <img src="media/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
+      <div class="pbc-icons">	
+        <div onclick="toggleClass('meu-elemento', 'grid-mob-position')" class="pbc-icon-homeSlide">
+          <?xml version="1.0" encoding="utf-8"?>
+          <svg viewBox="0 0 48 48" fill="none" class="icon-mobile-change" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" fill="white" fill-opacity="0.01"/>
+            <path d="M18 31H38V5" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 21H10V43" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M44 11L38 5L32 11" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 37L10 43L4 37" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Trocar posições</span>
+        </div>            
+      </div>
       <form id="pdvForm"></form>
-
+  
       <section class="pbc-btn-txtarea">
         <!-- Inicio botão salvar backup -->
         <div>
@@ -31,7 +43,7 @@
         <div>
           <button 
           id='buildButton' 
-          onclick="buildHomeSlide()" 
+          onclick="buildHtml()" 
           disabled>
           Montar HTML</button>
         </div>
@@ -51,7 +63,7 @@
         <div>
           <textarea name="codigo" id="codigo"></textarea>
         </div>			
-      </section>
+      </section>	
     </main>
 
     <div class="pdv-automation">

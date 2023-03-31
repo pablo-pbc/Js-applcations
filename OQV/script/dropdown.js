@@ -12,7 +12,7 @@ function buildHtml() {
     let altDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
     let checkBox =  document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=checkbox]`).checked;
 
-    let formSection = document.querySelector(`#pdvForm > section:nth-child(${i+1})`);
+    //let formSection = document.querySelector(`#pdvForm > section:nth-child(${i+1})`);
 
     //Choosing HTML element
     let resultDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i+1})`);
@@ -99,90 +99,4 @@ window.onload = function buildHtmlForm() {
     draggFormElement();
   };
   inputFocusOnOff();
-};
-
-//Function for change the element position when mobile
-function swapFormElementPositions() {
-  const elements = document.querySelectorAll(".pbcForm");
-  const elements2 = document.getElementById("pdvForm");
-  let firstElement = null;
-
-  elements.forEach((element) => {
-    element.addEventListener("click", () => {
-      if (firstElement === null) {
-        firstElement = element;
-        element.classList.add("selected");
-        console.log("elements2", elements2.classList);
-      } else {
-        const container = element.parentNode;
-        const firstIndex = parseInt(firstElement.dataset.index);
-        const secondIndex = parseInt(element.dataset.index);
-
-        if (
-          firstIndex !== secondIndex &&
-          elements2.classList == "grid-mob-position"
-        ) {
-          const temp = document.createElement("div");
-          container.insertBefore(temp, element);
-          container.insertBefore(element, firstElement);
-          container.insertBefore(firstElement, temp);
-          temp.remove();
-        }
-
-        firstElement.classList.remove("selected");
-        firstElement = null;
-      }
-    });
-  });
-}  
-
-//Function to change BUILD BUTTON style after some input modification
-function inputChanging() {
-  const inputChanging = document.querySelectorAll('#pdvForm > section > div > input');
-
-  for (let i = 0; i < inputChanging.length; i++) {
-      inputChanging[i].addEventListener("input", function () {
-
-          if (!inputChanged && !dragStart) {
-              saveBackup();
-              inputChanged = true;
-          };
-
-          btnBuildHtml.innerText = 'Montar HTML';
-          btnBuildHtml.style.border = '1px solid #264653';
-          btnBuildHtml.style.color = '#264653';
-      });    
-  };    
-};
-
-//Function to disable the draggable attribute
-function inputFocusOnOff() {
-  const nodeList = document.querySelectorAll("#pdvForm input");
-  for (var i = 0; i < nodeList.length; i++) {
-    nodeList[i].addEventListener("focusout", (event) => {
-      const button = document.querySelectorAll(".pbcForm");
-      for (var i = 0; i < button.length; i++) {
-        button[i].setAttribute("draggable", "true");
-        inputChanging();
-      }      
-    });
-
-    nodeList[i].addEventListener("focus", (event) => {
-      const button = document.querySelectorAll(".pbcForm");
-      for (var i = 0; i < button.length; i++) {
-        button[i].setAttribute("draggable", "false");
-        inputChanging();
-      }
-    });
-  }
-}
-
-/* Mobile */  
-function toggleClass(elementId, className) {
-  const element = document.getElementById("pdvForm");
-  if (element.classList.contains(className)) {
-    element.classList.remove(className);
-  } else {
-    element.classList.add(className);
-  }
-}
+}; 
