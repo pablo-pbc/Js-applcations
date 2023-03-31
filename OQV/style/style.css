@@ -59,20 +59,10 @@ form#pdvForm .dragging {
     transition: 0.5s all;
 }
 
-#pdvForm > section > div > input[type=checkbox] {
-    width: 30%;
-    margin: 0 auto;
-}
 
 #pdvForm > section > div > input[type=text]:focus {
     width: 100%;
     border: 2px solid #264653;
-}
-
-#pdvForm > section > div.input_checkbox {
-    display: grid;
-    grid-template-columns: 80% 20%;
-    text-align: center;
 }
 
 .pbc-btn-txtarea {
@@ -118,6 +108,7 @@ form#pdvForm .dragging {
 
 .box-dropdown a {
     display: grid;
+    transition: 0.5s all;
 }
 
 .box-dropdown a img {

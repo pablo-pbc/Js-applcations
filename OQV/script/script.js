@@ -315,7 +315,17 @@ setTimeout(() => {
 //Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-dropdown');    
+    const container = document.querySelector('div.item.selected > div > div.box-dropdown'); 
+    
+    btnBuildHtml.removeAttribute('style')
+    btnBuildHtml.innerText = 'Montar código'
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.removeAttribute('style')
+    btnCopyhtml.innerText = 'Copiar código'
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
 
     if (element.length < 6) {
         const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
@@ -342,33 +352,66 @@ function addNewElement() {
     }
 }
 
+//Global funciton to add mouseover on a image that will be removed
+function mouseOverImgToRemove() {
+    this.style.filter = 'grayscale(1)';
+}
+
+function mouseOutImgToRemove() {
+    this.style.border = '2px solid green';
+    this.style.filter = 'grayscale(0)';
+}
+
+function selectImgToRemove() {
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');
+    const element = document.querySelectorAll("#pdvForm > section");
+
+    this.removeAttribute('href');
+    this.remove();
+
+    if (btnAddSpan.innerText == 'Máximo de imagens') {
+        btnAddSpan.innerText = 'Adicionar imagens';
+    }
+
+    for (index = 0; index < element.length; index++) {
+        element[index].remove();
+
+        removeBoxImage[index].removeAttribute('style');
+        removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+        removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
+        removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+    };
+
+    setTimeout(() => {
+        window.onload();
+    }, 1000); 
+    
+    btnRemoveSpan.innerHTML = 'Remover Imagem';
+}
+
 //Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
-    const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-dropdown');
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');
 
-    if (element.length > 1) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
-        const nodeListLastValue = nodeList[nodeList.length - 1];
-        nodeListLastValue.remove();        
+    for (let index = 0; index < removeBoxImage.length; index++) {
+        removeBoxImage[index].style.border = '2px solid green'   
+        removeBoxImage[index].style.padding = '0.5rem'
+        removeBoxImage[index].style.borderRadius = '10px'     
+        removeBoxImage[index].addEventListener('mouseover', mouseOverImgToRemove)
+        removeBoxImage[index].addEventListener('mouseout', mouseOutImgToRemove)  
+        removeBoxImage[index].addEventListener('click', selectImgToRemove)      
+    }
+    btnRemoveSpan.innerHTML = 'Selecione a imagem'
 
-        for (i = 0; i < element.length; i++) {
-            element[i].remove();
-        };
-    
-        setTimeout(() => {
-            window.onload();
-        }, 1000);
-    } else {
-        btnRemove.disabled = true;
-        btnRemove.style.border = '2px solid #e85d04';
-        btnRemove.style.color = '#e85d04';
-        btnRemove.style.cursor = 'not-allowed';
-        btnRemoveSvg.style.fill = '#e85d04';
-        btnRemoveSpan.innerText = 'Mínimo de imagens';
-        btnRemove.removeEventListener('onmouseover', btnRemoveMouseOver);
-        btnRemove.removeEventListener('onmouseout', btnRemoveMouseOut);
-    };
+    btnBuildHtml.removeAttribute('style')
+    btnBuildHtml.innerText = 'Montar código'
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.removeAttribute('style')
+    btnCopyhtml.innerText = 'Copiar código'
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
 };
 
 //Global function to disable the attribute "disable" for COPY BUTTON

@@ -10,20 +10,15 @@ function buildHtml() {
     let linkDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(2) > input[type=text]`).value;
     let imgDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(3) > input[type=text]`).value;
     let altDropDown = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
-    let checkBox =  document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(5) > input[type=checkbox]`).checked;
-
-    //let formSection = document.querySelector(`#pdvForm > section:nth-child(${i+1})`);
 
     //Choosing HTML element
     let resultDropDown = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i+1})`);
 
     //Checking the input's length
     if (linkDropDown.length < 3 || imgDropDown.length < 3 || altDropDown.length < 3) {
+
       flag = 1;
       alert("Favor preencher todos os campos corretamente");
-    } else if (checkBox) { //checking if the checkbox is checked
-
-      resultDropDown.style.display = 'none'
 
     } else {
 
@@ -79,11 +74,6 @@ window.onload = function buildHtmlForm() {
               <div>
                   <label>Alt:</label>
                   <input type='text' value="${attributesimgDropDown.alt}" required></input>
-              </div>
-
-              <div class='input_checkbox'>
-                  <label>Marque aqui, caso queira remover este dropdown!</label>
-                  <input type="checkbox">                  
               </div>
               </section>
           `;
