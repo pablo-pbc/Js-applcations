@@ -18,8 +18,9 @@ const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('
 //Varible used for flag/alert and dynamic txt
 let pdvComment = '';
 let saveBtnCliked = false;
-let inputChanged = false
-let dragStart = false
+let inputChanged = false;
+let dragStart = false;
+let clicks = 0;
 
 //Global function to feed the textarea element
 function loopTxtArea() {  
@@ -363,55 +364,84 @@ function mouseOutImgToRemove() {
 }
 
 function selectImgToRemove() {
+    const confirmed = window.confirm("Tem certeza que deseja remover essa imagem?");
     const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');
-    const element = document.querySelectorAll("#pdvForm > section");
+    const element = document.querySelectorAll("#pdvForm > section");    
+    clicks = 0;
 
-    this.removeAttribute('href');
-    this.remove();
+    if (confirmed) {
+        event.preventDefault();
+        this.remove();
 
-    if (btnAddSpan.innerText == 'Máximo de imagens') {
-        btnAddSpan.innerText = 'Adicionar imagens';
-    }
+        if (btnAddSpan.innerText == 'Máximo de imagens') {
+            btnAddSpan.innerText = 'Adicionar imagens';
+        }
 
-    for (index = 0; index < element.length; index++) {
-        element[index].remove();
+        for (index = 0; index < element.length; index++) {
+            element[index].remove();
+    
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
 
-        removeBoxImage[index].removeAttribute('style');
-        removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
-        removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
-        removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
-    };
+        setTimeout(() => {
+            window.onload();
+        }, 1000);
+    } else {
+        event.preventDefault();
 
-    setTimeout(() => {
-        window.onload();
-    }, 1000); 
+        for (index = 0; index < removeBoxImage.length; index++) {    
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
+    }; 
     
     btnRemoveSpan.innerHTML = 'Remover Imagem';
 }
 
 //Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');    
+    clicks++;  
 
     for (let index = 0; index < removeBoxImage.length; index++) {
-        removeBoxImage[index].style.border = '2px solid green'   
-        removeBoxImage[index].style.padding = '0.5rem'
-        removeBoxImage[index].style.borderRadius = '10px'     
-        removeBoxImage[index].addEventListener('mouseover', mouseOverImgToRemove)
-        removeBoxImage[index].addEventListener('mouseout', mouseOutImgToRemove)  
-        removeBoxImage[index].addEventListener('click', selectImgToRemove)      
-    }
-    btnRemoveSpan.innerHTML = 'Selecione a imagem'
+        removeBoxImage[index].style.border = '2px solid green';   
+        removeBoxImage[index].style.padding = '0.5rem';
+        removeBoxImage[index].style.borderRadius = '10px';     
+        removeBoxImage[index].addEventListener('mouseover', mouseOverImgToRemove);
+        removeBoxImage[index].addEventListener('mouseout', mouseOutImgToRemove);  
+        removeBoxImage[index].addEventListener('click', selectImgToRemove); 
+    };
 
-    btnBuildHtml.removeAttribute('style')
-    btnBuildHtml.innerText = 'Montar código'
+    btnRemoveSpan.innerHTML = 'Cancelar Seleção';
+
+    btnBuildHtml.removeAttribute('style');
+    btnBuildHtml.innerText = 'Montar código';
     btnBuildHtml.style.color = '#264653';
     btnBuildHtml.style.border = '1px solid #264653';
 
-    btnCopyhtml.removeAttribute('style')
-    btnCopyhtml.innerText = 'Copiar código'
+    btnCopyhtml.removeAttribute('style');
+    btnCopyhtml.innerText = 'Copiar código';
     btnCopyhtml.style.color = '#264653';
     btnCopyhtml.style.border = '1px solid #264653';
+
+    if (clicks === 2) {
+        clicks = 0;
+        // Perform the action you want to take on single click here
+        for (let index = 0; index < removeBoxImage.length; index++) {
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);  
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
+        btnRemoveSpan.innerHTML = 'Remover Imagem';
+    };
 };
 
 //Global function to disable the attribute "disable" for COPY BUTTON
