@@ -317,6 +317,10 @@ setTimeout(() => {
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
     const container = document.querySelector('div.item.selected > div > div.box-dropdown'); 
+
+    if (!saveBtnCliked) {
+        saveBackup();
+    }
     
     btnBuildHtml.removeAttribute('style')
     btnBuildHtml.innerText = 'Montar código'
@@ -407,6 +411,10 @@ function selectImgToRemove() {
 function removeNewElement() {
     const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');    
     clicks++;  
+
+    if (!saveBtnCliked) {
+        saveBackup();
+    }
 
     for (let index = 0; index < removeBoxImage.length; index++) {
         removeBoxImage[index].style.border = '2px solid green';   
