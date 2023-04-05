@@ -210,6 +210,16 @@ textarea{
 
 
 @media (max-width: 900px) {
+    main.pbc-pdv-automation-form {
+        flex-direction: column;
+    }
+
+    .pbc-btn-txtarea {
+        width: 100%;
+        align-items: center;
+        padding: 1rem;
+    }
+    
     form#pdvForm {
         display: -webkit-inline-box;
         overflow: auto;
