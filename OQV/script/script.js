@@ -433,11 +433,6 @@ function removeNewElement() {
     btnBuildHtml.style.color = '#264653';
     btnBuildHtml.style.border = '1px solid #264653';
 
-    btnCopyhtml.removeAttribute('style');
-    btnCopyhtml.innerText = 'Copiar código';
-    btnCopyhtml.style.color = '#264653';
-    btnCopyhtml.style.border = '1px solid #264653';
-
     if (clicks === 2) {
         clicks = 0;
         // Perform the action you want to take on single click here
