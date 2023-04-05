@@ -18,8 +18,11 @@ const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('
 //Varible used for flag/alert and dynamic txt
 let pdvComment = '';
 let saveBtnCliked = false;
-let inputChanged = false
-let dragStart = false
+let inputChanged = false;
+let dragStart = false;
+let clicks = 0;
+
+console.log(saveBtnCliked)
 
 //Global function to feed the textarea element
 function loopTxtArea() {  
@@ -85,6 +88,7 @@ function saveBackup() {
 
     //Flag alert
     saveBtnCliked = true
+    console.log(saveBtnCliked)
 
     buildBtnDisabledFalse();
 };
@@ -112,7 +116,7 @@ function draggFormElement() {
 
     elements.forEach((element) => {
         element.addEventListener("dragstart", (e) => {
-            if (count != 1 && !inputChanged) {
+            if (count != 1 && !inputChanged && !saveBtnCliked) {
                 saveBackup();    
             }            
             count = 1
@@ -157,9 +161,111 @@ function draggFormElement() {
 
             buildHtml();
         });
+
         count = 0
     });
 };
+
+//Global function to change BUILD BUTTON style after some input modification
+function inputChanging() {
+    const inputChanging = document.querySelectorAll('#pdvForm > section > div > input');
+
+    for (let i = 0; i < inputChanging.length; i++) {
+        inputChanging[i].addEventListener("input", function () {
+
+            if (!inputChanged && !dragStart) {
+                saveBackup();
+                inputChanged = true;
+            };
+
+            btnBuildHtml.innerText = 'Montar HTML';
+            btnBuildHtml.style.border = '1px solid #264653';
+            btnBuildHtml.style.color = '#264653';
+        });    
+    };    
+};
+
+//Global function to disable the draggable attribute
+function inputFocusOnOff() {
+    const nodeList = document.querySelectorAll("#pdvForm input");
+    for (var i = 0; i < nodeList.length; i++) {
+        nodeList[i].addEventListener("focusout", (event) => {
+        const button = document.querySelectorAll(".pbcForm");
+        for (var i = 0; i < button.length; i++) {
+            button[i].setAttribute("draggable", "true");
+            inputChanging();
+        }      
+        });
+
+        nodeList[i].addEventListener("focus", (event) => {
+        const button = document.querySelectorAll(".pbcForm");
+        for (var i = 0; i < button.length; i++) {
+            button[i].setAttribute("draggable", "false");
+            inputChanging();
+        }
+        });
+    };
+};
+
+/* Mobile */  
+function toggleClass(elementId, className) {
+    const element = document.getElementById("pdvForm");
+    if (element.classList.contains(className)) {
+        element.classList.remove(className);
+    } else {
+        element.classList.add(className);
+    };
+};
+
+//Global function for change the element position when mobile
+function swapFormElementPositions() {
+    const elements = document.querySelectorAll(".pbcForm");
+    const elements2 = document.getElementById("pdvForm");
+    let firstElement = null;
+    let count = 0
+  
+    elements.forEach((element) => {
+      element.addEventListener("click", () => {
+  
+        if (count != 1 && !inputChanged && !saveBtnCliked) {
+          saveBackup();    
+        }            
+        count = 1
+  
+        if (firstElement === null) {
+          firstElement = element;
+          element.classList.add("selected");
+          console.log("elements2", elements2.classList);
+  
+          btnBuildHtml.style.border = '1px solid #264653'
+          btnBuildHtml.style.color = '#264653'
+          btnBuildHtml.innerText = 'Montar código';
+          btnBuildHtml.disabled = true;
+  
+        } else {
+          const container = element.parentNode;
+          const firstIndex = parseInt(firstElement.dataset.index);
+          const secondIndex = parseInt(element.dataset.index);       
+          if (
+            firstIndex !== secondIndex &&
+            elements2.classList == "grid-mob-position"
+          ) {
+            const temp = document.createElement("div");
+            container.insertBefore(temp, element);
+            container.insertBefore(element, firstElement);
+            container.insertBefore(firstElement, temp);
+            temp.remove();
+          }
+  
+          buildHtml();
+  
+          firstElement.classList.remove("selected");
+          firstElement = null;
+        }
+      });
+    });
+    count = 0
+}; 
   
 // Global function for the SELECT option change
 setTimeout(() => {
@@ -210,13 +316,27 @@ setTimeout(() => {
     };
 }, 1000);
 
-//Global function to add an new image Hoover and HOOVER
+//Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-hoover');    
+    const container = document.querySelector('div.item.selected > div > div.box-hoover'); 
+
+    if (!saveBtnCliked) {
+        saveBackup();
+    }
+    
+    btnBuildHtml.removeAttribute('style')
+    btnBuildHtml.innerText = 'Montar código'
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.removeAttribute('style')
+    btnCopyhtml.innerText = 'Copiar código'
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
 
     if (element.length < 6) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div.box-hoover a`);
         const nodeListLastValue = nodeList[nodeList.length - 1];
         const clonedElement = nodeListLastValue.cloneNode(true);
 
@@ -240,34 +360,100 @@ function addNewElement() {
     }
 }
 
-//Global function to remove an image Hoover and HOOVER
-function removeNewElement() {
-    const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-hoover');
+//Global funciton to add mouseover on a image that will be removed
+function mouseOverImgToRemove() {
+    this.style.filter = 'grayscale(1)';
+}
 
-    if (element.length > 1) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
-        const nodeListLastValue = nodeList[nodeList.length - 1];
-        nodeListLastValue.remove();        
+function mouseOutImgToRemove() {
+    this.style.border = '2px solid green';
+    this.style.filter = 'grayscale(0)';
+}
 
-        for (i = 0; i < element.length; i++) {
-            element[i].remove();
-        };
+function selectImgToRemove() {
+    const confirmed = window.confirm("Tem certeza que deseja remover essa imagem?");
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');
+    const element = document.querySelectorAll("#pdvForm > section");    
+    clicks = 0;
+
+    if (confirmed) {
+        event.preventDefault();
+        this.remove();
+
+        if (btnAddSpan.innerText == 'Máximo de imagens') {
+            btnAddSpan.innerText = 'Adicionar imagens';
+        }
+
+        for (index = 0; index < element.length; index++) {
+            element[index].remove();
     
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
+
         setTimeout(() => {
             window.onload();
         }, 1000);
     } else {
-        btnRemove.disabled = true;
-        btnRemove.style.border = '2px solid #e85d04';
-        btnRemove.style.color = '#e85d04';
-        btnRemove.style.cursor = 'not-allowed';
-        btnRemoveSvg.style.fill = '#e85d04';
-        btnRemoveSpan.innerText = 'Mínimo de imagens';
-        btnRemove.removeEventListener('onmouseover', btnRemoveMouseOver);
-        btnRemove.removeEventListener('onmouseout', btnRemoveMouseOut);
-    }
+        event.preventDefault();
+
+        for (index = 0; index < removeBoxImage.length; index++) {    
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
+    }; 
+    
+    btnRemoveSpan.innerHTML = 'Remover Imagem';
 }
+
+//Global function to remove an image DROPDOWN and HOOVER
+function removeNewElement() {
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');    
+    clicks++;  
+
+    if (!saveBtnCliked) {
+        saveBackup();
+    }
+
+    for (let index = 0; index < removeBoxImage.length; index++) {
+        removeBoxImage[index].style.border = '2px solid green';   
+        removeBoxImage[index].style.padding = '0.5rem';
+        removeBoxImage[index].style.borderRadius = '10px';     
+        removeBoxImage[index].addEventListener('mouseover', mouseOverImgToRemove);
+        removeBoxImage[index].addEventListener('mouseout', mouseOutImgToRemove);  
+        removeBoxImage[index].addEventListener('click', selectImgToRemove); 
+    };
+
+    btnRemoveSpan.innerHTML = 'Cancelar Seleção';
+
+    btnBuildHtml.removeAttribute('style');
+    btnBuildHtml.innerText = 'Montar código';
+    btnBuildHtml.style.color = '#264653';
+    btnBuildHtml.style.border = '1px solid #264653';
+
+    btnCopyhtml.removeAttribute('style');
+    btnCopyhtml.innerText = 'Copiar código';
+    btnCopyhtml.style.color = '#264653';
+    btnCopyhtml.style.border = '1px solid #264653';
+
+    if (clicks === 2) {
+        clicks = 0;
+        // Perform the action you want to take on single click here
+        for (let index = 0; index < removeBoxImage.length; index++) {
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeAttribute('style');
+            removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
+            removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);  
+            removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
+        };
+        btnRemoveSpan.innerHTML = 'Remover Imagem';
+    };
+};
 
 //Global function to disable the attribute "disable" for COPY BUTTON
 function copyBtnDisabledFalse() {
@@ -327,4 +513,3 @@ function btnRemoveMouseOut() {
     btnRemove.style.cursor = 'pointer';
     btnRemoveSvg.style.fill = "red";
 };
-

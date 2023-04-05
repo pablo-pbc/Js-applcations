@@ -113,9 +113,10 @@ function draggFormElement() {
 
     elements.forEach((element) => {
         element.addEventListener("dragstart", (e) => {
-            if (count != 1 && !inputChanged) {
+            
+            if (count != 1 && !inputChanged && !saveBtnCliked) {
                 saveBackup();    
-            }            
+            }             
             count = 1
             dragStart = true
             draggingElement = e.target;
@@ -224,8 +225,8 @@ function swapFormElementPositions() {
     elements.forEach((element) => {
       element.addEventListener("click", () => {
   
-        if (count != 1 && !inputChanged) {
-          saveBackup();    
+        if (count != 1 && !inputChanged && !saveBtnCliked) {
+            saveBackup();    
         }            
         count = 1
   
