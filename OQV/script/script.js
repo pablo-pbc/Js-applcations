@@ -80,12 +80,14 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
-    btnBackup.innerText = 'Backup Salvo!';
-    btnBackup.style.color = '#38b000';
-    btnBackup.style.border = "2px solid #38b000";
-
     //Flag alert
     saveBtnCliked = true
+
+    btnBackup.innerText = 'Backup Salvo!';
+    btnBackup.disabled = true;
+    btnBackup.style.cursor = 'not-allowed'
+    btnBackup.style.color = '#38b000';
+    btnBackup.style.border = "2px solid #38b000";
 
     buildBtnDisabledFalse();
 };

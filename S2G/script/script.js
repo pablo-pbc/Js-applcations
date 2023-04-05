@@ -22,8 +22,6 @@ let inputChanged = false;
 let dragStart = false;
 let clicks = 0;
 
-console.log(saveBtnCliked)
-
 //Global function to feed the textarea element
 function loopTxtArea() {  
     const txtArea = document.getElementById("codigo");  
@@ -82,13 +80,14 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
-    btnBackup.innerText = 'Backup Salvo!';
-    btnBackup.style.color = '#38b000';
-    btnBackup.style.border = "2px solid #38b000";
-
     //Flag alert
     saveBtnCliked = true
-    console.log(saveBtnCliked)
+
+    btnBackup.innerText = 'Backup Salvo!';
+    btnBackup.disabled = true;
+    btnBackup.style.cursor = 'not-allowed'
+    btnBackup.style.color = '#38b000';
+    btnBackup.style.border = "2px solid #38b000";
 
     buildBtnDisabledFalse();
 };
