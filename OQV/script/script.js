@@ -80,12 +80,14 @@ function saveBackup() {
     link.click();
     URL.revokeObjectURL(link.href);
 
-    btnBackup.innerText = 'Backup Salvo!';
-    btnBackup.style.color = '#38b000';
-    btnBackup.style.border = "2px solid #38b000";
-
     //Flag alert
     saveBtnCliked = true
+
+    btnBackup.innerText = 'Backup Salvo!';
+    btnBackup.disabled = true;
+    btnBackup.style.cursor = 'not-allowed'
+    btnBackup.style.color = '#38b000';
+    btnBackup.style.border = "2px solid #38b000";
 
     buildBtnDisabledFalse();
 };
@@ -432,11 +434,6 @@ function removeNewElement() {
     btnBuildHtml.innerText = 'Montar código';
     btnBuildHtml.style.color = '#264653';
     btnBuildHtml.style.border = '1px solid #264653';
-
-    btnCopyhtml.removeAttribute('style');
-    btnCopyhtml.innerText = 'Copiar código';
-    btnCopyhtml.style.color = '#264653';
-    btnCopyhtml.style.border = '1px solid #264653';
 
     if (clicks === 2) {
         clicks = 0;
