@@ -5,21 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style/homeSlideMasc.css" />
+    <link rel="stylesheet" href="style/style.css" />
 
     <title>PDV - HOME SLIDE MASC - OQV</title>
   </head>
 
   <body>
     <main class="pbc-pdv-automation-form">
-      <img src="/skin/frontend/rwd/oqv/images/change-svgrepo-com.svg" class="icon-mobile-change" onclick="toggleClass('meu-elemento', 'grid-mob-position')"></img>
-      <form id="homeSlideForm"></form>
-
+      <div class="pbc-icons">	
+        <div onclick="toggleClass('meu-elemento', 'grid-mob-position')" class="pbc-icon-homeSlide">
+          <?xml version="1.0" encoding="utf-8"?>
+          <svg viewBox="0 0 48 48" fill="none" class="icon-mobile-change" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" fill="white" fill-opacity="0.01"/>
+            <path d="M18 31H38V5" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 21H10V43" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M44 11L38 5L32 11" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 37L10 43L4 37" stroke="#264653" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Trocar posições</span>
+        </div>            
+      </div>
+      <form id="pdvForm"></form>
+  
       <section class="pbc-btn-txtarea">
         <!-- Inicio botão salvar backup -->
         <div>
           <button 
-            id='homeSlideBackup' 
+            id='backupButton' 
             type='button' 
             onclick="saveBackup()">
             Salvar BACKUP
@@ -31,7 +43,7 @@
         <div>
           <button 
           id='buildButton' 
-          onclick="buildHomeSlide()" 
+          onclick="buildHtml()" 
           disabled>
           Montar HTML</button>
         </div>
@@ -50,121 +62,113 @@
         
         <div>
           <textarea name="codigo" id="codigo"></textarea>
-        </div>			
-      </section>
+        </div>		
+        
+        <div class="pdv-automation">
+          <!-- 01 -->
+          <!-- BANNER -->
+          <div class="box-banner">
+            <a href="https://www.oqvestir.com.br/catalog/category/view/id/135253">
+              <picture>
+                <source
+                  srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_mobile_masc.jpg"
+                  alt=""
+                  media="(max-width: 770px)"
+                />
+    
+                <img
+                  src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_desk_masc.jpg"
+                  alt="Semana do consumidor"
+                />
+              </picture>
+            </a>
+          </div>
+          <!-- BANNER -->
+    
+          <!-- 02 -->
+          <!-- BANNER -->
+          <div class="box-banner">
+            <a href="https://www.oqvestir.com.br/catalog/category/view/id/134972">
+              <picture>
+                <source
+                  srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_mobile_masc.jpg"
+                  alt=""
+                  media="(max-width: 770px)"
+                />
+    
+                <img
+                  src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_desk_masc.jpg"
+                  alt="Osklen"
+                />
+              </picture>
+            </a>
+          </div>
+          <!-- BANNER -->
+    
+          <!-- 03 -->
+          <!-- BANNER -->
+          <div class="box-banner">
+            <a href="https://www.oqvestir.com.br/catalog/category/view/id/136235">
+              <picture>
+                <source
+                  srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_mobile_masc.jpg"
+                  alt=""
+                  media="(max-width: 770px)"
+                />
+    
+                <img
+                  src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_desk_masc.jpg"
+                  alt="Jab"
+                />
+              </picture>
+            </a>
+          </div>
+          <!-- BANNER -->
+    
+          <!-- 04 -->
+          <!-- BANNER -->
+          <div class="box-banner">
+            <a href="https://www.oqvestir.com.br/catalog/category/view/id/134971">
+              <picture>
+                <source
+                  srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_mobile_masc.jpg"
+                  alt=""
+                  media="(max-width: 770px)"
+                />
+    
+                <img
+                  src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_desk_masc.jpg"
+                  alt="Nike"
+                />
+              </picture>
+            </a>
+          </div>
+          <!-- BANNER -->
+    
+          <!-- 05 -->
+          <!-- BANNER -->
+          <div class="box-banner">
+            <a href="https://www.oqvestir.com.br/catalog/category/view/id/134999">
+              <picture>
+                <source
+                  srcset="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_mobile_masc.jpg"
+                  alt=""
+                  media="(max-width: 770px)"
+                />
+    
+                <img
+                  src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_desk_masc.jpg"
+                  alt="Colcci"
+                />
+              </picture>
+            </a>
+          </div>
+          <!-- BANNER -->
+        </div>
+      </section>	
     </main>
 
-    <div class="pdv-automation">
-      <!-- 01 -->
-      <!-- BANNER -->
-      <div class="box-banner">
-        <a href="https://www.oqvestir.com.br/catalog/category/view/id/135253">
-          <picture>
-            <source
-              srcset="
-                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_mobile_masc.jpg
-              "
-              alt=""
-              media="(max-width: 770px)"
-            />
-
-            <img
-              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/140323/01_banner-principal_desk_masc.jpg"
-              alt="Semana do consumidor"
-            />
-          </picture>
-        </a>
-      </div>
-      <!-- BANNER -->
-
-      <!-- 02 -->
-      <!-- BANNER -->
-      <div class="box-banner">
-        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134972">
-          <picture>
-            <source
-              srcset="
-                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_mobile_masc.jpg
-              "
-              alt=""
-              media="(max-width: 770px)"
-            />
-
-            <img
-              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/02_banner-principal_desk_masc.jpg"
-              alt="Osklen"
-            />
-          </picture>
-        </a>
-      </div>
-      <!-- BANNER -->
-
-      <!-- 03 -->
-      <!-- BANNER -->
-      <div class="box-banner">
-        <a href="https://www.oqvestir.com.br/catalog/category/view/id/136235">
-          <picture>
-            <source
-              srcset="
-                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_mobile_masc.jpg
-              "
-              alt=""
-              media="(max-width: 770px)"
-            />
-
-            <img
-              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/03_banner-principal_desk_masc.jpg"
-              alt="Jab"
-            />
-          </picture>
-        </a>
-      </div>
-      <!-- BANNER -->
-
-      <!-- 04 -->
-      <!-- BANNER -->
-      <div class="box-banner">
-        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134971">
-          <picture>
-            <source
-              srcset="
-                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_mobile_masc.jpg
-              "
-              alt=""
-              media="(max-width: 770px)"
-            />
-
-            <img
-              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/04_banner-principal_desk_masc.jpg"
-              alt="Nike"
-            />
-          </picture>
-        </a>
-      </div>
-      <!-- BANNER -->
-
-      <!-- 05 -->
-      <!-- BANNER -->
-      <div class="box-banner">
-        <a href="https://www.oqvestir.com.br/catalog/category/view/id/134999">
-          <picture>
-            <source
-              srcset="
-                https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_mobile_masc.jpg
-              "
-              alt=""
-              media="(max-width: 770px)"
-            />
-
-            <img
-              src="https://dybvctjo56z4b.cloudfront.net/pdv/banner-principal/150323/05_banner-principal_desk_masc.jpg"
-              alt="Colcci"
-            />
-          </picture>
-        </a>
-      </div>
-      <!-- BANNER -->
-    </div>
+    
     <script src="script/script.js"></script>
     <script src="script/homeSlideMasc.js"></script>
   </body>
