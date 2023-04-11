@@ -36,7 +36,10 @@ function buildHtml() {
       }                     
 
       resultDropDown.href = linkDropDown;
-      resultDropDown.innerHTML =`<img src=${finalUrl} alt=${altDropDown} border="0" />${altDropDown}` ;
+      resultDropDown.childNodes[1].src = finalUrl;
+      resultDropDown.childNodes[1].alt = altDropDown;
+      resultDropDown.childNodes[1].border = 0;
+      resultDropDown.childNodes[2].textContent = altDropDown;
     }
   };
 
