@@ -12,7 +12,7 @@ function buildHtml() {
     let altHoover = document.querySelector(`#pdvForm > section:nth-child(${i+1}) > div:nth-child(4) > input[type=text]`).value;
 
     //Choosing HTML element
-    let resultHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i+1})`);    
+    let resultHoover = document.querySelector(`.item.selected > .pdv-automation > div > a:nth-child(${i+1})`);
 
     //Checking the input's length
     if (linkHoover.length < 3 || imgHoover.length < 3 || altHoover.length < 3) {
@@ -36,10 +36,10 @@ function buildHtml() {
       }                     
 
       resultHoover.href = linkHoover;
-      resultHoover.childNodes[1].src = finalUrl;
-      resultHoover.childNodes[1].alt = altHoover;
-      resultHoover.childNodes[1].border = 0;
-      resultHoover.childNodes[2].textContent = altHoover;
+      resultHoover.childNodes[0].src = finalUrl;
+      resultHoover.childNodes[0].alt = altHoover;
+      resultHoover.childNodes[0].border = 0;
+      resultHoover.childNodes[1].textContent = altHoover;
     }
   };
 

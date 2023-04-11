@@ -18,12 +18,10 @@ const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('
 //Varible used for flag/alert and dynamic txt
 let pdvComment = '';
 let saveBtnCliked = false;
-let inputChanged = false;
-let dragStart = false;
 let clicks = 0;
 
 //Global function to feed the textarea element
-function loopTxtArea() {  
+function loopTxtArea() {      
     const txtArea = document.getElementById("codigo");  
     let querySelector = "";    
     let nodeList = null;
@@ -55,17 +53,25 @@ function loopTxtArea() {
     txtArea.value = "";
   
     for (let i = 0; i < nodeList.length; i++) {
+        
       let beginElementComment = `<!-- Inicio ${pdvComment} 0${i + 1} -->`;
       let endElementComment = `<!-- Final ${pdvComment} 0${i + 1} -->`;
       let copyHtml = nodeList[i].outerHTML;
   
       txtArea.value += `${beginElementComment}\n${copyHtml}\n${endElementComment}\n\n`;
     }
-    return txtArea;
+
+    if (pdvName == 'hoover') {
+        const nodeStyle = document.querySelector('div.item.selected > div.pdv-automation > div.box-hoover > style');
+        txtArea.value += nodeStyle.outerHTML; 
+        return txtArea;
+    } else {
+        return txtArea;
+    }
 };
   
 //Global function to save the backup file
-function saveBackup() {   
+function saveBackup() { 
     //Formanting the current date 
     const date = new Date();
     const hours = date.getHours("pt-br");
@@ -81,7 +87,7 @@ function saveBackup() {
     URL.revokeObjectURL(link.href);
 
     //Flag alert
-    saveBtnCliked = true
+    saveBtnCliked = true;
 
     btnBackup.innerText = 'Backup Salvo!';
     btnBackup.disabled = true;
@@ -93,7 +99,7 @@ function saveBackup() {
 };
 
 //Global function to copy the HTML after input's insertions
-function copyHtml() {
+function copyHtml() {    
     // Selecting the content inside the textarea
     loopTxtArea().select();
     // Selecting the content inside the textarea for mobile devices
@@ -110,16 +116,13 @@ function copyHtml() {
 function draggFormElement() {
     //Selecting all forms
     const elements = document.querySelectorAll(".pbcForm");
-    let count = 0
     let draggingElement;
 
     elements.forEach((element) => {
         element.addEventListener("dragstart", (e) => {
-            if (count != 1 && !inputChanged && !saveBtnCliked) {
-                saveBackup();    
-            }            
-            count = 1
-            dragStart = true
+            if (!saveBtnCliked) {
+                saveBackup();
+            }
             draggingElement = e.target;
             e.dataTransfer.effectAllowed = "move";
             e.dataTransfer.setData("text/plain", null);
@@ -172,9 +175,8 @@ function inputChanging() {
     for (let i = 0; i < inputChanging.length; i++) {
         inputChanging[i].addEventListener("input", function () {
 
-            if (!inputChanged && !dragStart) {
+            if (!saveBtnCliked) {
                 saveBackup();
-                inputChanged = true;
             };
 
             btnBuildHtml.innerText = 'Montar HTML';
@@ -221,15 +223,13 @@ function swapFormElementPositions() {
     const elements = document.querySelectorAll(".pbcForm");
     const elements2 = document.getElementById("pdvForm");
     let firstElement = null;
-    let count = 0
   
     elements.forEach((element) => {
       element.addEventListener("click", () => {
   
-        if (count != 1 && !inputChanged && !saveBtnCliked) {
-          saveBackup();    
-        }            
-        count = 1
+        if (!saveBtnCliked) {
+            saveBackup();   
+        }          
   
         if (firstElement === null) {
           firstElement = element;
@@ -263,7 +263,6 @@ function swapFormElementPositions() {
         }
       });
     });
-    count = 0
 }; 
   
 // Global function for the SELECT option change
@@ -276,6 +275,11 @@ setTimeout(() => {
             let selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');            
 
             const element = document.querySelectorAll("#pdvForm > section");
+
+            //Setting false for backup button flag
+            saveBtnCliked = false;
+            //Enable button after select change
+            btnBackup.disabled = false;
 
             items.forEach(function (item) {
                 item.classList.remove("selected");
@@ -390,10 +394,11 @@ function selectImgToRemove() {
             removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
             removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
             removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
-        };
+        };       
 
         setTimeout(() => {
             window.onload();
+            buildHtml();
         }, 1000);
     } else {
         event.preventDefault();
@@ -404,7 +409,7 @@ function selectImgToRemove() {
             removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
             removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
         };
-    }; 
+    };     
     
     btnRemoveSpan.innerHTML = 'Remover Imagem';
 }

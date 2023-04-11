@@ -36,10 +36,10 @@ function buildHtml() {
       }                     
 
       resultDropDown.href = linkDropDown;
-      resultDropDown.childNodes[1].src = finalUrl;
-      resultDropDown.childNodes[1].alt = altDropDown;
-      resultDropDown.childNodes[1].border = 0;
-      resultDropDown.childNodes[2].textContent = altDropDown;
+      resultDropDown.childNodes[0].src = finalUrl;
+      resultDropDown.childNodes[0].alt = altDropDown;
+      resultDropDown.childNodes[0].border = 0;
+      resultDropDown.childNodes[1].textContent = altDropDown;
     }
   };
 

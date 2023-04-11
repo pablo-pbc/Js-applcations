@@ -18,8 +18,6 @@ const pdvName = currentUlrPathname.substring(0, currentUlrPathname.lastIndexOf('
 //Varible used for flag/alert and dynamic txt
 let pdvComment = '';
 let saveBtnCliked = false;
-let inputChanged = false;
-let dragStart = false;
 let clicks = 0;
 
 //Global function to feed the textarea element
@@ -60,12 +58,19 @@ function loopTxtArea() {
       let copyHtml = nodeList[i].outerHTML;
   
       txtArea.value += `${beginElementComment}\n${copyHtml}\n${endElementComment}\n\n`;
+    };
+
+    if (pdvName == 'hoover') {
+        const nodeStyle = document.querySelector('div.item.selected > div.pdv-automation > div.box-dropdown > style');
+        txtArea.value += nodeStyle.outerHTML; 
+        return txtArea;
+    } else {
+        return txtArea;
     }
-    return txtArea;
 };
   
 //Global function to save the backup file
-function saveBackup() {   
+function saveBackup() { 
     //Formanting the current date 
     const date = new Date();
     const hours = date.getHours("pt-br");
@@ -81,7 +86,7 @@ function saveBackup() {
     URL.revokeObjectURL(link.href);
 
     //Flag alert
-    saveBtnCliked = true
+    saveBtnCliked = true;
 
     btnBackup.innerText = 'Backup Salvo!';
     btnBackup.disabled = true;
@@ -110,17 +115,13 @@ function copyHtml() {
 function draggFormElement() {
     //Selecting all forms
     const elements = document.querySelectorAll(".pbcForm");
-    let count = 0
     let draggingElement;
 
     elements.forEach((element) => {
         element.addEventListener("dragstart", (e) => {
-            
-            if (count != 1 && !inputChanged && !saveBtnCliked) {
-                saveBackup();    
-            }             
-            count = 1
-            dragStart = true
+            if (!saveBtnCliked) {
+                saveBackup();
+            }
             draggingElement = e.target;
             e.dataTransfer.effectAllowed = "move";
             e.dataTransfer.setData("text/plain", null);
@@ -141,7 +142,7 @@ function draggFormElement() {
 
             if (draggingElement === element) {
                 return;
-            };            
+            };
 
             const container = element.parentNode;
             const draggingIndex = parseInt(draggingElement.dataset.index);
@@ -173,9 +174,8 @@ function inputChanging() {
     for (let i = 0; i < inputChanging.length; i++) {
         inputChanging[i].addEventListener("input", function () {
 
-            if (!inputChanged && !dragStart) {
+            if (!saveBtnCliked) {
                 saveBackup();
-                inputChanged = true;
             };
 
             btnBuildHtml.innerText = 'Montar HTML';
@@ -222,15 +222,13 @@ function swapFormElementPositions() {
     const elements = document.querySelectorAll(".pbcForm");
     const elements2 = document.getElementById("pdvForm");
     let firstElement = null;
-    let count = 0
   
     elements.forEach((element) => {
       element.addEventListener("click", () => {
   
-        if (count != 1 && !inputChanged && !saveBtnCliked) {
-            saveBackup();    
-        }            
-        count = 1
+        if (!saveBtnCliked) {
+            saveBackup();   
+        }          
   
         if (firstElement === null) {
           firstElement = element;
@@ -264,8 +262,7 @@ function swapFormElementPositions() {
         }
       });
     });
-    count = 0
-  };  
+};  
   
 // Global function for the SELECT option change
 setTimeout(() => {
@@ -277,6 +274,11 @@ setTimeout(() => {
             let selectedItems = document.querySelectorAll('.item[data-option="' + selectedOption + '"]');            
 
             const element = document.querySelectorAll("#pdvForm > section");
+
+            //Setting false for backup button flag
+            saveBtnCliked = false;
+            //Enable button after select change
+            btnBackup.disabled = false;
 
             items.forEach(function (item) {
                 item.classList.remove("selected");
@@ -319,7 +321,7 @@ setTimeout(() => {
 //Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-dropdown'); 
+    const container = document.querySelector('div.item.selected > div > div.box-hoover'); 
 
     if (!saveBtnCliked) {
         saveBackup();
@@ -336,7 +338,7 @@ function addNewElement() {
     btnCopyhtml.style.border = '1px solid #264653';
 
     if (element.length < 6) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div > div > a`);
+        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div.box-hoover a`);
         const nodeListLastValue = nodeList[nodeList.length - 1];
         const clonedElement = nodeListLastValue.cloneNode(true);
 
@@ -372,7 +374,7 @@ function mouseOutImgToRemove() {
 
 function selectImgToRemove() {
     const confirmed = window.confirm("Tem certeza que deseja remover essa imagem?");
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');
     const element = document.querySelectorAll("#pdvForm > section");    
     clicks = 0;
 
@@ -391,10 +393,11 @@ function selectImgToRemove() {
             removeBoxImage[index].removeEventListener('mouseover', mouseOverImgToRemove);
             removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
             removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
-        };
+        };       
 
         setTimeout(() => {
             window.onload();
+            buildHtml();
         }, 1000);
     } else {
         event.preventDefault();
@@ -405,14 +408,14 @@ function selectImgToRemove() {
             removeBoxImage[index].removeEventListener('mouseout', mouseOutImgToRemove);
             removeBoxImage[index].removeEventListener('click', selectImgToRemove); 
         };
-    }; 
+    };     
     
     btnRemoveSpan.innerHTML = 'Remover Imagem';
 }
 
 //Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-dropdown a');    
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');    
     clicks++;  
 
     if (!saveBtnCliked) {
