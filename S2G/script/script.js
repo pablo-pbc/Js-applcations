@@ -31,7 +31,7 @@ function loopTxtArea() {
         case 'hoover':
             querySelector = 'div.item.selected > div > div > a';
             nodeList = document.querySelectorAll(`${querySelector}`);
-            pdvComment = 'Hoover';
+            pdvComment = document.querySelectorAll(`div.item.selected > div > div`)[0].id;;
             break;
     
         case 'homeSlideFem':
@@ -76,13 +76,14 @@ function saveBackup() {
     const date = new Date();
     const hours = date.getHours("pt-br");
     const min = date.getMinutes("pt-br");
+    const seg = date.getSeconds("pt-br");
     const today = date.toLocaleDateString("pt-br");
 
     const link = document.createElement("a");
     const file = new Blob([loopTxtArea().value], { type: "text/plain" });
 
     link.href = URL.createObjectURL(file);
-    link.download = `backup${pdvComment}_${today}_${hours}h-${min}.txt`;
+    link.download = `bkp - ${pdvComment} - ${today} - ${hours}h-${min}min-${seg}s.txt`;
     link.click();
     URL.revokeObjectURL(link.href);
 
