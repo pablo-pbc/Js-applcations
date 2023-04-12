@@ -166,6 +166,53 @@ function draggFormElement() {
     });
 };
 
+//Global function for change the element position when mobile
+function swapFormElementPositions() {
+    const elements = document.querySelectorAll(".pbcForm");
+    const elements2 = document.getElementById("pdvForm");
+    let firstElement = null;    
+    
+    elements.forEach((element) => {
+        element.addEventListener("click", () => {  
+            
+            if (document.querySelector('main.pbc-pdv-automation-form > form.grid-mob-position')) {
+
+                if (!saveBtnCliked) {
+                    saveBackup();   
+                };  
+    
+                btnBuildHtml.style.border = '1px solid #264653';
+                btnBuildHtml.style.color = '#264653';
+                btnBuildHtml.innerText = 'Montar código';            
+        
+                if (firstElement === null) {
+    
+                    firstElement = element;
+                    element.classList.add("selected");  
+    
+                } else {
+    
+                    const container = element.parentNode;
+                    const firstIndex = parseInt(firstElement.dataset.index);
+                    const secondIndex = parseInt(element.dataset.index);  
+    
+                    if (firstIndex !== secondIndex && elements2.classList == "grid-mob-position") {
+                        const temp = document.createElement("div");
+                        container.insertBefore(temp, element);
+                        container.insertBefore(element, firstElement);
+                        container.insertBefore(firstElement, temp);
+                        temp.remove();
+                    };
+    
+                    firstElement.classList.remove("selected");
+                    firstElement = null;
+                    buildHtml();
+                };
+            };
+        });
+    });    
+};  
+
 //Global function to change BUILD BUTTON style after some input modification
 function inputChanging() {
     const inputChanging = document.querySelectorAll('#pdvForm > section > div > input');
@@ -180,6 +227,11 @@ function inputChanging() {
             btnBuildHtml.innerText = 'Montar HTML';
             btnBuildHtml.style.border = '1px solid #264653';
             btnBuildHtml.style.color = '#264653';
+
+            btnCopyhtml.innerText = 'Copiar HTML';
+            btnCopyhtml.style.border = '1px solid #264653';
+            btnCopyhtml.style.color = '#264653';
+            btnCopyhtml.disabled = true;
         });    
     };    
 };
@@ -215,53 +267,6 @@ function toggleClass(elementId, className) {
         element.classList.add(className);
     };
 };
-
-//Global function for change the element position when mobile
-function swapFormElementPositions() {
-    const elements = document.querySelectorAll(".pbcForm");
-    const elements2 = document.getElementById("pdvForm");
-    let firstElement = null;
-  
-    elements.forEach((element) => {
-      element.addEventListener("click", () => {
-  
-        if (!saveBtnCliked) {
-            saveBackup();   
-        }          
-  
-        if (firstElement === null) {
-          firstElement = element;
-          element.classList.add("selected");
-          console.log("elements2", elements2.classList);
-  
-          btnBuildHtml.style.border = '1px solid #264653'
-          btnBuildHtml.style.color = '#264653'
-          btnBuildHtml.innerText = 'Montar código';
-          btnBuildHtml.disabled = true;
-  
-        } else {
-          const container = element.parentNode;
-          const firstIndex = parseInt(firstElement.dataset.index);
-          const secondIndex = parseInt(element.dataset.index);       
-          if (
-            firstIndex !== secondIndex &&
-            elements2.classList == "grid-mob-position"
-          ) {
-            const temp = document.createElement("div");
-            container.insertBefore(temp, element);
-            container.insertBefore(element, firstElement);
-            container.insertBefore(firstElement, temp);
-            temp.remove();
-          }
-  
-          buildHtml();
-  
-          firstElement.classList.remove("selected");
-          firstElement = null;
-        }
-      });
-    });
-};  
   
 // Global function for the SELECT option change
 setTimeout(() => {
@@ -373,7 +378,7 @@ function mouseOutImgToRemove() {
 
 function selectImgToRemove() {
     const confirmed = window.confirm("Tem certeza que deseja remover essa imagem?");
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div a');
     const element = document.querySelectorAll("#pdvForm > section");    
     clicks = 0;
 
