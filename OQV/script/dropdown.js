@@ -25,22 +25,22 @@ function buildHtml() {
       resultDropDown.removeAttribute("style");
 
       let originUrl = new URL(imgDropDown).origin;
-      let pathNameUrl = new URL(imgDropDown).pathname.substring(1)
-      let pathNameUrlS3 = new URL(imgDropDown).pathname.substring(26)
-      let finalUrl = null
+      let pathNameUrl = new URL(imgDropDown).pathname.substring(1);
+      let pathNameUrlS3 = new URL(imgDropDown).pathname.substring(26);
+      let finalUrl = null;
 
       if (originUrl == prefix) {
-        finalUrl = prefix + "/" + pathNameUrl
+        finalUrl = prefix + "/" + pathNameUrl;
       } else {
-        finalUrl = prefix + "/" + pathNameUrlS3
-      }                     
+        finalUrl = prefix + "/" + pathNameUrlS3;
+      };                     
 
       resultDropDown.href = linkDropDown;
       resultDropDown.childNodes[0].src = finalUrl;
       resultDropDown.childNodes[0].alt = altDropDown;
       resultDropDown.childNodes[0].border = 0;
       resultDropDown.childNodes[1].textContent = altDropDown;
-    }
+    };
   };
 
   if (saveBtnCliked) {  
@@ -49,7 +49,7 @@ function buildHtml() {
     btnBuildHtml.innerText = 'Código montado com sucesso!';
     btnBuildHtml.style.color = '#38b000';
     btnBuildHtml.style.border = "2px solid #38b000";
-  }
+  };
 };
 
 //Function to create form following pdv quantity

@@ -29,7 +29,7 @@ function loopTxtArea() {
     //Switch case that determine the query initial query selector considering the PDV name (name from URL)
     switch (pdvName) {
         case 'dropdown':
-            querySelector = 'div.item.selected > div > div > a';
+            querySelector = 'div.item.selected > div.pdv-automation > div.box-dropdown > a';
             nodeList = document.querySelectorAll(`${querySelector}`);
             pdvComment = document.querySelectorAll(`div.item.selected > div > div`)[0].id;
             break;
@@ -60,13 +60,13 @@ function loopTxtArea() {
       txtArea.value += `${beginElementComment}\n${copyHtml}\n${endElementComment}\n\n`;
     };
 
-    if (pdvName == 'hoover') {
+    if (pdvName == 'dropdown') {
         const nodeStyle = document.querySelector('div.item.selected > div.pdv-automation > div.box-dropdown > style');
         txtArea.value += nodeStyle.outerHTML; 
         return txtArea;
     } else {
         return txtArea;
-    }
+    };
 };
   
 //Global function to save the backup file
@@ -163,8 +163,6 @@ function draggFormElement() {
 
             buildHtml();
         });
-
-        count = 0
     });
 };
 
@@ -322,7 +320,7 @@ setTimeout(() => {
 //Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-hoover'); 
+    const container = document.querySelector('div.item.selected > div > div'); 
 
     if (!saveBtnCliked) {
         saveBackup();
@@ -339,7 +337,7 @@ function addNewElement() {
     btnCopyhtml.style.border = '1px solid #264653';
 
     if (element.length < 6) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div.box-hoover a`);
+        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div a`);
         const nodeListLastValue = nodeList[nodeList.length - 1];
         const clonedElement = nodeListLastValue.cloneNode(true);
 
@@ -416,7 +414,7 @@ function selectImgToRemove() {
 
 //Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');    
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div a');    
     clicks++;  
 
     if (!saveBtnCliked) {
@@ -512,4 +510,3 @@ function btnRemoveMouseOut() {
     btnRemove.style.cursor = 'pointer';
     btnRemoveSvg.style.fill = "red";
 };
-

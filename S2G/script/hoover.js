@@ -25,22 +25,22 @@ function buildHtml() {
       resultHoover.removeAttribute("style");
 
       let originUrl = new URL(imgHoover).origin;
-      let pathNameUrl = new URL(imgHoover).pathname.substring(1)
-      let pathNameUrlS3 = new URL(imgHoover).pathname.substring(26)
+      let pathNameUrl = new URL(imgHoover).pathname.substring(1);
+      let pathNameUrlS3 = new URL(imgHoover).pathname.substring(26);
       let finalUrl = null
 
       if (originUrl == prefix) {
-        finalUrl = prefix + "/" + pathNameUrl
+        finalUrl = prefix + "/" + pathNameUrl;
       } else {
-        finalUrl = prefix + "/" + pathNameUrlS3
-      }                     
+        finalUrl = prefix + "/" + pathNameUrlS3;
+      };                   
 
       resultHoover.href = linkHoover;
       resultHoover.childNodes[0].src = finalUrl;
       resultHoover.childNodes[0].alt = altHoover;
       resultHoover.childNodes[0].border = 0;
       resultHoover.childNodes[1].textContent = altHoover;
-    }
+    };
   };
 
   if (saveBtnCliked) {  
@@ -49,7 +49,7 @@ function buildHtml() {
     btnBuildHtml.innerText = 'Código montado com sucesso!';
     btnBuildHtml.style.color = '#38b000';
     btnBuildHtml.style.border = "2px solid #38b000";
-  }
+  };
 };
   
 //Function to create form following pdv quantity
