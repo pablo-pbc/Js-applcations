@@ -23,6 +23,9 @@ let clicks = 0;
 //Global function to feed the textarea element
 function loopTxtArea() {  
     const txtArea = document.getElementById("codigo");  
+    const selectElement = document.getElementById('select-option');
+    const selectedOption = selectElement.options[selectElement.selectedIndex]; // Seleciona o option selecionado
+    const selectedText = selectedOption.textContent; // Recupera o texto do option selecionado
     let querySelector = "";    
     let nodeList = null;
 
@@ -45,7 +48,13 @@ function loopTxtArea() {
             nodeList = document.querySelectorAll(`${querySelector}`);
             pdvComment = 'BannerMasc';
             break;
-    
+
+        case 'sobreMascFem':
+            querySelector = 'div.item.selected > div > div.box-sobre';
+            nodeList = document.querySelectorAll(`${querySelector}`);
+            pdvComment = `sobre${selectedText}`;
+            break;
+
         default:
             break;
     };    
@@ -296,9 +305,11 @@ setTimeout(() => {
                 element[i].remove();
             };
 
-            btnAdd.removeAttribute("style")
-            btnAddSvg.style.fill = '#A9BFB8'
-            btnAddSpan.innerText = "Adicionar Imagens"
+            if (btnAdd) {                
+                btnAdd.removeAttribute("style")
+                btnAddSvg.style.fill = '#A9BFB8'
+                btnAddSpan.innerText = "Adicionar Imagens"   
+            }            
 
             btnBackup.removeAttribute('style');
             btnBackup.innerText = 'Salvar Backup';

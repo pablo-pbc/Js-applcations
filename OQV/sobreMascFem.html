@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style/style.css" />
+        <title>PDV - SOBRE - OQV</title>
+    </head>
+
+<body>
+    <main class="pbc-pdv-automation-form">
+        <form id="pdvForm"></form>      
+
+        <section class="pbc-btn-txtarea">
+            <!-- Inicio botão salvar backup -->
+            <div>
+                <button
+                    id="backupButton"
+                    type="button"
+                    onclick="saveBackup()">
+                    Salvar BACKUP
+                </button>
+            </div>
+            <!-- Fim botão salvar backup -->
+
+            <!-- Inicio botão submit form -->
+            <div>
+                <button 
+                    id="buildButton" 
+                    onclick="buildHtml()" 
+                    disabled>
+                    Montar HTML
+                </button>
+            </div>
+            <!-- Fim botão submit form -->
+
+            <!-- Inicio botão copiar HTML -->
+            <div>
+                <button
+                    id="copyHtmlButton"
+                    type="button"
+                    onclick="copyHtml()" 
+                    disabled>
+                    Copiar código
+                </button>
+            </div>
+            <!-- Inicio botão copiar HTML -->
+
+            <div>
+                <textarea
+                    name="codigo"
+                    id="codigo">
+                </textarea>
+            </div>  
+
+            <select id="select-option">
+                <option value="1" selected>Feminino</option>
+                <option value="2">Masculino</option>
+            </select>
+        </section> 
+    </main>
+
+    <div class="item selected" data-option="1">
+        <div class="pdv-automation">
+            <div class="box-sobre">
+                <div id="col-esq">
+                    <h4>Sobre<br>OQVestir</h4>
+                    <p>Somos o primeiro e-commerce de moda do Brasil e o seu guia de estilo e compras na internet.</p>
+                    <p>Com mais de 300 marcas e um conteúdo diário com as principais tendências fashion e truques de estilo de um jeito simples e descomplicado, oferecemos uma experiência de compra única do começo ao fim: entrega em todo o Brasil, parcelamento em até 10x sem juros, troca e devolução grátis!</p>
+                    <!--<p class="textAlignNew">Oferecemos uma experiência de compra única do começo ao fim: nosso site é fácil de ser navegado, checkout rápido com o melhor serviço de atendimento ao consumidor. A troca é fácil e sem custo.</p> -->
+                </div>
+        
+                <div id="col-dir"> 
+                    <a href="https://www.oqvestir.com.br/catalog/category/view/id/135251">
+                        <img src="https://dybvctjo56z4b.cloudfront.net/pdv/sobre-oqvestir/140423/banner_sobreoqvestir_fem.jpg" alt="OQV HOJE - WINTER 23'">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="item" data-option="2">
+        <div class="pdv-automation">
+            <div class="box-sobre">
+                <div id="col-esq">
+                    <h4>Sobre<br>OQVestir</h4>
+                    <p>Somos o primeiro e-commerce de moda do Brasil e o seu guia de estilo e compras na internet.</p>
+                    <p>Com mais de 250 marcas e um conteúdo diário com as principais tendências fashion e truques de estilo de um jeito simples e descomplicado, oferecemos uma experiência de compra única do começo ao fim: entrega em todo o Brasil, parcelamento em até 10x sem juros, troca e devolução grátis!</p>
+                    <!--<p class="textAlignNew">Oferecemos uma experiência de compra única do começo ao fim: nosso site é fácil de ser navegado, checkout rápido com o melhor serviço de atendimento ao consumidor. A troca é fácil e sem custo.</p> -->
+                </div>
+
+                <div id="col-dir">
+                    <a href="">
+                        <img src="https://dybvctjo56z4b.cloudfront.net/pdv/sobre-oqvestir/200323/banner_sobreoqvestir_masc.jpg" alt="Sobre OQVestir">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+    <script src="script/sobre.js"></script>
+</body>
+</html>
