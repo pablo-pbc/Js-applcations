@@ -29,7 +29,7 @@ function loopTxtArea() {
     //Switch case that determine the query initial query selector considering the PDV name (name from URL)
     switch (pdvName) {
         case 'dropdown':
-            querySelector = 'div.item.selected > div > div > a';
+            querySelector = 'div.item.selected > div.pdv-automation > div.box-dropdown > a';
             nodeList = document.querySelectorAll(`${querySelector}`);
             pdvComment = document.querySelectorAll(`div.item.selected > div > div`)[0].id;
             break;
@@ -60,13 +60,13 @@ function loopTxtArea() {
       txtArea.value += `${beginElementComment}\n${copyHtml}\n${endElementComment}\n\n`;
     };
 
-    if (pdvName == 'hoover') {
+    if (pdvName == 'dropdown') {
         const nodeStyle = document.querySelector('div.item.selected > div.pdv-automation > div.box-dropdown > style');
         txtArea.value += nodeStyle.outerHTML; 
         return txtArea;
     } else {
         return txtArea;
-    }
+    };
 };
   
 //Global function to save the backup file
@@ -163,10 +163,55 @@ function draggFormElement() {
 
             buildHtml();
         });
-
-        count = 0
     });
 };
+
+//Global function for change the element position when mobile
+function swapFormElementPositions() {
+    const elements = document.querySelectorAll(".pbcForm");
+    const elements2 = document.getElementById("pdvForm");
+    let firstElement = null;    
+    
+    elements.forEach((element) => {
+        element.addEventListener("click", () => {  
+            
+            if (document.querySelector('main.pbc-pdv-automation-form > form.grid-mob-position')) {
+
+                if (!saveBtnCliked) {
+                    saveBackup();   
+                };  
+    
+                btnBuildHtml.style.border = '1px solid #264653';
+                btnBuildHtml.style.color = '#264653';
+                btnBuildHtml.innerText = 'Montar código';            
+        
+                if (firstElement === null) {
+    
+                    firstElement = element;
+                    element.classList.add("selected");  
+    
+                } else {
+    
+                    const container = element.parentNode;
+                    const firstIndex = parseInt(firstElement.dataset.index);
+                    const secondIndex = parseInt(element.dataset.index);  
+    
+                    if (firstIndex !== secondIndex && elements2.classList == "grid-mob-position") {
+                        const temp = document.createElement("div");
+                        container.insertBefore(temp, element);
+                        container.insertBefore(element, firstElement);
+                        container.insertBefore(firstElement, temp);
+                        temp.remove();
+                    };
+    
+                    firstElement.classList.remove("selected");
+                    firstElement = null;
+                    buildHtml();
+                };
+            };
+        });
+    });    
+};  
 
 //Global function to change BUILD BUTTON style after some input modification
 function inputChanging() {
@@ -182,6 +227,11 @@ function inputChanging() {
             btnBuildHtml.innerText = 'Montar HTML';
             btnBuildHtml.style.border = '1px solid #264653';
             btnBuildHtml.style.color = '#264653';
+
+            btnCopyhtml.innerText = 'Copiar HTML';
+            btnCopyhtml.style.border = '1px solid #264653';
+            btnCopyhtml.style.color = '#264653';
+            btnCopyhtml.disabled = true;
         });    
     };    
 };
@@ -217,53 +267,6 @@ function toggleClass(elementId, className) {
         element.classList.add(className);
     };
 };
-
-//Global function for change the element position when mobile
-function swapFormElementPositions() {
-    const elements = document.querySelectorAll(".pbcForm");
-    const elements2 = document.getElementById("pdvForm");
-    let firstElement = null;
-  
-    elements.forEach((element) => {
-      element.addEventListener("click", () => {
-  
-        if (!saveBtnCliked) {
-            saveBackup();   
-        }          
-  
-        if (firstElement === null) {
-          firstElement = element;
-          element.classList.add("selected");
-          console.log("elements2", elements2.classList);
-  
-          btnBuildHtml.style.border = '1px solid #264653'
-          btnBuildHtml.style.color = '#264653'
-          btnBuildHtml.innerText = 'Montar código';
-          btnBuildHtml.disabled = true;
-  
-        } else {
-          const container = element.parentNode;
-          const firstIndex = parseInt(firstElement.dataset.index);
-          const secondIndex = parseInt(element.dataset.index);       
-          if (
-            firstIndex !== secondIndex &&
-            elements2.classList == "grid-mob-position"
-          ) {
-            const temp = document.createElement("div");
-            container.insertBefore(temp, element);
-            container.insertBefore(element, firstElement);
-            container.insertBefore(firstElement, temp);
-            temp.remove();
-          }
-  
-          buildHtml();
-  
-          firstElement.classList.remove("selected");
-          firstElement = null;
-        }
-      });
-    });
-};  
   
 // Global function for the SELECT option change
 setTimeout(() => {
@@ -322,7 +325,7 @@ setTimeout(() => {
 //Global function to add an new image DROPDOWN and HOOVER
 function addNewElement() {
     const element = document.querySelectorAll("#pdvForm > section");
-    const container = document.querySelector('div.item.selected > div > div.box-hoover'); 
+    const container = document.querySelector('div.item.selected > div > div'); 
 
     if (!saveBtnCliked) {
         saveBackup();
@@ -339,7 +342,7 @@ function addNewElement() {
     btnCopyhtml.style.border = '1px solid #264653';
 
     if (element.length < 6) {
-        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div.box-hoover a`);
+        const nodeList = document.querySelectorAll(`div.item.selected > div.pdv-automation > div a`);
         const nodeListLastValue = nodeList[nodeList.length - 1];
         const clonedElement = nodeListLastValue.cloneNode(true);
 
@@ -375,7 +378,7 @@ function mouseOutImgToRemove() {
 
 function selectImgToRemove() {
     const confirmed = window.confirm("Tem certeza que deseja remover essa imagem?");
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div a');
     const element = document.querySelectorAll("#pdvForm > section");    
     clicks = 0;
 
@@ -416,7 +419,7 @@ function selectImgToRemove() {
 
 //Global function to remove an image DROPDOWN and HOOVER
 function removeNewElement() {
-    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div.box-hoover a');    
+    const removeBoxImage = document.querySelectorAll('div.item.selected > div.pdv-automation > div a');    
     clicks++;  
 
     if (!saveBtnCliked) {
@@ -512,4 +515,3 @@ function btnRemoveMouseOut() {
     btnRemove.style.cursor = 'pointer';
     btnRemoveSvg.style.fill = "red";
 };
-
